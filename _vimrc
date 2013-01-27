@@ -36,6 +36,8 @@ set t_Co=256       " Explicitly tell vim that the terminal supports 256 colors
 autocmd vimenter * if !argc() | NERDTree | endif  " load NERDTree automatically if started with no files
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " close vim if NERDTree is the only open buffer
 
+
+
 "" ========== vim-textobj-rubyblock ==========
 runtime macros/matchit.vim " a dependency
 
