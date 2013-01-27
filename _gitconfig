@@ -1,0 +1,33 @@
+[user]
+	name = thefonso
+	email = alephmage@gmail.com
+
+[color]
+	ui = auto
+
+[alias]
+  aa = add -A .
+  amend = commit --amend
+
+  br = branch
+	ci = commit
+	# cm = commit -m
+	cm = commit -am
+	co = checkout
+
+  di = diff
+  dc = diff --cached
+  ds = diff --staged
+
+  st = status
+
+  fml = !git aa && git reset --hard
+  pop = !git stash pop
+  checkpoint = commit -m "checkpoint"
+  log = "!source ~/.githelpers && pretty_git_log"
+
+[push]
+	default = current
+
+[merge]
+  tool = opendiff

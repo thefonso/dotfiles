@@ -1,0 +1,83 @@
+autoload -U compinit
+autoload colors
+compinit
+colors
+
+#Path
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+# export PATH="${PATH}:/usr/local/share/npm/bin"
+
+# Env Vars
+export EDITOR=vim
+export CLICOLOR=1
+# export DYLD_LIBRARY_PATH=/usr/local/mysql/lib/
+export CDPATH=~:~/src/:~/src/work
+
+# Options
+setopt nonomatch
+setopt EXTENDED_HISTORY # add timestamps to history
+setopt LOCAL_OPTIONS # allow functions to have local options
+setopt LOCAL_TRAPS # allow functions to have local traps
+setopt PROMPT_SUBST
+setopt COMPLETE_IN_WORD
+setopt IGNORE_EOF
+setopt AUTO_CD
+setopt HIST_IGNORE_DUPS
+setopt APPEND_HISTORY # adds history
+setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
+setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
+setopt HIST_REDUCE_BLANKS
+
+#Completion
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # case insensitive completion
+zstyle ':completion:*:default' menu 'select=0' # menu-style
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+
+# Functions
+git_prompt_info() {
+  ref=$($(which git) symbolic-ref HEAD 2> /dev/null) || return
+  mods=$(vcprompt -f %m%u%a) || return
+  echo "%{$reset_color%}(%{$fg[red]%}${ref#refs/heads/}%{$fg[yellow]%}${mods}%{$reset_color%})"
+}
+
+function ss {
+  if [ -e script/rails ]; then
+    script/rails server $@
+  else
+    script/server $@
+  fi
+}
+
+function sc {
+  if [ -e script/rails ]; then
+    script/rails console $@
+  else
+    script/console $@
+  fi
+}
+
+function sg {
+  if [ -e script/rails ]; then
+    script/rails generate $@
+  else
+    script/generate $@
+  fi
+}
+
+# Prompt
+# export PROMPT='%m%{$reset_color%}:%{$fg[magenta]%}%c$(git_prompt_info)%{$reset_color%}%% '
+
+# Aliases
+alias bx="bundle exec"
+alias rtest='ruby -I"lib:test"'
+alias cuke="cucumber -r features"
+alias ls-="ls -lah"
+alias gmacs='open . -a emacs'
+
+# Bindings
+bindkey -M viins '^R' history-incremental-pattern-search-backward
+bindkey -M viins '^F' history-incremental-pattern-search-forward
+
+typeset -U path cdpath fpath
