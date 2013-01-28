@@ -1,107 +1,104 @@
-python import sys; sys.path.append("/Library/Python/2.7/site-packages")
-
-"python from powerline.ext.vim import source_plugin; source_plugin()
-set rtp+=/usr/local/go/misc/vim
-filetype plugin indent on
 syntax on
 
-"" ==========  These come from Mislav (http://mislav.uniqpath.com/2011/12/vim-revisited/)  ==========
-set nocompatible                " choose no compatibility with legacy vi
-syntax enable
-set encoding=utf-8
-set showcmd                     " display incomplete commands
-filetype plugin indent on       " load file type plugins + indentation
+filetype off
+call pathogen#runtime_append_all_bundles()
+filetype plugin indent on
 
-"" Whitespace
-set nowrap                      " don't wrap lines
-set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
-set expandtab                   " use spaces, not tabs (optional)
-set backspace=indent,eol,start  " backspace through everything in insert mode
-set guifont=Dejavusans:h18
-"" Searching
-set hlsearch                    " highlight matches
-set incsearch                   " incremental searching
+compiler ruby
 
-"" ==========  Pathogen, vim path manager (https://github.com/tpope/vim-pathogen#readme)  ==========
-call pathogen#infect()
+set incsearch
+set hlsearch
+set number
+set showmatch
+set hidden
+set backspace=indent,eol,start
+set textwidth=0 nosmartindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+set ruler
+set wrap
+set scrolloff=5
+set nofoldenable
+set nocompatible
+set laststatus=2
+set ignorecase
+set smartcase
+set cursorline
 
-"" ==========  Powerline, toolbar (https://github.com/Lokaltog/vim-powerline/) ==========
-"let g:Powerline_colorscheme = 'josh'
-let g:Powerline_symbols = 'compatible'
-let g:Powerline_stl_path_style = 'relative'
-set laststatus=2   " Always show the statusline
-set t_Co=256       " Explicitly tell vim that the terminal supports 256 colors
+set nobackup
+set nowritebackup
+set noswapfile
 
-"" ========== NERDTree  ==========
-autocmd vimenter * if !argc() | NERDTree | endif  " load NERDTree automatically if started with no files
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " close vim if NERDTree is the only open buffer
+set winwidth=90
+set winminwidth=15
 
+set list
+set listchars=tab:\ \ ,trail:·
 
+" colorization
+if $BPCOLOR == 'lite'
+  set background=light
+else
+  set background=dark
+endif
 
-"" ========== vim-textobj-rubyblock ==========
-runtime macros/matchit.vim " a dependency
+let g:solarized_termcolors=256
+colorscheme solarized
 
-" got this list from here: https://github.com/Lokaltog/vim-powerline/blob/c4b72c5be57b165bb6a89d0b8a974fe62c0091d0/autoload/Powerline/Themes/default.vim
-call Pl#Theme#RemoveSegment('fugitive:branch')
-call Pl#Theme#RemoveSegment('syntastic:errors')
-call Pl#Theme#RemoveSegment('fileformat')
-call Pl#Theme#RemoveSegment('fileencoding')
-call Pl#Theme#RemoveSegment('filetype')
-call Pl#Theme#RemoveSegment('lineinfo')
+hi Search    ctermbg=none ctermfg=none cterm=underline
+hi IncSearch ctermbg=none ctermfg=none cterm=bold,underline
 
+" plugin options
+let NERDTreeMinimalUI           = 1
+let NERDTreeQuitOnOpen          = 0
+let NERDChristmasTree           = 1
+let NERDTreeHighlightCursorline = 0
+let NERDTreeWinSize             = 35
+let NERDTreeDirArrows           = 1
+let NERDTreeStatusline          = ' '
+let NERDTreeShowHidden          = 1
+let NERDTreeChDirMode           = 1
+let NERDTreeShowLineNumbers     = 0
+let NERDTreeMouseMode           = 2
+let NERDTreeAutoCenter          = 1
+let NERDTreeAutoCenterThreshold = 10
+let NERDTreeIgnore              = ['\.git', '\.pyc', '\.jhw-cache']
+let g:no_html_toolbar           = 'yes'
+let g:Powerline_symbols         = 'fancy'
+let g:CommandTMaxHeight         = 10
+let g:CommandTMaxDepth          = 10
+let coffee_no_trailing_space_error = 1
 
+autocmd QuickFixCmdPost *grep* cwindow
 
-"" ==========  My shit  ==========
+" key bindings
+imap <C-L> <SPACE>=><SPACE>
+imap <C-K> ->
 
-set nobackup                                        " no backup files
-set nowritebackup                                   " only in case you don't want a backup file while editing
-set noswapfile                                      " no swap files
-set scrolloff=4                                     " adds top/bottom buffer between cursor and window
-set cursorline                                      " colours the line the cursor is on
-set number                                          " line numbers
-nmap <Leader>p orequire "pry"<CR>binding.pry<ESC>;  " pry insertion
-vnoremap . :norm.<CR>                               " in visual mode, "." will for each line, go into normal mode and execute the "."
+nmap , \
 
-" easier navigation between split windows
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+map <Leader>t :CommandT<CR>
+map <silent> <LocalLeader>fb :CommandTBuffer<CR>
+map <silent> <LocalLeader>fr :CommandTFlush<CR>
 
-" Emacs/Readline keybindings for commandline mode
-cnoremap <C-A> <Home>
-cnoremap <C-F> <Right>
-cnoremap <C-B> <Left>
-cnoremap <Esc>b <S-Left>
-cnoremap <Esc>f <S-Right>
+map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
+map <silent> <LocalLeader>nr :NERDTree<CR>
+map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 
-" =========== Set Color Scheme ===========
-colorscheme Tomorrow-Night
+nmap g/ :Ggrep<space>
+nmap g* :Ggrep <C-R><C-W>
+nmap gn :cnext<CR>
+nmap gp :cprev<CR>
+nmap gq :ccl<CR>
+nmap gl :cwindow<CR>>
 
-"" :set guifont=Monaco:h14
+map Y y$
 
-"" filetypes
-au  BufRead,BufNewFile *.rabl setfiletype ruby    " .rabl -> ruby
-
-"" strip trailing whitespace
-function! <SID>StripTrailingWhitespaces()
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " Do the business:
-  %s/\s\+$//e
-  " Clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
+" functions
+function! Trim()
+  exe "normal mz"
+  %s/\s*$//
+  exe "normal `z"
+  exe "normal zz"
 endfunction
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-" replaces %/ with current directory, and %% with current file
-cmap %/ <C-R>=expand("%:p:h")."/"<CR>
-cmap %% <C-R>=expand("%")<CR>
-
-
-" .vm, from TECS, should be highlighted with assembly
-au BufNewFile,BufRead *.vm set filetype=asm
-au BufNewFile,BufRead *.jack set filetype=java "not really, but close enough
+command! -nargs=0 Trim :call Trim()
+nnoremap <silent> <Leader>cw :Trim<CR>

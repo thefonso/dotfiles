@@ -1,5 +1,5 @@
 if has("mac")
-  set guifont=Bitstream\ Vera\ Sans\ Mono:h18
+  set guifont=Monaco\ for\ Powerline
   set fuopt=maxhorz,maxvert
   set fu
   set vb "shuts up the bell sounds from macVim
