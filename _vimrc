@@ -16,7 +16,6 @@ set textwidth=0 nosmartindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 set ruler
 set wrap
 set scrolloff=5
-set nofoldenable
 set nocompatible
 set laststatus=2
 set ignorecase
@@ -30,8 +29,14 @@ set noswapfile
 set winwidth=90
 set winminwidth=15
 
-set list
-set listchars=tab:\ \ ,trail:·
+set nolist "turns off invisibles
+"set listchars=tab:\ \ ,trail: "this line throws an error..don't know why
+
+" folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use·
 
 " colorization
 if $BPCOLOR == 'lite'
@@ -79,7 +84,7 @@ map <Leader>t :CommandT<CR>
 map <silent> <LocalLeader>fb :CommandTBuffer<CR>
 map <silent> <LocalLeader>fr :CommandTFlush<CR>
 
-map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
+map <silent> <LocalLeader>d :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 
