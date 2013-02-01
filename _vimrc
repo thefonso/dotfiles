@@ -6,15 +6,22 @@ filetype plugin indent on
 
 compiler ruby
 
-set incsearch
-set hlsearch
+"" Whitespace
+set nowrap                      " don't wrap lines
+set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
+set expandtab                   " use spaces, not tabs (optional)
+set backspace=indent,eol,start  " backspace through everything in insert mode
+
+"" Searching
+set hlsearch                    " highlight matches
+set incsearch                   " incremental searching
+
+
 set number
 set showmatch
 set hidden
-set backspace=indent,eol,start
-set textwidth=0 nosmartindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+set textwidth=0 nosmartindent softtabstop=2
 set ruler
-set wrap
 set scrolloff=5
 set nocompatible
 set laststatus=2
@@ -22,11 +29,20 @@ set ignorecase
 set smartcase
 set cursorline
 
+nmap <Leader>p orequire "pry"<CR>binding.pry<ESC>;  " pry insertion
+vnoremap . :norm.<CR>                               " in visual mode, "." will for each line, go into normal mode and execute the "."
+
+" easier navigation between split windows
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
 set nobackup
 set nowritebackup
 set noswapfile
 
-set winwidth=90
+set winwidth=95
 set winminwidth=15
 
 set nolist "turns off invisibles
@@ -40,7 +56,7 @@ set foldlevel=1         "this is just what i use·
 
 " colorization
 if $BPCOLOR == 'lite'
-  set background=light
+  set background=lite
 else
   set background=dark
 endif
@@ -56,7 +72,7 @@ let NERDTreeMinimalUI           = 1
 let NERDTreeQuitOnOpen          = 0
 let NERDChristmasTree           = 1
 let NERDTreeHighlightCursorline = 0
-let NERDTreeWinSize             = 35
+let NERDTreeWinSize             = 25
 let NERDTreeDirArrows           = 1
 let NERDTreeStatusline          = ' '
 let NERDTreeShowHidden          = 1
