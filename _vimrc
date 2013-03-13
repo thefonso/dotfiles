@@ -38,6 +38,13 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+" Emacs/Readline keybindings for commandline mode
+cnoremap <C-A> <Home>
+cnoremap <C-F> <Right>
+cnoremap <C-B> <Left>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+
 set nobackup
 set nowritebackup
 set noswapfile
@@ -62,7 +69,10 @@ else
 endif
 
 let g:solarized_termcolors=256
+"colorscheme twilight-night
+"colorscheme anotherdark
 colorscheme solarized
+"colorscheme tomorrow-night
 
 hi Search    ctermbg=none ctermfg=none cterm=underline
 hi IncSearch ctermbg=none ctermfg=none cterm=bold,underline

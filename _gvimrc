@@ -12,3 +12,7 @@ set guioptions-=r
 set guioptions-=L
 
 set columns=140
+
+"colorscheme candycode
+colorscheme tomorrow-night
+set transparency=10
