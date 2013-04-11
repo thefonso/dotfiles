@@ -5,6 +5,8 @@ call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
 compiler ruby
+""auto-completion...html
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
 "" Whitespace
 set nowrap                      " don't wrap lines
