@@ -8,6 +8,9 @@ compiler ruby
 ""auto-completion...html
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
+""autosave when focus s lost
+autocmd BufLeave,FocusLost * silent! wall
+
 "" Whitespace
 set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
@@ -17,6 +20,11 @@ set backspace=indent,eol,start  " backspace through everything in insert mode
 "" Searching
 set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
+
+"" Omnicomplete css snippets
+set omnifunc=csscomplete#CompleteCSS
+"" and to get this to work for sass
+autocmd BufNewFile,BufRead *.scss             set ft=scss.css
 
 
 set number
@@ -29,7 +37,8 @@ set nocompatible
 set laststatus=2
 set ignorecase
 set smartcase
-set cursorline
+
+"set cursorline row and cursorcolumn
 
 nmap <Leader>p orequire "pry"<CR>binding.pry<ESC>;  " pry insertion
 vnoremap . :norm.<CR>                               " in visual mode, "." will for each line, go into normal mode and execute the "."
@@ -39,6 +48,9 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+" Zoomwin mapping
+nnoremap <silent> <c-z> :ZoomWin<CR>
 
 " Emacs/Readline keybindings for commandline mode
 cnoremap <C-A> <Home>
@@ -70,11 +82,15 @@ else
   set background=dark
 endif
 
+" cursor highlight color
+"highlight Cursor guifg=red guibg=white
+
 let g:solarized_termcolors=256
 "colorscheme twilight-night
 "colorscheme anotherdark
-colorscheme solarized
+"colorscheme solarized
 "colorscheme tomorrow-night
+
 
 hi Search    ctermbg=none ctermfg=none cterm=underline
 hi IncSearch ctermbg=none ctermfg=none cterm=bold,underline
@@ -99,6 +115,7 @@ let g:Powerline_symbols         = 'fancy'
 let g:CommandTMaxHeight         = 10
 let g:CommandTMaxDepth          = 10
 let coffee_no_trailing_space_error = 1
+let g:acp_behaviorSnipmateLength = 1
 
 autocmd QuickFixCmdPost *grep* cwindow
 
@@ -135,3 +152,12 @@ endfunction
 
 command! -nargs=0 Trim :call Trim()
 nnoremap <silent> <Leader>cw :Trim<CR>
+
+"https://github.com/mileszs/ack.vim"
+let g:ackprg="ack -H --nocolor --nogroup --column"
+
+"Open a new tab and search for something.
+nmap <leader>a :tab split<CR>:Ack ""<Left>
+
+"Immediately search for the word under the cursor in a new tab."
+nmap <Leader>A :tab split<CR>:Ack <C-R><C-w><CR>
