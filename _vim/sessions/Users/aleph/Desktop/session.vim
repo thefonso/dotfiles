@@ -331,7 +331,7 @@ set backspace=indent,eol,start
 set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
 set fuoptions=maxhorz,maxvert
-set guifont=Monaco\ for\ Powerline:h15
+set guifont=Monaco\ for\ Powerline:h14
 set guioptions=eg
 set guitablabel=%M%t
 set helplang=en
@@ -355,7 +355,7 @@ set noswapfile
 set tabstop=2
 set termencoding=utf-8
 set visualbell
-set window=38
+set window=41
 set winminwidth=15
 set winwidth=95
 set nowritebackup
@@ -367,9 +367,10 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 to_the_mages.txt
+badd +42 to_the_mages.txt
+badd +24 the_program.txt
 args to_the_mages.txt
-edit to_the_mages.txt
+edit the_program.txt
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -404,7 +405,7 @@ setlocal define=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
-setlocal errorformat=%+E%f:%l:\ parse\ error,%W%f:%l:\ warning:\ %m,%E%f:%l:in\ %*[^:]:\ %m,%E%f:%l:\ %m,%-C%tfrom\ %f:%l:in\ %.%#,%-Z%tfrom\ %f:%l,%-Z%p^,%-G%.%#
+setlocal errorformat=
 setlocal expandtab
 if &filetype != 'text'
 setlocal filetype=text
@@ -440,7 +441,7 @@ setlocal nolinebreak
 setlocal nolisp
 setlocal nolist
 setlocal nomacmeta
-setlocal makeprg=ruby\ -w\ $*
+setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
 setlocal modifiable
@@ -483,12 +484,12 @@ setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 105 - ((13 * winheight(0) + 18) / 37)
+let s:l = 10 - ((9 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-105
-normal! 096l
+10
+normal! 0
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

@@ -1,7 +1,7 @@
 " Vim completion for HTML5 data file
-" Language:       HTML5
-" Maintainer:     othree <othree@gmail.com>
-" Last Change:    2011 Apr 9
+" Language:	    HTML (version 5.1 Draft 2016 Jan 13)
+" Maintainer:   Kao, Wei-Ko(othree) ( othree AT gmail DOT com )
+" Last Change:  2016 Jan 20
 
 
 " Lang Tag: {{{
@@ -60,14 +60,16 @@ let charset = [
     \ 'windows-1256', 'windows-1257', 'windows-1258', 'TIS-620', ]
 " }}}
 
+let autofill_tokens = ['on', 'off', 'name', 'honorific-prefix', 'given-name', 'additional-name', 'family-name', 'honorific-suffix', 'nickname', 'username', 'new-password', 'current-password', 'organization-title', 'organization', 'street-address', 'address-line1', 'address-line2', 'address-line3', 'address-level4', 'address-level3', 'address-level2', 'address-level1', 'country', 'country-name', 'postal-code', 'cc-name', 'cc-given-name', 'cc-additional-name', 'cc-family-name', 'cc-number', 'cc-exp', 'cc-exp-month', 'cc-exp-year', 'cc-csc', 'cc-type', 'transaction-currency', 'transaction-amount', 'language', 'bday', 'bday-day', 'bday-month', 'bday-year', 'sex', 'url', 'photo']
+
 " Attributes_and_Settings: {{{
-let core_attributes = {'accesskey': [], 'class': [], 'contenteditable': ['true', 'false', ''], 'contextmenu': [], 'dir': ['ltr', 'rtl'], 'draggable': ['true', 'false'], 'hidden': ['hidden', ''], 'id': [], 'lang': lang_tag, 'spellcheck': ['true', 'false', ''], 'style': [], 'tabindex': [], 'title': []}
-let xml_attributes = {'xml:lang': lang_tag, 'xml:space': ['preserve'], 'xml:base': [], 'xmlns': ['http://www.w3.org/1999/xhtml', 'http://www.w3.org/1998/Math/MathML', 'http://www.w3.org/2000/svg']}
+let core_attributes = {'accesskey': [], 'class': [], 'contenteditable': ['true', 'false', ''], 'contextmenu': [], 'dir': ['ltr', 'rtl'], 'draggable': ['true', 'false'], 'hidden': ['hidden', ''], 'id': [], 'is': [], 'lang': lang_tag, 'spellcheck': ['true', 'false', ''], 'style': [], 'tabindex': [], 'title': []}
+let xml_attributes = {'xml:lang': lang_tag, 'xml:space': ['preserve'], 'xml:base': [], 'xmlns': ['http://www.w3.org/1999/xhtml', 'http://www.w3.org/1998/Math/MathML', 'http://www.w3.org/2000/svg', 'http://www.w3.org/1999/xlink']}
 
 let body_attributes = {}
 let global_attributes = extend(core_attributes, xml_attributes)
-if !exists('g:event_handler_attributes_complete')
-    let g:event_handler_attributes_complete = 1
+if !exists('g:html5_event_handler_attributes_complete')
+    let g:html5_event_handler_attributes_complete = 1
 endif
 
 " http://dev.w3.org/html5/spec/Overview.html#attributes-1
@@ -76,9 +78,12 @@ let attributes_value = {
     \ 'accept-charset': ['Charset', ''],
     \ 'accesskey': ['Character', ''],
     \ 'action': ['URL', ''],
+    \ 'allowfullscreen': ['Bool', ''],
+    \ 'allowpaymentrequest': ['Bool', ''],
+    \ 'allowusermedia': ['Bool', ''],
     \ 'alt': ['Text', ''],
     \ 'async': ['Bool', ''],
-    \ 'autocomplete': ['on/off', ''],
+    \ 'autocomplete': ['*Token', ''],
     \ 'autofocus': ['Bool', ''],
     \ 'autoplay': ['Bool', ''],
     \ 'border': ['1', ''],
@@ -101,6 +106,7 @@ let attributes_value = {
     \ 'disabled': ['Bool', ''],
     \ 'draggable': ['true/false', ''],
     \ 'enctype': ['Token', ''],
+    \ 'extends': ['Text', ''],
     \ 'for': ['ID', ''],
     \ 'form': ['ID', ''],
     \ 'formaction': ['URL', ''],
@@ -137,6 +143,7 @@ let attributes_value = {
     \ 'optimum': ['Number', ''],
     \ 'pattern': ['Pattern', ''],
     \ 'placeholder': ['Text', ''],
+    \ 'playsinline': ['Bool', ''],
     \ 'poster': ['URL', ''],
     \ 'preload': ['Token', ''],
     \ 'pubdate': ['Bool', ''],
@@ -152,6 +159,7 @@ let attributes_value = {
     \ 'scope': ['Token', ''],
     \ 'scoped': ['Bool', ''],
     \ 'seamless': ['Bool', ''],
+    \ 'select': ['Text', ''],
     \ 'selected': ['Bool', ''],
     \ 'shape': ['Token', ''],
     \ 'size': ['Int', ''],
@@ -179,7 +187,7 @@ let attributes_value = {
     \ 'role': ['*Token', '']
 \ }
 
-if g:event_handler_attributes_complete == 1
+if g:html5_event_handler_attributes_complete == 1
     let event_handler_attributes = {'onabort': [], 'onblur': [], 'oncanplay': [], 'oncanplaythrough': [], 'onchange': [], 'onclick': [], 'oncontextmenu': [], 'ondblclick': [], 'ondrag': [], 'ondragend': [], 'ondragenter': [], 'ondragleave': [], 'ondragover': [], 'ondragstart': [], 'ondrop': [], 'ondurationchange': [], 'onemptied': [], 'onended': [], 'onerror': [], 'onfocus': [], 'onformchange': [], 'onforminput': [], 'oninput': [], 'oninvalid': [], 'onkeydown': [], 'onkeypress': [], 'onkeyup': [], 'onload': [], 'onloadeddata': [], 'onloadedmetadata': [], 'onloadstart': [], 'onmousedown': [], 'onmousemove': [], 'onmouseout': [], 'onmouseover': [], 'onmouseup': [], 'onmousewheel': [], 'onpause': [], 'onplay': [], 'onplaying': [], 'onprogress': [], 'onratechange': [], 'onreadystatechange': [], 'onscroll': [], 'onseeked': [], 'onseeking': [], 'onselect': [], 'onshow': [], 'onstalled': [], 'onsubmit': [], 'onsuspend': [], 'ontimeupdate': [], 'onvolumechange': [], 'onwaiting': []}
     let global_attributes = extend(global_attributes, event_handler_attributes)
     
@@ -259,10 +267,10 @@ if g:event_handler_attributes_complete == 1
 
     let attributes_value = extend(attributes_value, event_attributes_value)
 endif
-if !exists('g:rdfa_attributes_complete')
-    let g:rdfa_attributes_complete = 1
+if !exists('g:html5_rdfa_attributes_complete')
+    let g:html5_rdfa_attributes_complete = 1
 endif
-if g:rdfa_attributes_complete == 1
+if g:html5_rdfa_attributes_complete == 1
     " http://www.w3.org/TR/rdfa-syntax/#s_metaAttributes
     " http://www.w3.org/TR/rdfa-core/#s_syntax
     let relrev = ['chapter', 'contents', 'copyright', 'first', 'glossary', 'help', 'icon', 'index', 'last', 'license', 'meta', 'next', 'p3pv1', 'prev', 'role', 'section', 'stylesheet', 'subsection', 'start', 'top', 'up']
@@ -284,10 +292,10 @@ if g:rdfa_attributes_complete == 1
     \ }
     let attributes_value = extend(attributes_value, rdfa_attributes_value)
 endif
-if !exists('g:microdata_attributes_complete')
-    let g:microdata_attributes_complete = 1
+if !exists('g:html5_microdata_attributes_complete')
+    let g:html5_microdata_attributes_complete = 1
 endif
-if g:microdata_attributes_complete == 1
+if g:html5_microdata_attributes_complete == 1
     let microdata_attributes = {'itemid': [], 'itemscope': ['itemscope', ''], 'itemtype': [], 'itemprop': [], 'itemref': []}
     let global_attributes = extend(global_attributes, microdata_attributes)
 
@@ -305,33 +313,58 @@ endif
 " WAI_ARIA: {{{
 " Ref: http://www.w3.org/TR/wai-aria/
 " Version: Draft 15 December 2009
-if !exists('g:aria_attributes_complete')
-    let g:aria_attributes_complete = 1
+if !exists('g:html5_aria_attributes_complete')
+    let g:html5_aria_attributes_complete = 1
 endif
-if g:aria_attributes_complete == 1
-    " Ref: http://www.w3.org/TR/wai-aria/roles
-    " Version: Draft 15 December 2009
-    let widget_role = ['alert', 'alertdialog', 'button', 'checkbox', 'combobox', 'dialog', 'gridcell', 'link', 'log', 'marquee', 'menuitem', 'menuitemcheckbox', 'menuitemradio', 'option', 'progressbar', 'radio', 'radiogroup', 'scrollbar', 'slider', 'spinbutton', 'status', 'tab', 'tabpanel', 'textbox', 'timer', 'tooltip', 'treeitem', 'combobox', 'grid', 'listbox', 'menu', 'menubar', 'radiogroup', 'tablist', 'tree', 'treegrid']
-    let document_structure = ['article', 'columnheader', 'definition', 'directory', 'document', 'group', 'heading', 'img', 'list', 'listitem', 'math', 'note', 'presentation', 'region', 'row', 'rowheader', 'separator']
+if g:html5_aria_attributes_complete == 1
+    " Ref: https://www.w3.org/TR/wai-aria-1.1/#role_definitions
+    " Version: W3C Candidate Recommendation 27 October 2016
+    let widget_role = ['alert', 'alertdialog', 'button', 'checkbox', 'combobox', 'dialog', 'gridcell', 'link', 'log', 'marquee', 'menuitem', 'menuitemcheckbox', 'menuitemradio', 'option', 'progressbar', 'radio', 'radiogroup', 'scrollbar', 'searchbox', 'slider', 'spinbutton', 'status', 'switch', 'tab', 'tabpanel', 'textbox', 'timer', 'tooltip', 'treeitem', 'combobox', 'grid', 'listbox', 'menu', 'menubar', 'radiogroup', 'tablist', 'tree', 'treegrid']
+    let document_structure = ['article', 'cell', 'columnheader', 'definition', 'directory', 'document', 'feed', 'figure', 'group', 'heading', 'img', 'list', 'listitem', 'math', 'none', 'note', 'presentation', 'region', 'row', 'rowheader', 'separator', 'table', 'term']
     let landmark_role = ['application', 'banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'search']
+    let dpub_role = ['dpub-abstract', 'dpub-afterword', 'dpub-appendix', 'dpub-biblioentry', 'dpub-bibliography', 'dpub-biblioref', 'dpub-chapter', 'dpub-cover', 'dpub-epilogue', 'dpub-footnote', 'dpub-footnotes', 'dpub-foreword', 'dpub-glossary', 'dpub-glossdef', 'dpub-glossref', 'dpub-glossterm', 'dpub-index', 'dpub-locator', 'dpub-noteref', 'dpub-notice', 'dpub-pagebreak', 'dpub-pagelist', 'dpub-part', 'dpub-preface', 'dpub-prologue', 'dpub-pullquote', 'dpub-qna', 'dpub-subtitle', 'dpub-tip', 'dpub-title', 'dpub-toc']
     let role = extend(widget_role, document_structure)
     let role = extend(role, landmark_role)
+    let role = extend(role, dpub_role)
     let global_attributes = extend(global_attributes, {'role': role})
 endif
 " }}}
 
 " Ref: http://dev.w3.org/html5/markup/
 " Version: Draft 05 April 2011
-let phrasing_elements = ['a', 'em', 'strong', 'small', 'mark', 'abbr', 'dfn', 'i', 'b', 'u', 'code', 'var', 'samp', 'kbd', 'sup', 'sub', 'q', 'cite', 'span', 'bdo', 'bdi', 'br', 'wbr', 'ins', 'del', 'img', 'embed', 'object', 'iframe', 'map', 'area', 'script', 'noscript', 'ruby', 'video', 'audio', 'input', 'textarea', 'select', 'button', 'label', 'output', 'datalist', 'keygen', 'progress', 'command', 'canvas', 'time', 'meter']
+let phrasing_elements = ['a', 'em', 'strong', 'small', 'mark', 'abbr', 'dfn', 'i', 'b', 'u', 'code', 'var', 'samp', 'kbd', 'sup', 'sub', 'q', 'cite', 'span', 'bdo', 'bdi', 'br', 'wbr', 'ins', 'del', 'img', 'picture', 'embed', 'object', 'iframe', 'map', 'area', 'script', 'noscript', 'ruby', 'video', 'audio', 'input', 'textarea', 'select', 'button', 'label', 'output', 'datalist', 'keygen', 'progress', 'command', 'canvas', 'time', 'meter', 'data', 'content', 'shadow']
 
 let metadata_elements = ['link', 'style', 'meta', 'script', 'noscript', 'command']
 
-let flow_elements = phrasing_elements + ['p', 'hr', 'pre', 'ul', 'ol', 'dl', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hgroup', 'address', 'blockquote', 'ins', 'del', 'object', 'map', 'noscript', 'section', 'nav', 'article', 'aside', 'header', 'footer', 'video', 'audio', 'figure', 'table', 'form', 'fieldset', 'menu', 'canvas', 'details']
+let flow_elements = phrasing_elements + ['p', 'hr', 'pre', 'ul', 'ol', 'dl', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hgroup', 'address', 'blockquote', 'ins', 'del', 'element', 'object', 'main', 'map', 'noscript', 'section', 'nav', 'article', 'aside', 'header', 'footer', 'video', 'audio', 'figure', 'table', 'template', 'form', 'fieldset', 'menu', 'canvas', 'details']
 
-" http://dev.w3.org/html5/spec/Overview.html#linkTypes
-let linktypes = ['alternate', 'author', 'bookmark', 'external', 'help', 'icon', 'license', 'next', 'nofollow', 'noreferrer', 'pingback', 'prefetch', 'prev', 'search', 'stylesheet', 'sidebar', 'tag']
+" https://html.spec.whatwg.org/#linkTypes
+let linktypes = ['alternate', 'author', 'bookmark', 'dns-prefetch', 'external', 'help', 'icon', 'license', 'next', 'nofollow', 'noreferrer', 'noopener', 'pingback', 'preconnect', 'prefetch', 'preload', 'prerender', 'prev', 'search', 'stylesheet', 'tag']
+" https://w3c.github.io/manifest/
+let linkreltypes = linktypes
+let linkreltypes = linkreltypes + ['manifest']
 " http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html
-let linkreltypes = linktypes + ['canonical']
+" http://www.ysearchblog.com/2009/02/12/fighting-duplication-adding-more-arrows-to-your-quiver/
+" http://blogs.bing.com/webmaster/2009/02/12/partnering-to-help-solve-duplicate-content-issues
+let linkreltypes = linkreltypes + ['canonical']
+" http://w3c.github.io/webcomponents/spec/imports/
+let linkreltypes = linkreltypes + ['import']
+" https://www.w3.org/TR/webmention/#sender-discovers-receiver-webmention-endpoint
+let linkreltypes = linkreltypes + ['webmention']
+" http://www.opensearch.org/Specifications/OpenSearch/1.1#Autodiscovery_in_HTML.2FXHTML
+let linkreltypes = linkreltypes + ['search']
+" http://microformats.org/wiki/rel-sitemap
+let linkreltypes = linkreltypes + ['sitemap']
+" https://www.ampproject.org/docs/get_started/create/prepare_for_discovery
+let linkreltypes = linkreltypes + ['amphtml']
+" https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html
+let linkreltypes = linkreltypes + ['apple-touch-icon', 'apple-touch-icon-precomposed', 'apple-touch-startup-image']
+" https://developer.chrome.com/webstore/inline_installation
+let linkreltypes = linkreltypes + ['chrome-webstore-item']
+" http://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.4.html#rfc.section.4
+let linkreltypes = linkreltypes + ['hub']
+" https://golem.ph.utexas.edu/~distler/blog/archives/000320.html
+let linkreltypes = linkreltypes + ['pgpkey']
 
 " a and button are special elements for interactive, some element can't be its descendent
 let abutton_dec = 'details\\|embed\\|iframe\\|keygen\\|label\\|menu\\|select\\|textarea'
@@ -340,10 +373,10 @@ let abutton_dec = 'details\\|embed\\|iframe\\|keygen\\|label\\|menu\\|select\\|t
 
 let g:xmldata_html5 = {
 \ 'vimxmlentities': ['AElig', 'Aacute', 'Acirc', 'Agrave', 'Alpha', 'Aring', 'Atilde', 'Auml', 'Beta', 'Ccedil', 'Chi', 'Dagger', 'Delta', 'ETH', 'Eacute', 'Ecirc', 'Egrave', 'Epsilon', 'Eta', 'Euml', 'Gamma', 'Iacute', 'Icirc', 'Igrave', 'Iota', 'Iuml', 'Kappa', 'Lambda', 'Mu', 'Ntilde', 'Nu', 'OElig', 'Oacute', 'Ocirc', 'Ograve', 'Omega', 'Omicron', 'Oslash', 'Otilde', 'Ouml', 'Phi', 'Pi', 'Prime', 'Psi', 'Rho', 'Scaron', 'Sigma', 'THORN', 'Tau', 'Theta', 'Uacute', 'Ucirc', 'Ugrave', 'Upsilon', 'Uuml', 'Xi', 'Yacute', 'Yuml', 'Zeta', 'aacute', 'acirc', 'acute', 'aelig', 'agrave', 'alefsym', 'alpha', 'amp', 'and', 'ang', 'apos', 'aring', 'asymp', 'atilde', 'auml', 'bdquo', 'beta', 'brvbar', 'bull', 'cap', 'ccedil', 'cedil', 'cent', 'chi', 'circ', 'clubs', 'cong', 'copy', 'crarr', 'cup', 'curren', 'dArr', 'dagger', 'darr', 'deg', 'delta', 'diams', 'divide', 'eacute', 'ecirc', 'egrave', 'empty', 'emsp', 'ensp', 'epsilon', 'equiv', 'eta', 'eth', 'euml', 'euro', 'exist', 'fnof', 'forall', 'frac12', 'frac14', 'frac34', 'frasl', 'gamma', 'ge', 'gt', 'hArr', 'harr', 'hearts', 'hellip', 'iacute', 'icirc', 'iexcl', 'igrave', 'image', 'infin', 'int', 'iota', 'iquest', 'isin', 'iuml', 'kappa', 'lArr', 'lambda', 'lang', 'laquo', 'larr', 'lceil', 'ldquo', 'le', 'lfloor', 'lowast', 'loz', 'lrm', 'lsaquo', 'lsquo', 'lt', 'macr', 'mdash', 'micro', 'middot', 'minus', 'mu', 'nabla', 'nbsp', 'ndash', 'ne', 'ni', 'not', 'notin', 'nsub', 'ntilde', 'nu', 'oacute', 'ocirc', 'oelig', 'ograve', 'oline', 'omega', 'omicron', 'oplus', 'or', 'ordf', 'ordm', 'oslash', 'otilde', 'otimes', 'ouml', 'para', 'part', 'permil', 'perp', 'phi', 'pi', 'piv', 'plusmn', 'pound', 'prime', 'prod', 'prop', 'psi', 'quot', 'rArr', 'radic', 'rang', 'raquo', 'rarr', 'rceil', 'rdquo', 'real', 'reg', 'rfloor', 'rho', 'rlm', 'rsaquo', 'rsquo', 'sbquo', 'scaron', 'sdot', 'sect', 'shy', 'sigma', 'sigmaf', 'sim', 'spades', 'sub', 'sube', 'sum', 'sup', 'sup1', 'sup2', 'sup3', 'supe', 'szlig', 'tau', 'there4', 'theta', 'thetasym', 'thinsp', 'thorn', 'tilde', 'times', 'trade', 'uArr', 'uacute', 'uarr', 'ucirc', 'ugrave', 'uml', 'upsih', 'upsilon', 'uuml', 'weierp', 'xi', 'yacute', 'yen', 'yuml', 'zeta', 'zwj', 'zwnj'],
-\ 'vimxmlroot': ['html'],
+\ 'vimxmlroot': ['html', 'head', 'body'] + flow_elements, 
 \ 'a': [
     \ filter(copy(flow_elements), "!(v:val =~ '". abutton_dec ."')"),
-    \ extend(copy(global_attributes), {'name': [], 'href': [], 'target': [], 'rel': linktypes, 'hreflang': lang_tag, 'media': [], 'type': []}) 
+    \ extend(copy(global_attributes), {'name': [], 'href': [], 'target': [], 'rel': linktypes, 'hreflang': lang_tag, 'media': [], 'type': [], 'referrerpolicy': ['no-referrer', 'no-referrer-when-downgrade', 'origin', 'origin-when-cross-origin', 'unsafe-url']}) 
 \ ],
 \ 'abbr': [
     \ phrasing_elements,
@@ -355,7 +388,7 @@ let g:xmldata_html5 = {
 \ ],
 \ 'area': [
     \ [],
-    \ extend(copy(global_attributes), {'alt': [], 'href': [], 'target': [], 'rel': linktypes, 'media': [], 'hreflang': lang_tag, 'type': [], 'shape': ['rect', 'circle', 'poly', 'default'], 'coords': []})
+    \ extend(copy(global_attributes), {'alt': [], 'href': [], 'target': [], 'rel': linktypes, 'media': [], 'hreflang': lang_tag, 'type': [], 'shape': ['rect', 'circle', 'poly', 'default'], 'coords': [], 'referrerpolicy': ['no-referrer', 'no-referrer-when-downgrade', 'origin', 'origin-when-cross-origin', 'unsafe-url']})
 \ ],
 \ 'article': [
     \ flow_elements + ['style'],
@@ -425,6 +458,10 @@ let g:xmldata_html5 = {
     \ [],
     \ extend(copy(global_attributes), {'span': []})
 \ ],
+\ 'content': [
+    \ [],
+    \ extend(copy(global_attributes), {'select': []})
+\ ],
 \ 'command': [
     \ ['col'],
     \ extend(copy(global_attributes), {'type': ['command', 'radio', 'checkbox'], 'radiogroup': [], 'checked': ['checked', ''], 'label': [], 'icon': [], 'disabled': ['disabled', '']})
@@ -487,7 +524,7 @@ let g:xmldata_html5 = {
 \ ],
 \ 'form': [
     \ flow_elements,
-    \ extend(copy(global_attributes), {'name': [], 'action': [], 'enctype': ['application/x-www-form-urlencoded', 'multipart/form-data', 'text/plain'], 'method': ['get', 'post', 'put', 'delete'], 'target': [], 'novalidate': ['novalidate', ''], 'accept-charset': charset, 'autocomplete': ['on', 'off']})
+    \ extend(copy(global_attributes), {'name': [], 'action': [], 'enctype': ['application/x-www-form-urlencoded', 'multipart/form-data', 'text/plain'], 'method': ['get', 'post', 'put', 'delete'], 'target': [], 'novalidate': ['novalidate', ''], 'accept-charset': charset, 'autocomplete': autofill_tokens})
 \ ],
 \ 'h1': [
     \ phrasing_elements,
@@ -539,15 +576,15 @@ let g:xmldata_html5 = {
 \ ],
 \ 'iframe': [
     \ [],
-    \ extend(copy(global_attributes), {'src': [], 'name': [], 'width': [], 'height': [], 'sandbox': ['allow-same-origin', 'allow-forms', 'allow-scripts'], 'seamless': ['seamless', '']})
+    \ extend(copy(global_attributes), {'src': [], 'srcdoc': [], 'name': [], 'width': [], 'height': [], 'sandbox': ['allow-same-origin', 'allow-forms', 'allow-scripts'], 'seamless': ['seamless', ''], 'referrerpolicy': ['no-referrer', 'no-referrer-when-downgrade', 'origin', 'origin-when-cross-origin', 'unsafe-url'], 'allowfullscreen': [], 'allowpaymentrequest': [], 'allowusermedia': []})
 \ ],
 \ 'img': [
     \ [],
-    \ extend(copy(global_attributes), {'src': [], 'alt': [], 'height': [], 'width': [], 'usemap': [], 'ismap': ['ismap', '']})
+    \ extend(copy(global_attributes), {'src': [], 'alt': [], 'height': [], 'width': [], 'usemap': [], 'ismap': ['ismap', ''], 'referrerpolicy': ['no-referrer', 'no-referrer-when-downgrade', 'origin', 'origin-when-cross-origin', 'unsafe-url']})
 \ ],
 \ 'input': [
     \ [],
-    \ extend(copy(global_attributes), {'type': ['text', 'password', 'checkbox', 'radio', 'button', 'submit', 'reset', 'file', 'hidden', 'image', 'datetime', 'datetime-local', 'date', 'month', 'time', 'week', 'number', 'range', 'email', 'url', 'search', 'tel', 'coloe'], 'name': [], 'disabled': ['disabled', ''], 'form': [], 'maxlength': [], 'readonly': ['readonly', ''], 'size': [], 'value': [], 'autocomplete': ['on', 'off'], 'autofocus': ['autofocus', ''], 'list': [], 'pattern': [], 'required': ['required', ''], 'placeholder': [], 'checked': ['checked'], 'accept': [], 'multiple': ['multiple', ''], 'alt': [], 'src': [], 'height': [], 'width': [], 'min': [], 'max': [], 'step': [], 'formenctype': ['application/x-www-form-urlencoded', 'multipart/form-data', 'text/plain'], 'formmethod': ['get', 'post', 'put', 'delete'], 'formtarget': [], 'formnovalidate': ['formnovalidate', '']})
+    \ extend(copy(global_attributes), {'type': ['text', 'password', 'checkbox', 'radio', 'button', 'submit', 'reset', 'file', 'hidden', 'image', 'datetime', 'datetime-local', 'date', 'month', 'time', 'week', 'number', 'range', 'email', 'url', 'search', 'tel', 'color'], 'name': [], 'disabled': ['disabled', ''], 'form': [], 'maxlength': [], 'readonly': ['readonly', ''], 'size': [], 'value': [], 'autocomplete': autofill_tokens, 'autofocus': ['autofocus', ''], 'list': [], 'pattern': [], 'required': ['required', ''], 'placeholder': [], 'checked': ['checked'], 'accept': [], 'multiple': ['multiple', ''], 'alt': [], 'src': [], 'height': [], 'width': [], 'min': [], 'max': [], 'step': [], 'formenctype': ['application/x-www-form-urlencoded', 'multipart/form-data', 'text/plain'], 'formmethod': ['get', 'post', 'put', 'delete'], 'formtarget': [], 'formnovalidate': ['formnovalidate', '']})
 \ ],
 \ 'ins': [
     \ flow_elements,
@@ -575,7 +612,11 @@ let g:xmldata_html5 = {
 \ ],
 \ 'link': [
     \ [],
-    \ extend(copy(global_attributes), {'href': [], 'rel': linkreltypes, 'hreflang': lang_tag, 'media': [], 'type': [], 'sizes': ['any']})
+    \ extend(copy(global_attributes), {'href': [], 'rel': linkreltypes, 'hreflang': lang_tag, 'media': [], 'type': [], 'sizes': ['any'], 'referrerpolicy': ['no-referrer', 'no-referrer-when-downgrade', 'origin', 'origin-when-cross-origin', 'unsafe-url']})
+\ ],
+\ 'main': [
+    \ flow_elements + ['style'],
+    \ global_attributes
 \ ],
 \ 'map': [
     \ flow_elements,
@@ -586,12 +627,16 @@ let g:xmldata_html5 = {
     \ global_attributes
 \ ],
 \ 'menu': [
-    \ flow_elements + ['li'],
+    \ flow_elements + ['menuitem'],
     \ extend(copy(global_attributes), {'type': ['toolbar', 'context'], 'label': []})
+\ ],
+\ 'menuitem': [
+    \ flow_elements + ['li'],
+    \ extend(copy(global_attributes), {'type': ['toolbar', 'context'], 'label': [], 'icon': [], 'disabled': [], 'checked': [], 'radiogroup': [], 'default': [], 'command': []})
 \ ],
 \ 'meta': [
     \ [],
-    \ extend(copy(global_attributes), {'name': [], 'http-equiv': ['refresh', 'default-style', 'content-type'], 'content': [], 'charset': charset})
+    \ extend(copy(global_attributes), {'name': ['application-name', 'author', 'description', 'generator', 'referrer', 'creator', 'googlebot', 'publisher', 'robots', 'slurp', 'viewport', 'theme-color'], 'http-equiv': ['refresh', 'default-style', 'content-type'], 'content': [], 'charset': charset})
 \ ],
 \ 'meter': [
     \ phrasing_elements,
@@ -633,6 +678,10 @@ let g:xmldata_html5 = {
     \ [],
     \ extend(copy(global_attributes), {'name': [], 'value': []})
 \ ],
+\ 'picture': [
+    \ flow_elements + ['source'],
+    \ global_attributes
+\ ],
 \ 'pre': [
     \ phrasing_elements,
     \ global_attributes
@@ -645,6 +694,10 @@ let g:xmldata_html5 = {
     \ phrasing_elements,
     \ extend(copy(global_attributes), {'cite': []})
 \ ],
+\ 'rb': [
+    \ phrasing_elements,
+    \ global_attributes
+\ ],
 \ 'rp': [
     \ phrasing_elements,
     \ global_attributes
@@ -653,8 +706,12 @@ let g:xmldata_html5 = {
     \ phrasing_elements,
     \ global_attributes
 \ ],
-\ 'ruby': [
+\ 'rtc': [
     \ phrasing_elements + ['rp', 'rt'],
+    \ global_attributes
+\ ],
+\ 'ruby': [
+    \ phrasing_elements + ['rb', 'rp', 'rt', 'rtc'],
     \ global_attributes
 \ ],
 \ 'samp': [
@@ -663,7 +720,7 @@ let g:xmldata_html5 = {
 \ ],
 \ 'script': [
     \ [],
-    \ extend(copy(global_attributes), {'src': [], 'defer': ['defer', ''], 'async': ['async', ''], 'type': [], 'charset': charset})
+    \ extend(copy(global_attributes), {'src': [], 'defer': ['defer', ''], 'async': ['async', ''], 'type': [], 'charset': charset, 'nonce': []})
 \ ],
 \ 'section': [
     \ flow_elements + ['style'],
@@ -673,13 +730,17 @@ let g:xmldata_html5 = {
     \ ['optgroup', 'option'],
     \ extend(copy(global_attributes), {'name': [], 'disabled': ['disabled', ''], 'form': [], 'size': [], 'multiple': ['multiple', '']})
 \ ],
+\ 'shadow': [
+    \ [],
+    \ global_attributes
+\ ],
 \ 'small': [
     \ phrasing_elements,
     \ global_attributes
 \ ],
 \ 'source': [
     \ [],
-    \ extend(copy(global_attributes), {'src': [], 'type': [], 'media': []})
+    \ extend(copy(global_attributes), {'src': [], 'type': [], 'media': [], 'srcset': [], 'sizes': []})
 \ ],
 \ 'span': [
     \ phrasing_elements,
@@ -691,7 +752,7 @@ let g:xmldata_html5 = {
 \ ],
 \ 'style': [
     \ [],
-    \ extend(copy(global_attributes), {'type': [], 'media': [], 'scoped': ['scoped', '']})
+    \ extend(copy(global_attributes), {'type': [], 'media': [], 'scoped': ['scoped', ''], 'nonce': []})
 \ ],
 \ 'sub': [
     \ phrasing_elements,
@@ -717,6 +778,10 @@ let g:xmldata_html5 = {
     \ flow_elements,
     \ extend(copy(global_attributes), {'colspan': [], 'rowspan': [], 'headers': []})
 \ ],
+\ 'template': [
+    \ flow_elements + ['style'],
+    \ global_attributes
+\ ],
 \ 'textarea': [
     \ [''],
     \ extend(copy(global_attributes), {'name': [], 'disabled': ['disabled', ''], 'form': [], 'readonly': ['readonly', ''], 'maxlength': [], 'autofocus': ['autofocus', ''], 'required': ['required', ''], 'placeholder': [], 'rows': [], 'wrap': ['hard', 'soft'], 'cols': []})
@@ -736,6 +801,10 @@ let g:xmldata_html5 = {
 \ 'time': [
     \ phrasing_elements,
     \ extend(copy(global_attributes), {'datetime': [], 'pubdate': ['pubdate', '']})
+\ ],
+\ 'data': [
+    \ phrasing_elements,
+    \ extend(copy(global_attributes), {'value': []})
 \ ],
 \ 'title': [
     \ [''],
@@ -763,7 +832,7 @@ let g:xmldata_html5 = {
 \ ],
 \ 'video': [
     \ flow_elements + ['source', 'track'],
-    \ extend(copy(global_attributes), {'autoplay': ['autoplay', ''], 'preload': ['none', 'metadata', 'auto', ''], 'controls': ['controls', ''], 'loop': ['loop', ''], 'poster': [], 'height': [], 'width': [], 'src': []})
+    \ extend(copy(global_attributes), {'autoplay': ['autoplay', ''], 'preload': ['none', 'metadata', 'auto', ''], 'controls': ['controls', ''], 'loop': ['loop', ''], 'playsinline': ['playsinline', ''], 'poster': [], 'height': [], 'width': [], 'src': []})
 \ ],
 \ 'wbr': [
     \ [],

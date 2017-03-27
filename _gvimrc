@@ -1,9 +1,9 @@
 if has("mac")
   set guifont=Monaco\ for\ Powerline
-  set fuopt=maxhorz,maxvert
-  set fu
+"  set fuopt=maxhorz,maxvert
+  set fu "start full screen
   set vb "shuts up the bell sounds from macVim
-  map <Leader>fs :set invfu<CR>
+  map <Leader>fs :set invfu<CR> " \fs for full screen
 end
 
 set guioptions-=T
@@ -11,15 +11,24 @@ set guioptions-=m
 set guioptions-=r
 set guioptions-=L
 
-set columns=140
-
 
 "colorscheme candycode
-colorscheme candy
-"colorscheme tomorrow-night
+"colorscheme candy
+colorscheme tomorrow-night
 "colorscheme twilight
 
 "set transparency=0
+
+"" XMPFilter options (see ruby results inside vim with #=>)
+"" us VISUAL mode, select item, use -u- to undo result
+autocmd FileType ruby nmap <buffer> <D-m> <Plug>(xmpfilter-mark)
+autocmd FileType ruby xmap <buffer> <D-m> <Plug>(xmpfilter-mark)
+autocmd FileType ruby imap <buffer> <D-m> <Plug>(xmpfilter-mark)
+
+autocmd FileType ruby nmap <buffer> <D-r> <Plug>(xmpfilter-run)
+autocmd FileType ruby xmap <buffer> <D-r> <Plug>(xmpfilter-run)
+autocmd FileType ruby imap <buffer> <D-r> <Plug>(xmpfilter-run)
+
 
 
 function! MakeSession()
@@ -43,4 +52,3 @@ function! LoadSession()
 endfunction
 au VimEnter * nested :call LoadSession()
 au VimLeave * :call MakeSession()
-

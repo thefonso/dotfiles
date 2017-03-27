@@ -56,16 +56,16 @@ nmap D <Plug>ZenCodingBalanceTagOutwardNormal
 nmap d <Plug>ZenCodingBalanceTagInwardNormal
 nmap , <Plug>ZenCodingExpandNormal
 nnoremap <silent>  :ZoomWin
-nnoremap <silent>  :TComment
-nnoremap <silent> 1 :TComment count=1
-nnoremap <silent> 2 :TComment count=2
-nnoremap <silent> 3 :TComment count=3
-nnoremap <silent> 4 :TComment count=4
-nnoremap <silent> 5 :TComment count=5
-nnoremap <silent> 6 :TComment count=6
-nnoremap <silent> 7 :TComment count=7
-nnoremap <silent> 8 :TComment count=8
 nnoremap <silent> 9 :TComment count=9
+nnoremap <silent> 8 :TComment count=8
+nnoremap <silent> 7 :TComment count=7
+nnoremap <silent> 6 :TComment count=6
+nnoremap <silent> 5 :TComment count=5
+nnoremap <silent> 4 :TComment count=4
+nnoremap <silent> 3 :TComment count=3
+nnoremap <silent> 2 :TComment count=2
+nnoremap <silent> 1 :TComment count=1
+nnoremap <silent>  :TComment
 vnoremap <silent> 9 :TCommentMaybeInline count=9
 onoremap <silent> 9 :TComment count=9
 vnoremap <silent> 8 :TCommentMaybeInline count=8
@@ -104,8 +104,8 @@ vnoremap . :norm.                               " in visual mode, "." will for
 xmap S <Plug>VSurround
 snoremap U b<BS>U
 map Y y$
-snoremap <silent> \__ :TComment
 nnoremap <silent> \__ :TComment
+snoremap <silent> \__ :TComment
 map \fs :set invfu
 snoremap \ b<BS>\
 noremap \_s :TCommentAs =&ft_
@@ -372,19 +372,18 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +24 README.rdoc
-badd +222 project_files/notes.rtf
-badd +19 Gemfile
+badd +171 README.rdoc
+badd +35 Gemfile
 badd +17 app/controllers/stats_controller.rb
 badd +16 db/schema.rb
 badd +24 app/views/stats/_form.html.erb
-badd +25 app/views/stats/index.html.erb
+badd +1 app/views/stats/index.html.erb
 badd +61 config/routes.rb
 badd +39 app/views/stats/show.html.erb
 badd +1 app/models/stat.rb
 badd +1 config/database.yml
 badd +6 app/assets/stylesheets/stats.css.scss
-badd +19 app/views/stats/new.html.erb
+badd +1 app/views/stats/new.html.erb
 badd +6 app/views/stats/edit.html.erb
 badd +1 db/migrate/20130803193208_create_stats.rb
 badd +1 db/migrate/20130810210233_add_statsid_to_stats.rb
@@ -395,174 +394,14 @@ edit app/views/stats/new.html.erb
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
-wincmd _ | wincmd |
-vsplit
-2wincmd h
-wincmd w
+1wincmd h
 wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 25 + 91) / 182)
-exe 'vert 2resize ' . ((&columns * 69 + 91) / 182)
-exe 'vert 3resize ' . ((&columns * 86 + 91) / 182)
-argglobal
-enew
-file NERD_tree_4
-let s:cpo_save=&cpo
-set cpo&vim
-nnoremap <buffer> <silent> <NL> :call nerdtree#invokeKeyMap("<C-j>")
-nnoremap <buffer> <silent>  :call nerdtree#invokeKeyMap("<C-k>")
-nnoremap <buffer> <silent>  :call nerdtree#invokeKeyMap('o')
-nmap <buffer> gf <Plug>RailsTabFind
-nmap <buffer> f <Plug>RailsSplitFind
-nnoremap <buffer> <silent> ? :call nerdtree#invokeKeyMap("?")
-nnoremap <buffer> <silent> A :call nerdtree#invokeKeyMap("A")
-nnoremap <buffer> <silent> B :call nerdtree#invokeKeyMap("B")
-nnoremap <buffer> <silent> CD :call nerdtree#invokeKeyMap("CD")
-nnoremap <buffer> <silent> C :call nerdtree#invokeKeyMap("C")
-nnoremap <buffer> <silent> D :call nerdtree#invokeKeyMap("D")
-nnoremap <buffer> <silent> F :call nerdtree#invokeKeyMap("F")
-nnoremap <buffer> <silent> I :call nerdtree#invokeKeyMap("I")
-nnoremap <buffer> <silent> J :call nerdtree#invokeKeyMap("J")
-nnoremap <buffer> <silent> K :call nerdtree#invokeKeyMap("K")
-nnoremap <buffer> <silent> O :call nerdtree#invokeKeyMap("O")
-nnoremap <buffer> <silent> P :call nerdtree#invokeKeyMap("P")
-nnoremap <buffer> <silent> R :call nerdtree#invokeKeyMap("R")
-nnoremap <buffer> <silent> T :call nerdtree#invokeKeyMap("T")
-nnoremap <buffer> <silent> U :call nerdtree#invokeKeyMap("U")
-nnoremap <buffer> <silent> X :call nerdtree#invokeKeyMap("X")
-nnoremap <buffer> <silent> cd :call nerdtree#invokeKeyMap("cd")
-nnoremap <buffer> <silent> e :call nerdtree#invokeKeyMap("e")
-nnoremap <buffer> <silent> f :call nerdtree#invokeKeyMap("f")
-nnoremap <buffer> <silent> gi :call nerdtree#invokeKeyMap("gi")
-nnoremap <buffer> <silent> gs :call nerdtree#invokeKeyMap("gs")
-nnoremap <buffer> <silent> go :call nerdtree#invokeKeyMap("go")
-nmap <buffer> gf <Plug>RailsFind
-nnoremap <buffer> <silent> i :call nerdtree#invokeKeyMap("i")
-nnoremap <buffer> <silent> m :call nerdtree#invokeKeyMap("m")
-nnoremap <buffer> <silent> o :call nerdtree#invokeKeyMap("o")
-nnoremap <buffer> <silent> p :call nerdtree#invokeKeyMap("p")
-nnoremap <buffer> <silent> q :call nerdtree#invokeKeyMap("q")
-nnoremap <buffer> <silent> r :call nerdtree#invokeKeyMap("r")
-nnoremap <buffer> <silent> s :call nerdtree#invokeKeyMap("s")
-nnoremap <buffer> <silent> t :call nerdtree#invokeKeyMap("t")
-nnoremap <buffer> <silent> u :call nerdtree#invokeKeyMap("u")
-nnoremap <buffer> <silent> x :call nerdtree#invokeKeyMap("x")
-nnoremap <buffer> <silent> <2-LeftMouse> :call nerdtree#invokeKeyMap("<2-LeftMouse>")
-nnoremap <buffer> <silent> <LeftRelease> <LeftRelease>:call nerdtree#invokeKeyMap("<LeftRelease>")
-nnoremap <buffer> <silent> <MiddleRelease> :call nerdtree#invokeKeyMap("<MiddleRelease>")
-let &cpo=s:cpo_save
-unlet s:cpo_save
-setlocal keymap=
-setlocal noarabic
-setlocal noautoindent
-setlocal balloonexpr=
-setlocal nobinary
-setlocal bufhidden=hide
-setlocal nobuflisted
-setlocal buftype=nofile
-setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=:#
-setlocal commentstring=#\ %s
-setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'nerdtree'
-setlocal filetype=nerdtree
-endif
-setlocal foldcolumn=0
-set nofoldenable
-setlocal nofoldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-set foldlevel=1
-setlocal foldlevel=1
-setlocal foldmarker={{{,}}}
-set foldmethod=indent
-setlocal foldmethod=manual
-setlocal foldminlines=1
-set foldnestmax=10
-setlocal foldnestmax=10
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=tcq
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=RailsIncludeexpr()
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255,$
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal nolist
-setlocal nomacmeta
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal nomodifiable
-setlocal nrformats=octal,hex
-set number
-setlocal nonumber
-setlocal numberwidth=4
-setlocal omnifunc=csscomplete#CompleteCSS
-setlocal path=.,lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,test,test/unit,test/functional,test/integration,test/controllers,test/helpers,test/mailers,test/models,spec,spec/controllers,spec/helpers,spec/mailers,spec/models,spec/views,spec/lib,spec/features,spec/requests,spec/integration,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/baseball,/usr/include,,~/.rvm/gems/ruby-1.9.3-p448/gems/kaminari-0.14.1/app/*,~/.rvm/gems/ruby-1.9.3-p448/gems/actionmailer-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/actionpack-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activemodel-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activerecord-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activeresource-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activesupport-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/ansi-1.4.3/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/arel-3.0.2/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/better_errors-0.9.0/lib,~/.r
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=2
-setlocal noshortname
-setlocal nosmartindent
-setlocal softtabstop=2
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=%!Pl#Statusline(11,1)
-setlocal suffixesadd=.rb
-setlocal noswapfile
-setlocal synmaxcol=3000
-if &syntax != 'nerdtree'
-setlocal syntax=nerdtree
-endif
-setlocal tabstop=2
-setlocal tags=~/Projects/baseball/tags,~/Projects/baseball/tmp/tags,~/Projects/baseball/.git/tags,./tags,tags,~/.rvm/gems/ruby-1.9.3-p448/gems/actionmailer-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/actionpack-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activemodel-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activerecord-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activeresource-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activesupport-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/ansi-1.4.3/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/arel-3.0.2/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/better_errors-0.9.0/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/binding_of_caller-0.7.2/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/builder-3.0.4/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/coderay-1.0.9/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/coffee-rails-3.2.2/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/coffee-script-2.2.0/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/coffee-script-source-1.6.3/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/debug_inspector-0.0.2/tags,~/.rvm/gems/ruby-
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal noundofile
-setlocal nowinfixheight
-setlocal winfixwidth
-set nowrap
-setlocal nowrap
-setlocal wrapmargin=0
-wincmd w
+exe 'vert 1resize ' . ((&columns * 86 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 95 + 91) / 182)
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
@@ -687,12 +526,12 @@ setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 19 - ((18 * winheight(0) + 24) / 49)
+let s:l = 22 - ((21 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-19
-normal! 06l
+22
+normal! 032l
 wincmd w
 argglobal
 edit app/controllers/stats_controller.rb
@@ -819,16 +658,15 @@ setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 43 - ((20 * winheight(0) + 24) / 49)
+let s:l = 42 - ((41 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-43
-normal! 0
+42
+normal! 04l
 wincmd w
-exe 'vert 1resize ' . ((&columns * 25 + 91) / 182)
-exe 'vert 2resize ' . ((&columns * 69 + 91) / 182)
-exe 'vert 3resize ' . ((&columns * 86 + 91) / 182)
+exe 'vert 1resize ' . ((&columns * 86 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 95 + 91) / 182)
 tabedit app/models/stat.rb
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -839,8 +677,8 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 95 + 91) / 182)
-exe 'vert 2resize ' . ((&columns * 86 + 91) / 182)
+exe 'vert 1resize ' . ((&columns * 86 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 95 + 91) / 182)
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
@@ -1104,176 +942,14 @@ normal! zt
 44
 normal! 04l
 wincmd w
-exe 'vert 1resize ' . ((&columns * 95 + 91) / 182)
-exe 'vert 2resize ' . ((&columns * 86 + 91) / 182)
+exe 'vert 1resize ' . ((&columns * 86 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 95 + 91) / 182)
 tabedit app/views/stats/index.html.erb
 set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 25 + 91) / 182)
-exe 'vert 2resize ' . ((&columns * 156 + 91) / 182)
-argglobal
-enew
-file NERD_tree_5
-let s:cpo_save=&cpo
-set cpo&vim
-nnoremap <buffer> <silent> <NL> :call nerdtree#invokeKeyMap("<C-j>")
-nnoremap <buffer> <silent>  :call nerdtree#invokeKeyMap("<C-k>")
-nnoremap <buffer> <silent>  :call nerdtree#invokeKeyMap('o')
-nmap <buffer> gf <Plug>RailsTabFind
-nmap <buffer> f <Plug>RailsSplitFind
-nnoremap <buffer> <silent> ? :call nerdtree#invokeKeyMap("?")
-nnoremap <buffer> <silent> A :call nerdtree#invokeKeyMap("A")
-nnoremap <buffer> <silent> B :call nerdtree#invokeKeyMap("B")
-nnoremap <buffer> <silent> CD :call nerdtree#invokeKeyMap("CD")
-nnoremap <buffer> <silent> C :call nerdtree#invokeKeyMap("C")
-nnoremap <buffer> <silent> D :call nerdtree#invokeKeyMap("D")
-nnoremap <buffer> <silent> F :call nerdtree#invokeKeyMap("F")
-nnoremap <buffer> <silent> I :call nerdtree#invokeKeyMap("I")
-nnoremap <buffer> <silent> J :call nerdtree#invokeKeyMap("J")
-nnoremap <buffer> <silent> K :call nerdtree#invokeKeyMap("K")
-nnoremap <buffer> <silent> O :call nerdtree#invokeKeyMap("O")
-nnoremap <buffer> <silent> P :call nerdtree#invokeKeyMap("P")
-nnoremap <buffer> <silent> R :call nerdtree#invokeKeyMap("R")
-nnoremap <buffer> <silent> T :call nerdtree#invokeKeyMap("T")
-nnoremap <buffer> <silent> U :call nerdtree#invokeKeyMap("U")
-nnoremap <buffer> <silent> X :call nerdtree#invokeKeyMap("X")
-nnoremap <buffer> <silent> cd :call nerdtree#invokeKeyMap("cd")
-nnoremap <buffer> <silent> e :call nerdtree#invokeKeyMap("e")
-nnoremap <buffer> <silent> f :call nerdtree#invokeKeyMap("f")
-nnoremap <buffer> <silent> gi :call nerdtree#invokeKeyMap("gi")
-nnoremap <buffer> <silent> gs :call nerdtree#invokeKeyMap("gs")
-nnoremap <buffer> <silent> go :call nerdtree#invokeKeyMap("go")
-nmap <buffer> gf <Plug>RailsFind
-nnoremap <buffer> <silent> i :call nerdtree#invokeKeyMap("i")
-nnoremap <buffer> <silent> m :call nerdtree#invokeKeyMap("m")
-nnoremap <buffer> <silent> o :call nerdtree#invokeKeyMap("o")
-nnoremap <buffer> <silent> p :call nerdtree#invokeKeyMap("p")
-nnoremap <buffer> <silent> q :call nerdtree#invokeKeyMap("q")
-nnoremap <buffer> <silent> r :call nerdtree#invokeKeyMap("r")
-nnoremap <buffer> <silent> s :call nerdtree#invokeKeyMap("s")
-nnoremap <buffer> <silent> t :call nerdtree#invokeKeyMap("t")
-nnoremap <buffer> <silent> u :call nerdtree#invokeKeyMap("u")
-nnoremap <buffer> <silent> x :call nerdtree#invokeKeyMap("x")
-nnoremap <buffer> <silent> <2-LeftMouse> :call nerdtree#invokeKeyMap("<2-LeftMouse>")
-nnoremap <buffer> <silent> <LeftRelease> <LeftRelease>:call nerdtree#invokeKeyMap("<LeftRelease>")
-nnoremap <buffer> <silent> <MiddleRelease> :call nerdtree#invokeKeyMap("<MiddleRelease>")
-let &cpo=s:cpo_save
-unlet s:cpo_save
-setlocal keymap=
-setlocal noarabic
-setlocal noautoindent
-setlocal balloonexpr=
-setlocal nobinary
-setlocal bufhidden=hide
-setlocal nobuflisted
-setlocal buftype=nofile
-setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=:#
-setlocal commentstring=#\ %s
-setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'nerdtree'
-setlocal filetype=nerdtree
-endif
-setlocal foldcolumn=0
-set nofoldenable
-setlocal nofoldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-set foldlevel=1
-setlocal foldlevel=1
-setlocal foldmarker={{{,}}}
-set foldmethod=indent
-setlocal foldmethod=manual
-setlocal foldminlines=1
-set foldnestmax=10
-setlocal foldnestmax=10
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=tcq
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=RailsIncludeexpr()
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255,$
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal nolist
-setlocal nomacmeta
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal nomodifiable
-setlocal nrformats=octal,hex
-set number
-setlocal nonumber
-setlocal numberwidth=4
-setlocal omnifunc=csscomplete#CompleteCSS
-setlocal path=.,lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,test,test/unit,test/functional,test/integration,test/controllers,test/helpers,test/mailers,test/models,spec,spec/controllers,spec/helpers,spec/mailers,spec/models,spec/views,spec/lib,spec/features,spec/requests,spec/integration,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/baseball,/usr/include,,~/.rvm/gems/ruby-1.9.3-p448/gems/kaminari-0.14.1/app/*,~/.rvm/gems/ruby-1.9.3-p448/gems/actionmailer-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/actionpack-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activemodel-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activerecord-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activeresource-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activesupport-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/ansi-1.4.3/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/arel-3.0.2/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/better_errors-0.9.0/lib,~/.r
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=2
-setlocal noshortname
-setlocal nosmartindent
-setlocal softtabstop=2
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=%!Pl#Statusline(11,0)
-setlocal suffixesadd=.rb
-setlocal noswapfile
-setlocal synmaxcol=3000
-if &syntax != 'nerdtree'
-setlocal syntax=nerdtree
-endif
-setlocal tabstop=2
-setlocal tags=~/Projects/baseball/tags,~/Projects/baseball/tmp/tags,~/Projects/baseball/.git/tags,./tags,tags,~/.rvm/gems/ruby-1.9.3-p448/gems/actionmailer-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/actionpack-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activemodel-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activerecord-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activeresource-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activesupport-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/ansi-1.4.3/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/arel-3.0.2/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/better_errors-0.9.0/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/binding_of_caller-0.7.2/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/builder-3.0.4/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/coderay-1.0.9/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/coffee-rails-3.2.2/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/coffee-script-2.2.0/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/coffee-script-source-1.6.3/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/debug_inspector-0.0.2/tags,~/.rvm/gems/ruby-
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal noundofile
-setlocal nowinfixheight
-setlocal winfixwidth
-set nowrap
-setlocal nowrap
-setlocal wrapmargin=0
-wincmd w
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
@@ -1404,10 +1080,300 @@ exe s:l
 normal! zt
 9
 normal! 0
+tabedit README.rdoc
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
 wincmd w
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
 exe 'vert 1resize ' . ((&columns * 25 + 91) / 182)
 exe 'vert 2resize ' . ((&columns * 156 + 91) / 182)
-tabnext 1
+argglobal
+enew
+file NERD_tree_4
+let s:cpo_save=&cpo
+set cpo&vim
+nnoremap <buffer> <silent> <NL> :call nerdtree#invokeKeyMap("<C-j>")
+nnoremap <buffer> <silent>  :call nerdtree#invokeKeyMap("<C-k>")
+nnoremap <buffer> <silent>  :call nerdtree#invokeKeyMap('o')
+nmap <buffer> f <Plug>RailsSplitFind
+nmap <buffer> gf <Plug>RailsTabFind
+nnoremap <buffer> <silent> ? :call nerdtree#invokeKeyMap("?")
+nnoremap <buffer> <silent> A :call nerdtree#invokeKeyMap("A")
+nnoremap <buffer> <silent> B :call nerdtree#invokeKeyMap("B")
+nnoremap <buffer> <silent> C :call nerdtree#invokeKeyMap("C")
+nnoremap <buffer> <silent> CD :call nerdtree#invokeKeyMap("CD")
+nnoremap <buffer> <silent> D :call nerdtree#invokeKeyMap("D")
+nnoremap <buffer> <silent> F :call nerdtree#invokeKeyMap("F")
+nnoremap <buffer> <silent> I :call nerdtree#invokeKeyMap("I")
+nnoremap <buffer> <silent> J :call nerdtree#invokeKeyMap("J")
+nnoremap <buffer> <silent> K :call nerdtree#invokeKeyMap("K")
+nnoremap <buffer> <silent> O :call nerdtree#invokeKeyMap("O")
+nnoremap <buffer> <silent> P :call nerdtree#invokeKeyMap("P")
+nnoremap <buffer> <silent> R :call nerdtree#invokeKeyMap("R")
+nnoremap <buffer> <silent> T :call nerdtree#invokeKeyMap("T")
+nnoremap <buffer> <silent> U :call nerdtree#invokeKeyMap("U")
+nnoremap <buffer> <silent> X :call nerdtree#invokeKeyMap("X")
+nnoremap <buffer> <silent> cd :call nerdtree#invokeKeyMap("cd")
+nnoremap <buffer> <silent> e :call nerdtree#invokeKeyMap("e")
+nnoremap <buffer> <silent> f :call nerdtree#invokeKeyMap("f")
+nmap <buffer> gf <Plug>RailsFind
+nnoremap <buffer> <silent> go :call nerdtree#invokeKeyMap("go")
+nnoremap <buffer> <silent> gs :call nerdtree#invokeKeyMap("gs")
+nnoremap <buffer> <silent> gi :call nerdtree#invokeKeyMap("gi")
+nnoremap <buffer> <silent> i :call nerdtree#invokeKeyMap("i")
+nnoremap <buffer> <silent> m :call nerdtree#invokeKeyMap("m")
+nnoremap <buffer> <silent> o :call nerdtree#invokeKeyMap("o")
+nnoremap <buffer> <silent> p :call nerdtree#invokeKeyMap("p")
+nnoremap <buffer> <silent> q :call nerdtree#invokeKeyMap("q")
+nnoremap <buffer> <silent> r :call nerdtree#invokeKeyMap("r")
+nnoremap <buffer> <silent> s :call nerdtree#invokeKeyMap("s")
+nnoremap <buffer> <silent> t :call nerdtree#invokeKeyMap("t")
+nnoremap <buffer> <silent> u :call nerdtree#invokeKeyMap("u")
+nnoremap <buffer> <silent> x :call nerdtree#invokeKeyMap("x")
+nnoremap <buffer> <silent> <MiddleRelease> :call nerdtree#invokeKeyMap("<MiddleRelease>")
+nnoremap <buffer> <silent> <LeftRelease> <LeftRelease>:call nerdtree#invokeKeyMap("<LeftRelease>")
+nnoremap <buffer> <silent> <2-LeftMouse> :call nerdtree#invokeKeyMap("<2-LeftMouse>")
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal noautoindent
+setlocal balloonexpr=
+setlocal nobinary
+setlocal bufhidden=hide
+setlocal nobuflisted
+setlocal buftype=nofile
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=:#
+setlocal commentstring=#\ %s
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'nerdtree'
+setlocal filetype=nerdtree
+endif
+setlocal foldcolumn=0
+set nofoldenable
+setlocal nofoldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+set foldlevel=1
+setlocal foldlevel=1
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=manual
+setlocal foldminlines=1
+set foldnestmax=10
+setlocal foldnestmax=10
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=
+setlocal includeexpr=RailsIncludeexpr()
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255,$
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal nomacmeta
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal nomodifiable
+setlocal nrformats=octal,hex
+set number
+setlocal nonumber
+setlocal numberwidth=4
+setlocal omnifunc=csscomplete#CompleteCSS
+setlocal path=.,lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,test,test/unit,test/functional,test/integration,test/controllers,test/helpers,test/mailers,test/models,spec,spec/controllers,spec/helpers,spec/mailers,spec/models,spec/views,spec/lib,spec/features,spec/requests,spec/integration,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/baseball,/usr/include,,~/.rvm/gems/ruby-1.9.3-p448/gems/kaminari-0.14.1/app/*,~/.rvm/gems/ruby-1.9.3-p448/gems/actionmailer-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/actionpack-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activemodel-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activerecord-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activeresource-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activesupport-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/ansi-1.4.3/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/arel-3.0.2/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/better_errors-0.9.0/lib,~/.r
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!Pl#Statusline(11,0)
+setlocal suffixesadd=.rb
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'nerdtree'
+setlocal syntax=nerdtree
+endif
+setlocal tabstop=2
+setlocal tags=~/Projects/baseball/.git/nerdtree.tags,~/Projects/baseball/.git/tags,~/Projects/baseball/tags,~/Projects/baseball/tmp/tags,~/Projects/baseball/.git/tags,./tags,tags,~/.rvm/gems/ruby-1.9.3-p448/gems/actionmailer-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/actionpack-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activemodel-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activerecord-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activeresource-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activesupport-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/ansi-1.4.3/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/arel-3.0.2/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/better_errors-0.9.0/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/binding_of_caller-0.7.2/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/builder-3.0.4/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/coderay-1.0.9/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/coffee-rails-3.2.2/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/coffee-script-2.2.0/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/coffee-script-source-1.6.3/tags,~/.rvm/g
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal nowinfixheight
+setlocal winfixwidth
+set nowrap
+setlocal nowrap
+setlocal wrapmargin=0
+wincmd w
+argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+nmap <buffer> gf <Plug>RailsTabFind
+nmap <buffer> f <Plug>RailsSplitFind
+nmap <buffer> gf <Plug>RailsFind
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal noautoindent
+setlocal balloonexpr=
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=:#
+setlocal commentstring=#\ %s
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != ''
+setlocal filetype=
+endif
+setlocal foldcolumn=0
+set nofoldenable
+setlocal nofoldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+set foldlevel=1
+setlocal foldlevel=1
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=indent
+setlocal foldminlines=1
+set foldnestmax=10
+setlocal foldnestmax=10
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=
+setlocal includeexpr=RailsIncludeexpr()
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255,$
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal nomacmeta
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=csscomplete#CompleteCSS
+setlocal path=.,lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,test,test/unit,test/functional,test/integration,test/controllers,test/helpers,test/mailers,test/models,spec,spec/controllers,spec/helpers,spec/mailers,spec/models,spec/views,spec/lib,spec/features,spec/requests,spec/integration,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/baseball,/usr/include,,~/.rvm/gems/ruby-1.9.3-p448/gems/kaminari-0.14.1/app/*
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!Pl#Statusline(0,1)
+setlocal suffixesadd=.rb
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != ''
+setlocal syntax=
+endif
+setlocal tabstop=2
+setlocal tags=~/Projects/baseball/tags,~/Projects/baseball/tmp/tags,~/Projects/baseball/.git/tags,./tags,tags
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+set nowrap
+setlocal nowrap
+setlocal wrapmargin=0
+let s:l = 218 - ((34 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+218
+normal! 0
+wincmd w
+2wincmd w
+exe 'vert 1resize ' . ((&columns * 25 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 156 + 91) / 182)
+tabnext 4
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
 endif

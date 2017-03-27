@@ -2,6 +2,18 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
+inoremap <Plug>ZenCodingAnchorizeSummary :call zencoding#anchorizeURL(1)a
+inoremap <Plug>ZenCodingAnchorizeURL :call zencoding#anchorizeURL(0)a
+inoremap <Plug>ZenCodingRemoveTag :call zencoding#removeTag()a
+inoremap <Plug>ZenCodingSplitJoinTagInsert :call zencoding#splitJoinTag()
+inoremap <Plug>ZenCodingToggleComment :call zencoding#toggleComment()a
+inoremap <Plug>ZenCodingImageSize :call zencoding#imageSize()a
+inoremap <Plug>ZenCodingPrev :call zencoding#moveNextPrev(1)
+inoremap <Plug>ZenCodingNext :call zencoding#moveNextPrev(0)
+inoremap <Plug>ZenCodingBalanceTagOutwardInsert :call zencoding#balanceTag(-1)
+inoremap <Plug>ZenCodingBalanceTagInwardInsert :call zencoding#balanceTag(1)
+inoremap <Plug>ZenCodingExpandWord u:call zencoding#expandAbbr(1,"")a
+inoremap <Plug>ZenCodingExpandAbbr u:call zencoding#expandAbbr(0,"")a
 imap <D-BS> 
 imap <M-BS> 
 imap <M-Down> }
@@ -16,20 +28,20 @@ inoremap <Plug>ClojureReplDownHistory. :call b:vimclojure_repl.downHistory()
 inoremap <Plug>ClojureReplUpHistory. :call b:vimclojure_repl.upHistory()
 inoremap <Plug>ClojureReplEvaluate. G$:call b:vimclojure_repl.enterHook()
 inoremap <Plug>ClojureReplEnterHook. :call b:vimclojure_repl.enterHook()
-inoremap <Plug>ZenCodingAnchorizeSummary :call zencoding#anchorizeURL(1)a
-inoremap <Plug>ZenCodingAnchorizeURL :call zencoding#anchorizeURL(0)a
-inoremap <Plug>ZenCodingRemoveTag :call zencoding#removeTag()a
-inoremap <Plug>ZenCodingSplitJoinTagInsert :call zencoding#splitJoinTag()
-inoremap <Plug>ZenCodingToggleComment :call zencoding#toggleComment()a
-inoremap <Plug>ZenCodingImageSize :call zencoding#imageSize()a
-inoremap <Plug>ZenCodingPrev :call zencoding#moveNextPrev(1)
-inoremap <Plug>ZenCodingNext :call zencoding#moveNextPrev(0)
-inoremap <Plug>ZenCodingBalanceTagOutwardInsert :call zencoding#balanceTag(-1)
-inoremap <Plug>ZenCodingBalanceTagInwardInsert :call zencoding#balanceTag(1)
-inoremap <Plug>ZenCodingExpandWord u:call zencoding#expandAbbr(1,"")a
-inoremap <Plug>ZenCodingExpandAbbr u:call zencoding#expandAbbr(0,"")a
 inoremap <silent> <S-Tab> =BackwardsSnippet()
 inoremap <C-Tab> 	
+inoremap <Plug>(EmmetAnchorizeSummary) =emmet#anchorizeURL(1)
+inoremap <Plug>(EmmetAnchorizeURL) =emmet#anchorizeURL(0)
+inoremap <Plug>(EmmetRemoveTag) =emmet#removeTag()
+inoremap <Plug>(EmmetSplitJoinTag) :call emmet#splitJoinTag()
+inoremap <Plug>(EmmetToggleComment) =emmet#toggleComment()
+inoremap <Plug>(EmmetImageSize) =emmet#imageSize()
+inoremap <Plug>(EmmetMovePrev) :call emmet#moveNextPrev(1)
+inoremap <Plug>(EmmetMoveNext) :call emmet#moveNextPrev(0)
+inoremap <Plug>(EmmetBalanceTagOutward) :call emmet#balanceTag(-1)
+inoremap <Plug>(EmmetBalanceTagInward) :call emmet#balanceTag(1)
+inoremap <Plug>(EmmetExpandWord) =emmet#expandAbbr(1,"")
+inoremap <Plug>(EmmetExpandAbbr) =emmet#expandAbbr(0,"")<Right>
 inoremap <silent> <Plug>NERDCommenterInInsert  <BS>:call NERDComment(0, "insert")
 nnoremap  h
 snoremap <silent> 	 i<Right>=TriggerSnippet()
@@ -41,9 +53,6 @@ nmap o <Plug>ZoomWin
 snoremap  b<BS>
 vmap c <Plug>ZenCodingCodePretty
 vmap m <Plug>ZenCodingMergeLines
-vmap D <Plug>ZenCodingBalanceTagOutwardVisual
-vmap d <Plug>ZenCodingBalanceTagInwardVisual
-vmap , <Plug>ZenCodingExpandVisual
 nmap A <Plug>ZenCodingAnchorizeSummary
 nmap a <Plug>ZenCodingAnchorizeURL
 nmap k <Plug>ZenCodingRemoveTag
@@ -52,8 +61,12 @@ nmap / <Plug>ZenCodingToggleComment
 nmap i <Plug>ZenCodingImageSize
 nmap N <Plug>ZenCodingPrev
 nmap n <Plug>ZenCodingNext
+vmap D <Plug>ZenCodingBalanceTagOutwardVisual
 nmap D <Plug>ZenCodingBalanceTagOutwardNormal
+vmap d <Plug>ZenCodingBalanceTagInwardVisual
 nmap d <Plug>ZenCodingBalanceTagInwardNormal
+nmap ; <Plug>(EmmetExpandWord)
+vmap , <Plug>ZenCodingExpandVisual
 nmap , <Plug>ZenCodingExpandNormal
 nnoremap <silent>  :ZoomWin
 nnoremap <silent> 9 :TComment count=9
@@ -189,6 +202,23 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
+vnoremap <Plug>ZenCodingCodePretty :call zencoding#codePretty()
+vnoremap <Plug>ZenCodingMergeLines :call zencoding#mergeLines()
+vnoremap <Plug>ZenCodingBalanceTagOutwardVisual :call zencoding#balanceTag(-2)
+vnoremap <Plug>ZenCodingBalanceTagInwardVisual :call zencoding#balanceTag(2)
+vnoremap <Plug>ZenCodingExpandVisual :call zencoding#expandAbbr(2,"")
+nnoremap <Plug>ZenCodingAnchorizeSummary :call zencoding#anchorizeURL(1)
+nnoremap <Plug>ZenCodingAnchorizeURL :call zencoding#anchorizeURL(0)
+nnoremap <Plug>ZenCodingRemoveTag :call zencoding#removeTag()
+nnoremap <Plug>ZenCodingSplitJoinTagNormal :call zencoding#splitJoinTag()
+nnoremap <Plug>ZenCodingToggleComment :call zencoding#toggleComment()
+nnoremap <Plug>ZenCodingImageSize :call zencoding#imageSize()
+nnoremap <Plug>ZenCodingPrev :call zencoding#moveNextPrev(1)
+nnoremap <Plug>ZenCodingNext :call zencoding#moveNextPrev(0)
+nnoremap <Plug>ZenCodingBalanceTagOutwardNormal :call zencoding#balanceTag(-1)
+nnoremap <Plug>ZenCodingBalanceTagInwardNormal :call zencoding#balanceTag(1)
+nnoremap <Plug>ZenCodingExpandWord :call zencoding#expandAbbr(1,"")
+nnoremap <Plug>ZenCodingExpandNormal :call zencoding#expandAbbr(3,"")
 map <M-Down> }
 noremap <D-Down> <C-End>
 map <M-Up> {
@@ -229,24 +259,24 @@ nnoremap <Plug>ClojureDocLookupInteractive. :call vimclojure#ProtectedPlug( fu
 nnoremap <Plug>ClojureDocLookupWord. :call vimclojure#ProtectedPlug( function("vimclojure#CommandPlug"), [ function("vimclojure#DocLookup"), [ expand("<cword>") ]])
 nnoremap <Plug>ClojureToggleParenRainbow. :call vimclojure#ProtectedPlug(function("vimclojure#ToggleParenRainbow"), [  ])
 nnoremap <Plug>ClojureAddToLispWords. :call vimclojure#ProtectedPlug(function("vimclojure#AddToLispWords"), [ expand("<cword>") ])
-vnoremap <Plug>ZenCodingCodePretty :call zencoding#codePretty()
-vnoremap <Plug>ZenCodingMergeLines :call zencoding#mergeLines()
-vnoremap <Plug>ZenCodingBalanceTagOutwardVisual :call zencoding#balanceTag(-2)
-vnoremap <Plug>ZenCodingBalanceTagInwardVisual :call zencoding#balanceTag(2)
-vnoremap <Plug>ZenCodingExpandVisual :call zencoding#expandAbbr(2,"")
-nnoremap <Plug>ZenCodingAnchorizeSummary :call zencoding#anchorizeURL(1)
-nnoremap <Plug>ZenCodingAnchorizeURL :call zencoding#anchorizeURL(0)
-nnoremap <Plug>ZenCodingRemoveTag :call zencoding#removeTag()
-nnoremap <Plug>ZenCodingSplitJoinTagNormal :call zencoding#splitJoinTag()
-nnoremap <Plug>ZenCodingToggleComment :call zencoding#toggleComment()
-nnoremap <Plug>ZenCodingImageSize :call zencoding#imageSize()
-nnoremap <Plug>ZenCodingPrev :call zencoding#moveNextPrev(1)
-nnoremap <Plug>ZenCodingNext :call zencoding#moveNextPrev(0)
-nnoremap <Plug>ZenCodingBalanceTagOutwardNormal :call zencoding#balanceTag(-1)
-nnoremap <Plug>ZenCodingBalanceTagInwardNormal :call zencoding#balanceTag(1)
-nnoremap <Plug>ZenCodingExpandWord :call zencoding#expandAbbr(1,"")
-nnoremap <Plug>ZenCodingExpandNormal :call zencoding#expandAbbr(3,"")
 nnoremap <silent> <Plug>SurroundRepeat .
+vnoremap <Plug>(EmmetCodePretty) :call emmet#codePretty()
+vnoremap <Plug>(EmmetMergeLines) :call emmet#mergeLines()
+nnoremap <Plug>(EmmetAnchorizeSummary) :call emmet#anchorizeURL(1)
+nnoremap <Plug>(EmmetAnchorizeURL) :call emmet#anchorizeURL(0)
+nnoremap <Plug>(EmmetRemoveTag) :call emmet#removeTag()
+nnoremap <Plug>(EmmetSplitJoinTag) :call emmet#splitJoinTag()
+nnoremap <Plug>(EmmetToggleComment) :call emmet#toggleComment()
+nnoremap <Plug>(EmmetImageSize) :call emmet#imageSize()
+nnoremap <Plug>(EmmetMovePrev) :call emmet#moveNextPrev(1)
+nnoremap <Plug>(EmmetMoveNext) :call emmet#moveNextPrev(0)
+vnoremap <Plug>(EmmetBalanceTagOutward) :call emmet#balanceTag(-2)
+nnoremap <Plug>(EmmetBalanceTagOutward) :call emmet#balanceTag(-1)
+vnoremap <Plug>(EmmetBalanceTagInward) :call emmet#balanceTag(2)
+nnoremap <Plug>(EmmetBalanceTagInward) :call emmet#balanceTag(1)
+nnoremap <Plug>(EmmetExpandWord) :call emmet#expandAbbr(1,"")
+vnoremap <Plug>(EmmetExpandAbbr) :call emmet#expandAbbr(2,"")
+nnoremap <Plug>(EmmetExpandAbbr) :call emmet#expandAbbr(3,"")
 map <F12> :python debugger_watch_input("property_get", '<cword>')A
 map <F11> :python debugger_watch_input("context_get")A
 map <F9> :python debugger_command('step_out')
@@ -332,7 +362,7 @@ set commentstring=//\ %s
 set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
 set fuoptions=maxhorz,maxvert
-set guifont=Monaco\ for\ Powerline:h15
+set guifont=Monaco\ for\ Powerline:h13
 set guioptions=eg
 set guitablabel=%M%t
 set helplang=en
@@ -358,7 +388,7 @@ set noswapfile
 set tabstop=2
 set termencoding=utf-8
 set visualbell
-set window=38
+set window=62
 set winminwidth=15
 set winwidth=95
 set nowritebackup
@@ -370,45 +400,47 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +43 app/assets/stylesheets/idea_center.css.scss
+badd +1 .git/config
+badd +1 ~/.config/mc/ini
+badd +89 app/assets/stylesheets/idea_center.css.scss
 badd +154 app/views/idea_center/staff_picks.html.erb
-badd +242 app/assets/stylesheets/application.css.scss
-badd +78 app/views/aboutus/overview.html.erb
+badd +229 app/assets/stylesheets/application.css.scss
+badd +342 app/views/aboutus/overview.html.erb
 badd +1 app/views/idea_center/_subnav.erb
-badd +15 app/views/layouts/application.html.erb
-badd +16 app/views/team_creative/overview.html.erb
-badd +21 app/assets/stylesheets/team_creative.css.scss
+badd +10 app/views/layouts/application.html.erb
+badd +173 app/views/team_creative/overview.html.erb
+badd +128 app/assets/stylesheets/team_creative.css.scss
 badd +10 app/views/team_creative/_subnav.erb
-badd +1 app/views/aboutus/_subnav.erb
+badd +9 app/views/aboutus/_subnav.erb
 badd +1 app/assets/javascripts/application.js
 badd +29 ~/.vimrc
-badd +114 app/views/customer_lounge/overview.html.erb
+badd +38 app/views/customer_lounge/overview.html.erb
 badd +10 app/views/customer_lounge/_subnav.erb
 badd +1 app/views/clients/_subnav.erb
-badd +5 app/assets/stylesheets/customer_lounge.css.scss
+badd +120 app/assets/stylesheets/customer_lounge.css.scss
 badd +78 app/views/customer_lounge/music.html.erb
 badd +55 ~/dotfiles/_vim/snippets/css.snippets
 badd +1 ~/Desktop/to_the_master_mages.txt
 badd +9 app/views/customer_lounge/sports_bar.html.erb
 badd +23 app/assets/stylesheets/clients.css.scss
-badd +12 app/assets/stylesheets/aboutus.css.scss
+badd +78 app/assets/stylesheets/aboutus.css.scss
 badd +47 app/views/clients/index.html.erb
-badd +85 app/views/customer_lounge/stu_contact.html.erb
+badd +10 app/views/customer_lounge/stu_contact.html.erb
 badd +3 app/assets/stylesheets/contact.css.scss
-badd +31 Gemfile
+badd +1 Gemfile
+badd +19 app/views/customer_lounge/locker_room.html.erb
+badd +1 app/assets/javascripts/aboutus.js.coffee
+badd +6 app/assets/stylesheets/overview.css.scss
+badd +3 config/routes.rb
+badd +115 practice/index.html
+badd +22 config/database.yml
 args ./
-edit app/views/customer_lounge/stu_contact.html.erb
+edit app/views/team_creative/overview.html.erb
 set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 45 + 70) / 141)
-exe 'vert 2resize ' . ((&columns * 95 + 70) / 141)
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
@@ -499,130 +531,7 @@ set number
 setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=rubycomplete#Complete
-setlocal path=lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,app/views/customer_lounge,public,spec,spec/controllers,spec/helpers,spec/mailers,spec/models,spec/views,spec/lib,spec/features,spec/requests,spec/integration,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/creative,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.4.0,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.4.0,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1/x86_64-darwin12.4.0,~/.rvm/gems/ruby-1.9.3-p448/gems/actionmailer-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/actionpack-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/activemodel-3.2.13/li
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=2
-setlocal noshortname
-setlocal nosmartindent
-setlocal softtabstop=2
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=%!Pl#Statusline(0,0)
-setlocal suffixesadd=.rb
-setlocal noswapfile
-setlocal synmaxcol=3000
-if &syntax != 'eruby'
-setlocal syntax=eruby
-endif
-setlocal tabstop=2
-setlocal tags=~/Projects/creative/tags,~/Projects/creative/tmp/tags,~/Projects/creative/.git/eruby.tags,~/Projects/creative/.git/tags,./tags,tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.4.0/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.4.0/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1/x86_64-darwin12.4.0/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/actionmailer-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/actionpack-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activemodel-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activerecord-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activeresource-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activesupport-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/g
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal noundofile
-setlocal nowinfixheight
-setlocal nowinfixwidth
-set nowrap
-setlocal nowrap
-setlocal wrapmargin=0
-let s:l = 130 - ((31 * winheight(0) + 18) / 37)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-130
-normal! 01l
-wincmd w
-argglobal
-edit app/assets/stylesheets/customer_lounge.css.scss
-let s:cpo_save=&cpo
-set cpo&vim
-nmap <buffer> gf <Plug>RailsTabFind
-nmap <buffer> f <Plug>RailsSplitFind
-nmap <buffer> gf <Plug>RailsFind
-let &cpo=s:cpo_save
-unlet s:cpo_save
-setlocal keymap=
-setlocal noarabic
-setlocal noautoindent
-setlocal balloonexpr=
-setlocal nobinary
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=//\ %s
-setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=^\\s*\\%(@mixin\\|=\\)
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'scss.css'
-setlocal filetype=scss.css
-endif
-setlocal foldcolumn=0
-set nofoldenable
-setlocal nofoldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-set foldlevel=1
-setlocal foldlevel=1
-setlocal foldmarker={{{,}}}
-set foldmethod=indent
-setlocal foldmethod=indent
-setlocal foldminlines=1
-set foldnestmax=10
-setlocal foldnestmax=10
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=tcq
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
-setlocal include=^\\s*@import\\s\\+\\%(url(\\)\\=[\"']\\=
-setlocal includeexpr=RailsIncludeexpr()
-setlocal indentexpr=GetCSSIndent()
-setlocal indentkeys=0{,0},!^F,o,O
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255,$
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal nolist
-setlocal nomacmeta
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=csscomplete#CompleteCSS
-setlocal path=.,lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,app/views/customer_lounge,public,spec,spec/controllers,spec/helpers,spec/mailers,spec/models,spec/views,spec/lib,spec/features,spec/requests,spec/integration,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/creative,/usr/include,,~/.rvm/gems/ruby-1.9.3-p448/gems/font-awesome-sass-rails-3.0.2.2/app/*
+setlocal path=lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,app/views/team_creative,public,spec,spec/controllers,spec/helpers,spec/mailers,spec/models,spec/views,spec/lib,spec/features,spec/requests,spec/integration,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/creative,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.4.0,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.4.0,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1/x86_64-darwin12.4.0,~/.rvm/gems/ruby-1.9.3-p448/gems/font-awesome-sass-rails-3.0.2.2/app/*,~/.rvm/gems/ruby-1.9.3-p448/gems/actionmailer-3.2.13/lib,~/.rvm/gems/ruby-1.9.3-p448/gems/actionp
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -640,14 +549,14 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=%!Pl#Statusline(0,1)
-setlocal suffixesadd=.sass,.scss,.css
+setlocal suffixesadd=.rb
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'scss.css'
-setlocal syntax=scss.css
+if &syntax != 'eruby'
+setlocal syntax=eruby
 endif
 setlocal tabstop=2
-setlocal tags=~/Projects/creative/tags,~/Projects/creative/tmp/tags,~/Projects/creative/.git/scss.css.tags,~/Projects/creative/.git/tags,./tags,tags
+setlocal tags=~/Projects/creative/tags,~/Projects/creative/tmp/tags,~/Projects/creative/.git/eruby.tags,~/Projects/creative/.git/tags,./tags,tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.4.0/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.4.0/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1/x86_64-darwin12.4.0/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/actionmailer-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/actionpack-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activemodel-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activerecord-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activeresource-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/gems/activesupport-3.2.13/tags,~/.rvm/gems/ruby-1.9.3-p448/g
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
@@ -656,16 +565,12 @@ setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 138 - ((14 * winheight(0) + 18) / 37)
+let s:l = 39 - ((38 * winheight(0) + 22) / 44)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-138
-normal! 016l
-wincmd w
-2wincmd w
-exe 'vert 1resize ' . ((&columns * 45 + 70) / 141)
-exe 'vert 2resize ' . ((&columns * 95 + 70) / 141)
+39
+normal! 012l
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

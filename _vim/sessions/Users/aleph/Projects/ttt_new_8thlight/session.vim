@@ -2,6 +2,18 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
+inoremap <Plug>ZenCodingExpandAbbr u:call zencoding#expandAbbr(0,"")a
+inoremap <Plug>ZenCodingExpandWord u:call zencoding#expandAbbr(1,"")a
+inoremap <Plug>ZenCodingBalanceTagInwardInsert :call zencoding#balanceTag(1)
+inoremap <Plug>ZenCodingBalanceTagOutwardInsert :call zencoding#balanceTag(-1)
+inoremap <Plug>ZenCodingNext :call zencoding#moveNextPrev(0)
+inoremap <Plug>ZenCodingPrev :call zencoding#moveNextPrev(1)
+inoremap <Plug>ZenCodingImageSize :call zencoding#imageSize()a
+inoremap <Plug>ZenCodingToggleComment :call zencoding#toggleComment()a
+inoremap <Plug>ZenCodingSplitJoinTagInsert :call zencoding#splitJoinTag()
+inoremap <Plug>ZenCodingRemoveTag :call zencoding#removeTag()a
+inoremap <Plug>ZenCodingAnchorizeURL :call zencoding#anchorizeURL(0)a
+inoremap <Plug>ZenCodingAnchorizeSummary :call zencoding#anchorizeURL(1)a
 imap <D-BS> 
 imap <M-BS> 
 imap <M-Down> }
@@ -16,20 +28,20 @@ inoremap <Plug>ClojureReplDownHistory. :call b:vimclojure_repl.downHistory()
 inoremap <Plug>ClojureReplUpHistory. :call b:vimclojure_repl.upHistory()
 inoremap <Plug>ClojureReplEvaluate. G$:call b:vimclojure_repl.enterHook()
 inoremap <Plug>ClojureReplEnterHook. :call b:vimclojure_repl.enterHook()
-inoremap <Plug>ZenCodingAnchorizeSummary :call zencoding#anchorizeURL(1)a
-inoremap <Plug>ZenCodingAnchorizeURL :call zencoding#anchorizeURL(0)a
-inoremap <Plug>ZenCodingRemoveTag :call zencoding#removeTag()a
-inoremap <Plug>ZenCodingSplitJoinTagInsert :call zencoding#splitJoinTag()
-inoremap <Plug>ZenCodingToggleComment :call zencoding#toggleComment()a
-inoremap <Plug>ZenCodingImageSize :call zencoding#imageSize()a
-inoremap <Plug>ZenCodingPrev :call zencoding#moveNextPrev(1)
-inoremap <Plug>ZenCodingNext :call zencoding#moveNextPrev(0)
-inoremap <Plug>ZenCodingBalanceTagOutwardInsert :call zencoding#balanceTag(-1)
-inoremap <Plug>ZenCodingBalanceTagInwardInsert :call zencoding#balanceTag(1)
-inoremap <Plug>ZenCodingExpandWord u:call zencoding#expandAbbr(1,"")a
-inoremap <Plug>ZenCodingExpandAbbr u:call zencoding#expandAbbr(0,"")a
 inoremap <silent> <S-Tab> =BackwardsSnippet()
 inoremap <C-Tab> 	
+inoremap <Plug>(EmmetAnchorizeSummary) =emmet#anchorizeURL(1)
+inoremap <Plug>(EmmetAnchorizeURL) =emmet#anchorizeURL(0)
+inoremap <Plug>(EmmetRemoveTag) =emmet#removeTag()
+inoremap <Plug>(EmmetSplitJoinTag) :call emmet#splitJoinTag()
+inoremap <Plug>(EmmetToggleComment) =emmet#toggleComment()
+inoremap <Plug>(EmmetImageSize) =emmet#imageSize()
+inoremap <Plug>(EmmetMovePrev) :call emmet#moveNextPrev(1)
+inoremap <Plug>(EmmetMoveNext) :call emmet#moveNextPrev(0)
+inoremap <Plug>(EmmetBalanceTagOutward) :call emmet#balanceTag(-1)
+inoremap <Plug>(EmmetBalanceTagInward) :call emmet#balanceTag(1)
+inoremap <Plug>(EmmetExpandWord) =emmet#expandAbbr(1,"")
+inoremap <Plug>(EmmetExpandAbbr) =emmet#expandAbbr(0,"")<Right>
 inoremap <silent> <Plug>NERDCommenterInInsert  <BS>:call NERDComment(0, "insert")
 nnoremap  h
 snoremap <silent> 	 i<Right>=TriggerSnippet()
@@ -41,9 +53,6 @@ nmap o <Plug>ZoomWin
 snoremap  b<BS>
 vmap c <Plug>ZenCodingCodePretty
 vmap m <Plug>ZenCodingMergeLines
-vmap D <Plug>ZenCodingBalanceTagOutwardVisual
-vmap d <Plug>ZenCodingBalanceTagInwardVisual
-vmap , <Plug>ZenCodingExpandVisual
 nmap A <Plug>ZenCodingAnchorizeSummary
 nmap a <Plug>ZenCodingAnchorizeURL
 nmap k <Plug>ZenCodingRemoveTag
@@ -52,20 +61,24 @@ nmap / <Plug>ZenCodingToggleComment
 nmap i <Plug>ZenCodingImageSize
 nmap N <Plug>ZenCodingPrev
 nmap n <Plug>ZenCodingNext
+vmap D <Plug>ZenCodingBalanceTagOutwardVisual
 nmap D <Plug>ZenCodingBalanceTagOutwardNormal
+vmap d <Plug>ZenCodingBalanceTagInwardVisual
 nmap d <Plug>ZenCodingBalanceTagInwardNormal
+nmap ; <Plug>(EmmetExpandWord)
+vmap , <Plug>ZenCodingExpandVisual
 nmap , <Plug>ZenCodingExpandNormal
 nnoremap <silent>  :ZoomWin
-nnoremap <silent> 9 :TComment count=9
-nnoremap <silent> 8 :TComment count=8
-nnoremap <silent> 7 :TComment count=7
-nnoremap <silent> 6 :TComment count=6
-nnoremap <silent> 5 :TComment count=5
-nnoremap <silent> 4 :TComment count=4
-nnoremap <silent> 3 :TComment count=3
-nnoremap <silent> 2 :TComment count=2
-nnoremap <silent> 1 :TComment count=1
 nnoremap <silent>  :TComment
+nnoremap <silent> 1 :TComment count=1
+nnoremap <silent> 2 :TComment count=2
+nnoremap <silent> 3 :TComment count=3
+nnoremap <silent> 4 :TComment count=4
+nnoremap <silent> 5 :TComment count=5
+nnoremap <silent> 6 :TComment count=6
+nnoremap <silent> 7 :TComment count=7
+nnoremap <silent> 8 :TComment count=8
+nnoremap <silent> 9 :TComment count=9
 vnoremap <silent> 9 :TCommentMaybeInline count=9
 onoremap <silent> 9 :TComment count=9
 vnoremap <silent> 8 :TCommentMaybeInline count=8
@@ -104,8 +117,8 @@ vnoremap . :norm.                               " in visual mode, "." will for
 xmap S <Plug>VSurround
 snoremap U b<BS>U
 map Y y$
-nnoremap <silent> \__ :TComment
 snoremap <silent> \__ :TComment
+nnoremap <silent> \__ :TComment
 map \fs :set invfu
 snoremap \ b<BS>\
 noremap \_s :TCommentAs =&ft_
@@ -189,6 +202,23 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
+nnoremap <Plug>ZenCodingExpandNormal :call zencoding#expandAbbr(3,"")
+nnoremap <Plug>ZenCodingExpandWord :call zencoding#expandAbbr(1,"")
+nnoremap <Plug>ZenCodingBalanceTagInwardNormal :call zencoding#balanceTag(1)
+nnoremap <Plug>ZenCodingBalanceTagOutwardNormal :call zencoding#balanceTag(-1)
+nnoremap <Plug>ZenCodingNext :call zencoding#moveNextPrev(0)
+nnoremap <Plug>ZenCodingPrev :call zencoding#moveNextPrev(1)
+nnoremap <Plug>ZenCodingImageSize :call zencoding#imageSize()
+nnoremap <Plug>ZenCodingToggleComment :call zencoding#toggleComment()
+nnoremap <Plug>ZenCodingSplitJoinTagNormal :call zencoding#splitJoinTag()
+nnoremap <Plug>ZenCodingRemoveTag :call zencoding#removeTag()
+nnoremap <Plug>ZenCodingAnchorizeURL :call zencoding#anchorizeURL(0)
+nnoremap <Plug>ZenCodingAnchorizeSummary :call zencoding#anchorizeURL(1)
+vnoremap <Plug>ZenCodingExpandVisual :call zencoding#expandAbbr(2,"")
+vnoremap <Plug>ZenCodingBalanceTagInwardVisual :call zencoding#balanceTag(2)
+vnoremap <Plug>ZenCodingBalanceTagOutwardVisual :call zencoding#balanceTag(-2)
+vnoremap <Plug>ZenCodingMergeLines :call zencoding#mergeLines()
+vnoremap <Plug>ZenCodingCodePretty :call zencoding#codePretty()
 map <M-Down> }
 noremap <D-Down> <C-End>
 map <M-Up> {
@@ -229,24 +259,24 @@ nnoremap <Plug>ClojureDocLookupInteractive. :call vimclojure#ProtectedPlug( fu
 nnoremap <Plug>ClojureDocLookupWord. :call vimclojure#ProtectedPlug( function("vimclojure#CommandPlug"), [ function("vimclojure#DocLookup"), [ expand("<cword>") ]])
 nnoremap <Plug>ClojureToggleParenRainbow. :call vimclojure#ProtectedPlug(function("vimclojure#ToggleParenRainbow"), [  ])
 nnoremap <Plug>ClojureAddToLispWords. :call vimclojure#ProtectedPlug(function("vimclojure#AddToLispWords"), [ expand("<cword>") ])
-vnoremap <Plug>ZenCodingCodePretty :call zencoding#codePretty()
-vnoremap <Plug>ZenCodingMergeLines :call zencoding#mergeLines()
-vnoremap <Plug>ZenCodingBalanceTagOutwardVisual :call zencoding#balanceTag(-2)
-vnoremap <Plug>ZenCodingBalanceTagInwardVisual :call zencoding#balanceTag(2)
-vnoremap <Plug>ZenCodingExpandVisual :call zencoding#expandAbbr(2,"")
-nnoremap <Plug>ZenCodingAnchorizeSummary :call zencoding#anchorizeURL(1)
-nnoremap <Plug>ZenCodingAnchorizeURL :call zencoding#anchorizeURL(0)
-nnoremap <Plug>ZenCodingRemoveTag :call zencoding#removeTag()
-nnoremap <Plug>ZenCodingSplitJoinTagNormal :call zencoding#splitJoinTag()
-nnoremap <Plug>ZenCodingToggleComment :call zencoding#toggleComment()
-nnoremap <Plug>ZenCodingImageSize :call zencoding#imageSize()
-nnoremap <Plug>ZenCodingPrev :call zencoding#moveNextPrev(1)
-nnoremap <Plug>ZenCodingNext :call zencoding#moveNextPrev(0)
-nnoremap <Plug>ZenCodingBalanceTagOutwardNormal :call zencoding#balanceTag(-1)
-nnoremap <Plug>ZenCodingBalanceTagInwardNormal :call zencoding#balanceTag(1)
-nnoremap <Plug>ZenCodingExpandWord :call zencoding#expandAbbr(1,"")
-nnoremap <Plug>ZenCodingExpandNormal :call zencoding#expandAbbr(3,"")
 nnoremap <silent> <Plug>SurroundRepeat .
+vnoremap <Plug>(EmmetCodePretty) :call emmet#codePretty()
+vnoremap <Plug>(EmmetMergeLines) :call emmet#mergeLines()
+nnoremap <Plug>(EmmetAnchorizeSummary) :call emmet#anchorizeURL(1)
+nnoremap <Plug>(EmmetAnchorizeURL) :call emmet#anchorizeURL(0)
+nnoremap <Plug>(EmmetRemoveTag) :call emmet#removeTag()
+nnoremap <Plug>(EmmetSplitJoinTag) :call emmet#splitJoinTag()
+nnoremap <Plug>(EmmetToggleComment) :call emmet#toggleComment()
+nnoremap <Plug>(EmmetImageSize) :call emmet#imageSize()
+nnoremap <Plug>(EmmetMovePrev) :call emmet#moveNextPrev(1)
+nnoremap <Plug>(EmmetMoveNext) :call emmet#moveNextPrev(0)
+vnoremap <Plug>(EmmetBalanceTagOutward) :call emmet#balanceTag(-2)
+nnoremap <Plug>(EmmetBalanceTagOutward) :call emmet#balanceTag(-1)
+vnoremap <Plug>(EmmetBalanceTagInward) :call emmet#balanceTag(2)
+nnoremap <Plug>(EmmetBalanceTagInward) :call emmet#balanceTag(1)
+nnoremap <Plug>(EmmetExpandWord) :call emmet#expandAbbr(1,"")
+vnoremap <Plug>(EmmetExpandAbbr) :call emmet#expandAbbr(2,"")
+nnoremap <Plug>(EmmetExpandAbbr) :call emmet#expandAbbr(3,"")
 map <F12> :python debugger_watch_input("property_get", '<cword>')A
 map <F11> :python debugger_watch_input("context_get")A
 map <F9> :python debugger_command('step_out')
@@ -356,7 +386,7 @@ set noswapfile
 set tabstop=2
 set termencoding=utf-8
 set visualbell
-set window=52
+set window=50
 set winminwidth=15
 set winwidth=95
 set nowritebackup
@@ -369,85 +399,60 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 set shortmess=aoO
 badd +5 scratch.rb
-badd +1 lib/game_io.rb
-badd +0 bin/ttt.rb
+badd +24 lib/game_io.rb
+badd +1 bin/ttt.rb
+badd +1 Gemfile
+badd +1 lib/ai.rb
+badd +1 lib/board.rb
+badd +1 lib/game.rb
+badd +12 lib/human.rb
+badd +92 lib/minimax.rb
+badd +1 lib/random_move.rb
+badd +1 lib/windetection.rb
+badd +20 spec/game_spec.rb
+badd +1 lib/aihard.rb
+badd +19 lib/aieasy.rb
+badd +13 NERD_tree_5
+badd +51 spec/minimax_spec.rb
+badd +1 ~.vimrc
 args ./
-edit lib/game_io.rb
+edit lib/game.rb
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
-wincmd _ | wincmd |
-vsplit
-2wincmd h
-wincmd w
+1wincmd h
 wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 25 + 182) / 365)
-exe 'vert 2resize ' . ((&columns * 169 + 182) / 365)
-exe 'vert 3resize ' . ((&columns * 169 + 182) / 365)
+exe 'vert 1resize ' . ((&columns * 86 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 95 + 91) / 182)
 argglobal
-enew
-file NERD_tree_4
-let s:cpo_save=&cpo
-set cpo&vim
-nnoremap <buffer> <silent> <NL> :call nerdtree#invokeKeyMap("<C-j>")
-nnoremap <buffer> <silent>  :call nerdtree#invokeKeyMap("<C-k>")
-nnoremap <buffer> <silent>  :call nerdtree#invokeKeyMap('o')
-nnoremap <buffer> <silent> ? :call nerdtree#invokeKeyMap("?")
-nnoremap <buffer> <silent> A :call nerdtree#invokeKeyMap("A")
-nnoremap <buffer> <silent> B :call nerdtree#invokeKeyMap("B")
-nnoremap <buffer> <silent> CD :call nerdtree#invokeKeyMap("CD")
-nnoremap <buffer> <silent> C :call nerdtree#invokeKeyMap("C")
-nnoremap <buffer> <silent> D :call nerdtree#invokeKeyMap("D")
-nnoremap <buffer> <silent> F :call nerdtree#invokeKeyMap("F")
-nnoremap <buffer> <silent> I :call nerdtree#invokeKeyMap("I")
-nnoremap <buffer> <silent> J :call nerdtree#invokeKeyMap("J")
-nnoremap <buffer> <silent> K :call nerdtree#invokeKeyMap("K")
-nnoremap <buffer> <silent> O :call nerdtree#invokeKeyMap("O")
-nnoremap <buffer> <silent> P :call nerdtree#invokeKeyMap("P")
-nnoremap <buffer> <silent> R :call nerdtree#invokeKeyMap("R")
-nnoremap <buffer> <silent> T :call nerdtree#invokeKeyMap("T")
-nnoremap <buffer> <silent> U :call nerdtree#invokeKeyMap("U")
-nnoremap <buffer> <silent> X :call nerdtree#invokeKeyMap("X")
-nnoremap <buffer> <silent> cd :call nerdtree#invokeKeyMap("cd")
-nnoremap <buffer> <silent> e :call nerdtree#invokeKeyMap("e")
-nnoremap <buffer> <silent> f :call nerdtree#invokeKeyMap("f")
-nnoremap <buffer> <silent> gi :call nerdtree#invokeKeyMap("gi")
-nnoremap <buffer> <silent> gs :call nerdtree#invokeKeyMap("gs")
-nnoremap <buffer> <silent> go :call nerdtree#invokeKeyMap("go")
-nnoremap <buffer> <silent> i :call nerdtree#invokeKeyMap("i")
-nnoremap <buffer> <silent> m :call nerdtree#invokeKeyMap("m")
-nnoremap <buffer> <silent> o :call nerdtree#invokeKeyMap("o")
-nnoremap <buffer> <silent> p :call nerdtree#invokeKeyMap("p")
-nnoremap <buffer> <silent> q :call nerdtree#invokeKeyMap("q")
-nnoremap <buffer> <silent> r :call nerdtree#invokeKeyMap("r")
-nnoremap <buffer> <silent> s :call nerdtree#invokeKeyMap("s")
-nnoremap <buffer> <silent> t :call nerdtree#invokeKeyMap("t")
-nnoremap <buffer> <silent> u :call nerdtree#invokeKeyMap("u")
-nnoremap <buffer> <silent> x :call nerdtree#invokeKeyMap("x")
-nnoremap <buffer> <silent> <2-LeftMouse> :call nerdtree#invokeKeyMap("<2-LeftMouse>")
-nnoremap <buffer> <silent> <LeftRelease> <LeftRelease>:call nerdtree#invokeKeyMap("<LeftRelease>")
-nnoremap <buffer> <silent> <MiddleRelease> :call nerdtree#invokeKeyMap("<MiddleRelease>")
-let &cpo=s:cpo_save
-unlet s:cpo_save
+nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe        "stjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> ] :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe  v:count1."tag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g] :exe       "tselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe         "tjump =RubyCursorIdentifier()"
 setlocal keymap=
 setlocal noarabic
 setlocal noautoindent
-setlocal balloonexpr=
+setlocal balloonexpr=RubyBalloonexpr()
 setlocal nobinary
 setlocal bufhidden=hide
-setlocal nobuflisted
-setlocal buftype=nofile
+setlocal buflisted
+setlocal buftype=
 setlocal nocindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
+setlocal comments=:#
+setlocal commentstring=#\ %s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -457,14 +462,14 @@ setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal nocursorline
-setlocal define=
+setlocal define=^\\s*#\\s*define
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'nerdtree'
-setlocal filetype=nerdtree
+if &filetype != 'ruby'
+setlocal filetype=ruby
 endif
 setlocal foldcolumn=0
 set nofoldenable
@@ -475,24 +480,24 @@ set foldlevel=1
 setlocal foldlevel=1
 setlocal foldmarker={{{,}}}
 set foldmethod=indent
-setlocal foldmethod=manual
+setlocal foldmethod=indent
 setlocal foldminlines=1
 set foldnestmax=10
 setlocal foldnestmax=10
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcq
+setlocal formatoptions=croql
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=2
 setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
+setlocal includeexpr=substitute(substitute(v:fname,'::','/','g'),'$','.rb','')
+setlocal indentexpr=GetRubyIndent(v:lnum)
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,=end,=else,=elsif,=when,=ensure,=rescue,==begin,==end
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
+setlocal keywordprg=ri\ -T\ -f\ bs
 setlocal nolinebreak
 setlocal nolisp
 setlocal nolist
@@ -500,13 +505,13 @@ setlocal nomacmeta
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
-setlocal nomodifiable
+setlocal modifiable
 setlocal nrformats=octal,hex
 set number
-setlocal nonumber
+setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=csscomplete#CompleteCSS
-setlocal path=
+setlocal omnifunc=rubycomplete#Complete
+setlocal path=~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.4.0,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.4.0,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1/x86_64-darwin12.4.0
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -523,25 +528,32 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal statusline=%!Pl#Statusline(11,0)
-setlocal suffixesadd=
+setlocal statusline=%!Pl#Statusline(0,0)
+setlocal suffixesadd=.rb
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'nerdtree'
-setlocal syntax=nerdtree
+if &syntax != 'ruby'
+setlocal syntax=ruby
 endif
 setlocal tabstop=2
-setlocal tags=~/Projects/ttt_new_8thlight/.git/tags,./tags,tags
+setlocal tags=~/Projects/ttt_new_8thlight/.git/ruby.tags,~/Projects/ttt_new_8thlight/.git/tags,./tags,tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.4.0/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.4.0/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1/x86_64-darwin12.4.0/tags
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal nowinfixheight
-setlocal winfixwidth
+setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
+let s:l = 44 - ((43 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+44
+normal! 0
 wincmd w
 argglobal
+edit spec/game_spec.rb
 nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
 nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
 nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
@@ -658,15 +670,29 @@ setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 46) / 93)
+let s:l = 31 - ((30 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 0
+31
+normal! 04l
 wincmd w
+2wincmd w
+exe 'vert 1resize ' . ((&columns * 86 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 95 + 91) / 182)
+tabedit Gemfile
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+exe 'vert 1resize ' . ((&columns * 86 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 95 + 91) / 182)
 argglobal
-edit scratch.rb
 nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
 nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
 nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
@@ -679,9 +705,134 @@ nnoremap <buffer> <silent> g :exe         "tjump =RubyCursorIdentifier()
 setlocal keymap=
 setlocal noarabic
 setlocal noautoindent
-setlocal balloonexpr=
+setlocal balloonexpr=RubyBalloonexpr()
 setlocal nobinary
 setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=:#
+setlocal commentstring=#\ %s
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=^\\s*#\\s*define
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=%+E%f:%l:\ parse\ error,%W%f:%l:\ warning:\ %m,%E%f:%l:in\ %*[^:]:\ %m,%E%f:%l:\ %m,%-C%tfrom\ %f:%l:in\ %.%#,%-Z%tfrom\ %f:%l,%-Z%p^,%-G%.%#
+setlocal expandtab
+if &filetype != 'ruby'
+setlocal filetype=ruby
+endif
+setlocal foldcolumn=0
+set nofoldenable
+setlocal nofoldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+set foldlevel=1
+setlocal foldlevel=1
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=indent
+setlocal foldminlines=1
+set foldnestmax=10
+setlocal foldnestmax=10
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
+setlocal includeexpr=substitute(substitute(v:fname,'::','/','g'),'$','.rb','')
+setlocal indentexpr=GetRubyIndent(v:lnum)
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,=end,=else,=elsif,=when,=ensure,=rescue,==begin,==end
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=ri\ -T\ -f\ bs
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal nomacmeta
+setlocal makeprg=bundle
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=rubycomplete#Complete
+setlocal path=~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.4.0,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.4.0,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1/x86_64-darwin12.4.0
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!Pl#Statusline(0,0)
+setlocal suffixesadd=.rb
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'ruby'
+setlocal syntax=ruby
+endif
+setlocal tabstop=2
+setlocal tags=~/Projects/ttt_new_8thlight/.git/ruby.tags,~/Projects/ttt_new_8thlight/.git/tags,./tags,tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.4.0/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/site_ruby/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.4.0/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/vendor_ruby/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p448/lib/ruby/1.9.1/x86_64-darwin12.4.0/tags
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+set nowrap
+setlocal nowrap
+setlocal wrapmargin=0
+let s:l = 1 - ((0 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+wincmd w
+argglobal
+edit spec/minimax_spec.rb
+nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe        "stjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> ] :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe  v:count1."tag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g] :exe       "tselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe         "tjump =RubyCursorIdentifier()"
+setlocal keymap=
+setlocal noarabic
+setlocal noautoindent
+setlocal balloonexpr=RubyBalloonexpr()
+setlocal nobinary
+setlocal bufhidden=hide
 setlocal buflisted
 setlocal buftype=
 setlocal nocindent
@@ -783,17 +934,16 @@ setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 5 - ((4 * winheight(0) + 46) / 93)
+let s:l = 44 - ((43 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-5
+44
 normal! 0
 wincmd w
 2wincmd w
-exe 'vert 1resize ' . ((&columns * 25 + 182) / 365)
-exe 'vert 2resize ' . ((&columns * 169 + 182) / 365)
-exe 'vert 3resize ' . ((&columns * 169 + 182) / 365)
+exe 'vert 1resize ' . ((&columns * 86 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 95 + 91) / 182)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

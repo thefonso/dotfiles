@@ -2,6 +2,18 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
+inoremap <Plug>ZenCodingExpandAbbr u:call zencoding#expandAbbr(0,"")a
+inoremap <Plug>ZenCodingExpandWord u:call zencoding#expandAbbr(1,"")a
+inoremap <Plug>ZenCodingBalanceTagInwardInsert :call zencoding#balanceTag(1)
+inoremap <Plug>ZenCodingBalanceTagOutwardInsert :call zencoding#balanceTag(-1)
+inoremap <Plug>ZenCodingNext :call zencoding#moveNextPrev(0)
+inoremap <Plug>ZenCodingPrev :call zencoding#moveNextPrev(1)
+inoremap <Plug>ZenCodingImageSize :call zencoding#imageSize()a
+inoremap <Plug>ZenCodingToggleComment :call zencoding#toggleComment()a
+inoremap <Plug>ZenCodingSplitJoinTagInsert :call zencoding#splitJoinTag()
+inoremap <Plug>ZenCodingRemoveTag :call zencoding#removeTag()a
+inoremap <Plug>ZenCodingAnchorizeURL :call zencoding#anchorizeURL(0)a
+inoremap <Plug>ZenCodingAnchorizeSummary :call zencoding#anchorizeURL(1)a
 imap <D-BS> 
 imap <M-BS> 
 imap <M-Down> }
@@ -16,20 +28,20 @@ inoremap <Plug>ClojureReplDownHistory. :call b:vimclojure_repl.downHistory()
 inoremap <Plug>ClojureReplUpHistory. :call b:vimclojure_repl.upHistory()
 inoremap <Plug>ClojureReplEvaluate. G$:call b:vimclojure_repl.enterHook()
 inoremap <Plug>ClojureReplEnterHook. :call b:vimclojure_repl.enterHook()
-inoremap <Plug>ZenCodingAnchorizeSummary :call zencoding#anchorizeURL(1)a
-inoremap <Plug>ZenCodingAnchorizeURL :call zencoding#anchorizeURL(0)a
-inoremap <Plug>ZenCodingRemoveTag :call zencoding#removeTag()a
-inoremap <Plug>ZenCodingSplitJoinTagInsert :call zencoding#splitJoinTag()
-inoremap <Plug>ZenCodingToggleComment :call zencoding#toggleComment()a
-inoremap <Plug>ZenCodingImageSize :call zencoding#imageSize()a
-inoremap <Plug>ZenCodingPrev :call zencoding#moveNextPrev(1)
-inoremap <Plug>ZenCodingNext :call zencoding#moveNextPrev(0)
-inoremap <Plug>ZenCodingBalanceTagOutwardInsert :call zencoding#balanceTag(-1)
-inoremap <Plug>ZenCodingBalanceTagInwardInsert :call zencoding#balanceTag(1)
-inoremap <Plug>ZenCodingExpandWord u:call zencoding#expandAbbr(1,"")a
-inoremap <Plug>ZenCodingExpandAbbr u:call zencoding#expandAbbr(0,"")a
 inoremap <silent> <S-Tab> =BackwardsSnippet()
 inoremap <C-Tab> 	
+inoremap <Plug>(EmmetAnchorizeSummary) =emmet#anchorizeURL(1)
+inoremap <Plug>(EmmetAnchorizeURL) =emmet#anchorizeURL(0)
+inoremap <Plug>(EmmetRemoveTag) =emmet#removeTag()
+inoremap <Plug>(EmmetSplitJoinTag) :call emmet#splitJoinTag()
+inoremap <Plug>(EmmetToggleComment) =emmet#toggleComment()
+inoremap <Plug>(EmmetImageSize) =emmet#imageSize()
+inoremap <Plug>(EmmetMovePrev) :call emmet#moveNextPrev(1)
+inoremap <Plug>(EmmetMoveNext) :call emmet#moveNextPrev(0)
+inoremap <Plug>(EmmetBalanceTagOutward) :call emmet#balanceTag(-1)
+inoremap <Plug>(EmmetBalanceTagInward) :call emmet#balanceTag(1)
+inoremap <Plug>(EmmetExpandWord) =emmet#expandAbbr(1,"")
+inoremap <Plug>(EmmetExpandAbbr) =emmet#expandAbbr(0,"")<Right>
 inoremap <silent> <Plug>NERDCommenterInInsert  <BS>:call NERDComment(0, "insert")
 nnoremap  h
 snoremap <silent> 	 i<Right>=TriggerSnippet()
@@ -41,9 +53,6 @@ nmap o <Plug>ZoomWin
 snoremap  b<BS>
 vmap c <Plug>ZenCodingCodePretty
 vmap m <Plug>ZenCodingMergeLines
-vmap D <Plug>ZenCodingBalanceTagOutwardVisual
-vmap d <Plug>ZenCodingBalanceTagInwardVisual
-vmap , <Plug>ZenCodingExpandVisual
 nmap A <Plug>ZenCodingAnchorizeSummary
 nmap a <Plug>ZenCodingAnchorizeURL
 nmap k <Plug>ZenCodingRemoveTag
@@ -52,36 +61,41 @@ nmap / <Plug>ZenCodingToggleComment
 nmap i <Plug>ZenCodingImageSize
 nmap N <Plug>ZenCodingPrev
 nmap n <Plug>ZenCodingNext
+vmap D <Plug>ZenCodingBalanceTagOutwardVisual
 nmap D <Plug>ZenCodingBalanceTagOutwardNormal
+vmap d <Plug>ZenCodingBalanceTagInwardVisual
 nmap d <Plug>ZenCodingBalanceTagInwardNormal
+nmap ; <Plug>(EmmetExpandWord)
+vmap , <Plug>ZenCodingExpandVisual
 nmap , <Plug>ZenCodingExpandNormal
 nnoremap <silent>  :ZoomWin
-vnoremap <silent> 9 :TCommentMaybeInline count=9
+nnoremap <silent>  :TComment
+nnoremap <silent> 1 :TComment count=1
+nnoremap <silent> 2 :TComment count=2
+nnoremap <silent> 3 :TComment count=3
+nnoremap <silent> 4 :TComment count=4
+nnoremap <silent> 5 :TComment count=5
+nnoremap <silent> 6 :TComment count=6
+nnoremap <silent> 7 :TComment count=7
+nnoremap <silent> 8 :TComment count=8
 nnoremap <silent> 9 :TComment count=9
+vnoremap <silent> 9 :TCommentMaybeInline count=9
 onoremap <silent> 9 :TComment count=9
 vnoremap <silent> 8 :TCommentMaybeInline count=8
-nnoremap <silent> 8 :TComment count=8
 onoremap <silent> 8 :TComment count=8
 vnoremap <silent> 7 :TCommentMaybeInline count=7
-nnoremap <silent> 7 :TComment count=7
 onoremap <silent> 7 :TComment count=7
 vnoremap <silent> 6 :TCommentMaybeInline count=6
-nnoremap <silent> 6 :TComment count=6
 onoremap <silent> 6 :TComment count=6
 vnoremap <silent> 5 :TCommentMaybeInline count=5
-nnoremap <silent> 5 :TComment count=5
 onoremap <silent> 5 :TComment count=5
 vnoremap <silent> 4 :TCommentMaybeInline count=4
-nnoremap <silent> 4 :TComment count=4
 onoremap <silent> 4 :TComment count=4
 vnoremap <silent> 3 :TCommentMaybeInline count=3
-nnoremap <silent> 3 :TComment count=3
 onoremap <silent> 3 :TComment count=3
 vnoremap <silent> 2 :TCommentMaybeInline count=2
-nnoremap <silent> 2 :TComment count=2
 onoremap <silent> 2 :TComment count=2
 vnoremap <silent> 1 :TCommentMaybeInline count=1
-nnoremap <silent> 1 :TComment count=1
 onoremap <silent> 1 :TComment count=1
 noremap ca :call tcomment#SetOption("as", input("Comment as: ", &filetype, "customlist,tcomment#Complete"))
 noremap <silent> cc :call tcomment#SetOption("count", v:count1)
@@ -94,7 +108,6 @@ noremap <silent> r :TCommentRight
 noremap   :TComment 
 noremap <silent> p m`vip:TComment``
 vnoremap <silent>  :TCommentMaybeInline
-nnoremap <silent>  :TComment
 onoremap <silent>  :TComment
 snoremap % b<BS>%
 snoremap ' b<BS>'
@@ -104,6 +117,8 @@ vnoremap . :norm.                               " in visual mode, "." will for
 xmap S <Plug>VSurround
 snoremap U b<BS>U
 map Y y$
+snoremap <silent> \__ :TComment
+nnoremap <silent> \__ :TComment
 map \fs :set invfu
 snoremap \ b<BS>\
 noremap \_s :TCommentAs =&ft_
@@ -115,8 +130,6 @@ xnoremap <silent> \_i :TCommentInline
 noremap \_  :TComment 
 noremap <silent> \_p vip:TComment
 xnoremap <silent> \__ :TCommentMaybeInline
-nnoremap <silent> \__ :TComment
-snoremap <silent> \__ :TComment
 onoremap <silent> \__ :TComment
 map \dt :python debugger_command('step_out')
 map \do :python debugger_command('step_over')
@@ -189,6 +202,23 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
+nnoremap <Plug>ZenCodingExpandNormal :call zencoding#expandAbbr(3,"")
+nnoremap <Plug>ZenCodingExpandWord :call zencoding#expandAbbr(1,"")
+nnoremap <Plug>ZenCodingBalanceTagInwardNormal :call zencoding#balanceTag(1)
+nnoremap <Plug>ZenCodingBalanceTagOutwardNormal :call zencoding#balanceTag(-1)
+nnoremap <Plug>ZenCodingNext :call zencoding#moveNextPrev(0)
+nnoremap <Plug>ZenCodingPrev :call zencoding#moveNextPrev(1)
+nnoremap <Plug>ZenCodingImageSize :call zencoding#imageSize()
+nnoremap <Plug>ZenCodingToggleComment :call zencoding#toggleComment()
+nnoremap <Plug>ZenCodingSplitJoinTagNormal :call zencoding#splitJoinTag()
+nnoremap <Plug>ZenCodingRemoveTag :call zencoding#removeTag()
+nnoremap <Plug>ZenCodingAnchorizeURL :call zencoding#anchorizeURL(0)
+nnoremap <Plug>ZenCodingAnchorizeSummary :call zencoding#anchorizeURL(1)
+vnoremap <Plug>ZenCodingExpandVisual :call zencoding#expandAbbr(2,"")
+vnoremap <Plug>ZenCodingBalanceTagInwardVisual :call zencoding#balanceTag(2)
+vnoremap <Plug>ZenCodingBalanceTagOutwardVisual :call zencoding#balanceTag(-2)
+vnoremap <Plug>ZenCodingMergeLines :call zencoding#mergeLines()
+vnoremap <Plug>ZenCodingCodePretty :call zencoding#codePretty()
 map <M-Down> }
 noremap <D-Down> <C-End>
 map <M-Up> {
@@ -229,24 +259,24 @@ nnoremap <Plug>ClojureDocLookupInteractive. :call vimclojure#ProtectedPlug( fu
 nnoremap <Plug>ClojureDocLookupWord. :call vimclojure#ProtectedPlug( function("vimclojure#CommandPlug"), [ function("vimclojure#DocLookup"), [ expand("<cword>") ]])
 nnoremap <Plug>ClojureToggleParenRainbow. :call vimclojure#ProtectedPlug(function("vimclojure#ToggleParenRainbow"), [  ])
 nnoremap <Plug>ClojureAddToLispWords. :call vimclojure#ProtectedPlug(function("vimclojure#AddToLispWords"), [ expand("<cword>") ])
-vnoremap <Plug>ZenCodingCodePretty :call zencoding#codePretty()
-vnoremap <Plug>ZenCodingMergeLines :call zencoding#mergeLines()
-vnoremap <Plug>ZenCodingBalanceTagOutwardVisual :call zencoding#balanceTag(-2)
-vnoremap <Plug>ZenCodingBalanceTagInwardVisual :call zencoding#balanceTag(2)
-vnoremap <Plug>ZenCodingExpandVisual :call zencoding#expandAbbr(2,"")
-nnoremap <Plug>ZenCodingAnchorizeSummary :call zencoding#anchorizeURL(1)
-nnoremap <Plug>ZenCodingAnchorizeURL :call zencoding#anchorizeURL(0)
-nnoremap <Plug>ZenCodingRemoveTag :call zencoding#removeTag()
-nnoremap <Plug>ZenCodingSplitJoinTagNormal :call zencoding#splitJoinTag()
-nnoremap <Plug>ZenCodingToggleComment :call zencoding#toggleComment()
-nnoremap <Plug>ZenCodingImageSize :call zencoding#imageSize()
-nnoremap <Plug>ZenCodingPrev :call zencoding#moveNextPrev(1)
-nnoremap <Plug>ZenCodingNext :call zencoding#moveNextPrev(0)
-nnoremap <Plug>ZenCodingBalanceTagOutwardNormal :call zencoding#balanceTag(-1)
-nnoremap <Plug>ZenCodingBalanceTagInwardNormal :call zencoding#balanceTag(1)
-nnoremap <Plug>ZenCodingExpandWord :call zencoding#expandAbbr(1,"")
-nnoremap <Plug>ZenCodingExpandNormal :call zencoding#expandAbbr(3,"")
 nnoremap <silent> <Plug>SurroundRepeat .
+vnoremap <Plug>(EmmetCodePretty) :call emmet#codePretty()
+vnoremap <Plug>(EmmetMergeLines) :call emmet#mergeLines()
+nnoremap <Plug>(EmmetAnchorizeSummary) :call emmet#anchorizeURL(1)
+nnoremap <Plug>(EmmetAnchorizeURL) :call emmet#anchorizeURL(0)
+nnoremap <Plug>(EmmetRemoveTag) :call emmet#removeTag()
+nnoremap <Plug>(EmmetSplitJoinTag) :call emmet#splitJoinTag()
+nnoremap <Plug>(EmmetToggleComment) :call emmet#toggleComment()
+nnoremap <Plug>(EmmetImageSize) :call emmet#imageSize()
+nnoremap <Plug>(EmmetMovePrev) :call emmet#moveNextPrev(1)
+nnoremap <Plug>(EmmetMoveNext) :call emmet#moveNextPrev(0)
+vnoremap <Plug>(EmmetBalanceTagOutward) :call emmet#balanceTag(-2)
+nnoremap <Plug>(EmmetBalanceTagOutward) :call emmet#balanceTag(-1)
+vnoremap <Plug>(EmmetBalanceTagInward) :call emmet#balanceTag(2)
+nnoremap <Plug>(EmmetBalanceTagInward) :call emmet#balanceTag(1)
+nnoremap <Plug>(EmmetExpandWord) :call emmet#expandAbbr(1,"")
+vnoremap <Plug>(EmmetExpandAbbr) :call emmet#expandAbbr(2,"")
+nnoremap <Plug>(EmmetExpandAbbr) :call emmet#expandAbbr(3,"")
 map <F12> :python debugger_watch_input("property_get", '<cword>')A
 map <F11> :python debugger_watch_input("context_get")A
 map <F9> :python debugger_command('step_out')
@@ -328,6 +358,8 @@ let &cpo=s:cpo_save
 unlet s:cpo_save
 set background=dark
 set backspace=indent,eol,start
+set comments=:#
+set commentstring=#\ %s
 set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
 set fuoptions=maxhorz,maxvert
@@ -357,7 +389,7 @@ set noswapfile
 set tabstop=2
 set termencoding=utf-8
 set visualbell
-set window=94
+set window=50
 set winminwidth=15
 set winwidth=95
 set nowritebackup
@@ -369,18 +401,18 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +65 app/views/products/index.html.erb
+badd +39 app/views/products/index.html.erb
 badd +9 db/schema.rb
-badd +1 app/views/sessions/create.html.erb
-badd +36 app/controllers/products_controller.rb
+badd +2 app/views/sessions/create.html.erb
+badd +1 app/controllers/products_controller.rb
 badd +1 app/controllers/sessions_controller.rb
-badd +1 app/controllers/application_controller.rb
-badd +36 app/controllers/users_controller.rb
+badd +10 app/controllers/application_controller.rb
+badd +44 app/controllers/users_controller.rb
 badd +3 app/models/followers.rb
 badd +1 app/models/product.rb
 badd +1 app/models/savetweets.rb
 badd +1 app/models/user.rb
-badd +1 app/views/layouts/application.html.erb
+badd +2 app/views/layouts/application.html.erb
 badd +1 app/views/products/_form.html.erb
 badd +6 app/views/products/edit.html.erb
 badd +1 app/views/products/new.html.erb
@@ -390,92 +422,86 @@ badd +1 app/views/users/_form.html.erb
 badd +1 app/views/users/index.html.erb
 badd +1 app/views/users/new.html.erb
 badd +25 app/views/users/show.html.erb
-args .
+badd +15 Gemfile
+badd +1 ~/.vimrc
+badd +1 ~/.rvmrc
+badd +1 .rvmrc
+badd +22 README
+badd +7 config/initializers/secret_token.rb
+badd +1 .env
+badd +1 config/environment.rb
+badd +45 config/application.rb
+badd +3 config/initializers/omniauth.rb
+badd +18 config/routes.rb
+badd +1 config/initializers/twitter.rb
+badd +1 config/initializers/session_store.rb
+badd +1 config/initializers/backtrace_silencers.rb
+badd +1 config/initializers/inflections.rb
+badd +1 config/initializers/mime_types.rb
+badd +1 config/initializers/wrap_parameters.rb
+badd +0 config/database.yml
+args ./
+edit app/controllers/sessions_controller.rb
 set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
+exe 'vert 1resize ' . ((&columns * 95 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 86 + 91) / 182)
 argglobal
-enew
-file NERD_tree_3
 let s:cpo_save=&cpo
 set cpo&vim
-nnoremap <buffer> <silent> <NL> :call nerdtree#invokeKeyMap("<C-j>")
-nnoremap <buffer> <silent>  :call nerdtree#invokeKeyMap("<C-k>")
-nnoremap <buffer> <silent>  :call nerdtree#invokeKeyMap('o')
 nmap <buffer> gf <Plug>RailsTabFind
 nmap <buffer> f <Plug>RailsSplitFind
-nnoremap <buffer> <silent> ? :call nerdtree#invokeKeyMap("?")
-nnoremap <buffer> <silent> A :call nerdtree#invokeKeyMap("A")
-nnoremap <buffer> <silent> B :call nerdtree#invokeKeyMap("B")
-nnoremap <buffer> <silent> CD :call nerdtree#invokeKeyMap("CD")
-nnoremap <buffer> <silent> C :call nerdtree#invokeKeyMap("C")
-nnoremap <buffer> <silent> D :call nerdtree#invokeKeyMap("D")
-nnoremap <buffer> <silent> F :call nerdtree#invokeKeyMap("F")
-nnoremap <buffer> <silent> I :call nerdtree#invokeKeyMap("I")
-nnoremap <buffer> <silent> J :call nerdtree#invokeKeyMap("J")
-nnoremap <buffer> <silent> K :call nerdtree#invokeKeyMap("K")
-nnoremap <buffer> <silent> O :call nerdtree#invokeKeyMap("O")
-nnoremap <buffer> <silent> P :call nerdtree#invokeKeyMap("P")
-nnoremap <buffer> <silent> R :call nerdtree#invokeKeyMap("R")
-nnoremap <buffer> <silent> T :call nerdtree#invokeKeyMap("T")
-nnoremap <buffer> <silent> U :call nerdtree#invokeKeyMap("U")
-nnoremap <buffer> <silent> X :call nerdtree#invokeKeyMap("X")
-nnoremap <buffer> <silent> cd :call nerdtree#invokeKeyMap("cd")
-nnoremap <buffer> <silent> e :call nerdtree#invokeKeyMap("e")
-nnoremap <buffer> <silent> f :call nerdtree#invokeKeyMap("f")
-nnoremap <buffer> <silent> gi :call nerdtree#invokeKeyMap("gi")
-nnoremap <buffer> <silent> gs :call nerdtree#invokeKeyMap("gs")
-nnoremap <buffer> <silent> go :call nerdtree#invokeKeyMap("go")
+nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe        "stjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> ] :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe  v:count1."tag =RubyCursorIdentifier()"
 nmap <buffer> gf <Plug>RailsFind
-nnoremap <buffer> <silent> i :call nerdtree#invokeKeyMap("i")
-nnoremap <buffer> <silent> m :call nerdtree#invokeKeyMap("m")
-nnoremap <buffer> <silent> o :call nerdtree#invokeKeyMap("o")
-nnoremap <buffer> <silent> p :call nerdtree#invokeKeyMap("p")
-nnoremap <buffer> <silent> q :call nerdtree#invokeKeyMap("q")
-nnoremap <buffer> <silent> r :call nerdtree#invokeKeyMap("r")
-nnoremap <buffer> <silent> s :call nerdtree#invokeKeyMap("s")
-nnoremap <buffer> <silent> t :call nerdtree#invokeKeyMap("t")
-nnoremap <buffer> <silent> u :call nerdtree#invokeKeyMap("u")
-nnoremap <buffer> <silent> x :call nerdtree#invokeKeyMap("x")
-nnoremap <buffer> <silent> <2-LeftMouse> :call nerdtree#invokeKeyMap("<2-LeftMouse>")
-nnoremap <buffer> <silent> <LeftRelease> <LeftRelease>:call nerdtree#invokeKeyMap("<LeftRelease>")
-nnoremap <buffer> <silent> <MiddleRelease> :call nerdtree#invokeKeyMap("<MiddleRelease>")
+nnoremap <buffer> <silent> g] :exe       "tselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe         "tjump =RubyCursorIdentifier()"
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal keymap=
 setlocal noarabic
 setlocal noautoindent
-setlocal balloonexpr=
+setlocal balloonexpr=RubyBalloonexpr()
 setlocal nobinary
-setlocal bufhidden=hide
-setlocal nobuflisted
-setlocal buftype=nofile
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
 setlocal nocindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
+setlocal comments=:#
+setlocal commentstring=#\ %s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
-setlocal completefunc=
+setlocal completefunc=syntaxcomplete#Complete
 setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal nocursorline
-setlocal define=
+setlocal define=^\\s*def\\s\\+\\(self\\.\\)\\=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'nerdtree'
-setlocal filetype=nerdtree
+if &filetype != 'ruby'
+setlocal filetype=ruby
 endif
 setlocal foldcolumn=0
 set nofoldenable
@@ -486,24 +512,24 @@ set foldlevel=1
 setlocal foldlevel=1
 setlocal foldmarker={{{,}}}
 set foldmethod=indent
-setlocal foldmethod=manual
+setlocal foldmethod=indent
 setlocal foldminlines=1
 set foldnestmax=10
 setlocal foldnestmax=10
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcq
+setlocal formatoptions=croql
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=2
 setlocal imsearch=2
-setlocal include=
+setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
 setlocal includeexpr=RailsIncludeexpr()
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal indentexpr=GetRubyIndent(v:lnum)
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,=end,=else,=elsif,=when,=ensure,=rescue,==begin,==end
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255,$
-setlocal keywordprg=
+setlocal keywordprg=ri\ -T\ -f\ bs
 setlocal nolinebreak
 setlocal nolisp
 setlocal nolist
@@ -511,13 +537,13 @@ setlocal nomacmeta
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
-setlocal nomodifiable
+setlocal modifiable
 setlocal nrformats=octal,hex
 set number
-setlocal nonumber
+setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=csscomplete#CompleteCSS
-setlocal path=.,lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,test,test/unit,test/functional,test/integration,test/controllers,test/helpers,test/mailers,test/models,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/toy-twitter-app,/usr/include
+setlocal omnifunc=rubycomplete#Complete
+setlocal path=lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,app/views/sessions,public,test,test/unit,test/functional,test/integration,test/controllers,test/helpers,test/mailers,test/models,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/toy-twitter-app,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.2.0,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.2.0,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/x86_64-darwin12.2.0
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -534,24 +560,564 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal statusline=%!Pl#Statusline(11,1)
+setlocal statusline=%!Pl#Statusline(0,0)
 setlocal suffixesadd=.rb
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'nerdtree'
-setlocal syntax=nerdtree
+if &syntax != 'ruby'
+setlocal syntax=ruby
 endif
 setlocal tabstop=2
-setlocal tags=~/Projects/toy-twitter-app/tags,~/Projects/toy-twitter-app/tmp/tags,~/Projects/toy-twitter-app/.git/tags,./tags,tags
+setlocal tags=~/Projects/toy-twitter-app/tags,~/Projects/toy-twitter-app/tmp/tags,~/Projects/toy-twitter-app/.git/ruby.tags,~/Projects/toy-twitter-app/.git/tags,./tags,tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.2.0/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.2.0/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/x86_64-darwin12.2.0/tags
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal nowinfixheight
-setlocal winfixwidth
+setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
-tabnext 1
+let s:l = 32 - ((31 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+32
+normal! 01l
+wincmd w
+argglobal
+edit app/controllers/products_controller.rb
+let s:cpo_save=&cpo
+set cpo&vim
+nmap <buffer> gf <Plug>RailsTabFind
+nmap <buffer> f <Plug>RailsSplitFind
+nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe        "stjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> ] :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe  v:count1."tag =RubyCursorIdentifier()"
+nmap <buffer> gf <Plug>RailsFind
+nnoremap <buffer> <silent> g] :exe       "tselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe         "tjump =RubyCursorIdentifier()"
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal noautoindent
+setlocal balloonexpr=RubyBalloonexpr()
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=:#
+setlocal commentstring=#\ %s
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=syntaxcomplete#Complete
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=^\\s*def\\s\\+\\(self\\.\\)\\=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'ruby'
+setlocal filetype=ruby
+endif
+setlocal foldcolumn=0
+set nofoldenable
+setlocal nofoldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+set foldlevel=1
+setlocal foldlevel=1
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=indent
+setlocal foldminlines=1
+set foldnestmax=10
+setlocal foldnestmax=10
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
+setlocal includeexpr=RailsIncludeexpr()
+setlocal indentexpr=GetRubyIndent(v:lnum)
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,=end,=else,=elsif,=when,=ensure,=rescue,==begin,==end
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255,$
+setlocal keywordprg=ri\ -T\ -f\ bs
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal nomacmeta
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=rubycomplete#Complete
+setlocal path=lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,app/views/products,public,test,test/unit,test/functional,test/integration,test/controllers,test/helpers,test/mailers,test/models,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/toy-twitter-app,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.2.0,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.2.0,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/x86_64-darwin12.2.0
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!Pl#Statusline(0,0)
+setlocal suffixesadd=.rb
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'ruby'
+setlocal syntax=ruby
+endif
+setlocal tabstop=2
+setlocal tags=~/Projects/toy-twitter-app/tags,~/Projects/toy-twitter-app/tmp/tags,~/Projects/toy-twitter-app/.git/ruby.tags,~/Projects/toy-twitter-app/.git/tags,./tags,tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.2.0/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.2.0/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/x86_64-darwin12.2.0/tags
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+set nowrap
+setlocal nowrap
+setlocal wrapmargin=0
+let s:l = 13 - ((10 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+13
+normal! 017l
+wincmd w
+exe 'vert 1resize ' . ((&columns * 95 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 86 + 91) / 182)
+tabedit app/models/user.rb
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+nmap <buffer> gf <Plug>RailsTabFind
+nmap <buffer> f <Plug>RailsSplitFind
+nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe        "stjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> ] :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe  v:count1."tag =RubyCursorIdentifier()"
+nmap <buffer> gf <Plug>RailsFind
+nnoremap <buffer> <silent> g] :exe       "tselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe         "tjump =RubyCursorIdentifier()"
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal noautoindent
+setlocal balloonexpr=RubyBalloonexpr()
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=:#
+setlocal commentstring=#\ %s
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=syntaxcomplete#Complete
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=^\\s*def\\s\\+\\(self\\.\\)\\=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'ruby'
+setlocal filetype=ruby
+endif
+setlocal foldcolumn=0
+set nofoldenable
+setlocal nofoldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+set foldlevel=1
+setlocal foldlevel=1
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=indent
+setlocal foldminlines=1
+set foldnestmax=10
+setlocal foldnestmax=10
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
+setlocal includeexpr=RailsIncludeexpr()
+setlocal indentexpr=GetRubyIndent(v:lnum)
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,=end,=else,=elsif,=when,=ensure,=rescue,==begin,==end
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255,$
+setlocal keywordprg=ri\ -T\ -f\ bs
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal nomacmeta
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=rubycomplete#Complete
+setlocal path=lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,test,test/unit,test/functional,test/integration,test/controllers,test/helpers,test/mailers,test/models,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/toy-twitter-app,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.2.0,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.2.0,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/x86_64-darwin12.2.0
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!Pl#Statusline(0,0)
+setlocal suffixesadd=.rb
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'ruby'
+setlocal syntax=ruby
+endif
+setlocal tabstop=2
+setlocal tags=~/Projects/toy-twitter-app/tags,~/Projects/toy-twitter-app/tmp/tags,~/Projects/toy-twitter-app/.git/ruby.tags,~/Projects/toy-twitter-app/.git/tags,./tags,tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.2.0/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.2.0/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/x86_64-darwin12.2.0/tags
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+set nowrap
+setlocal nowrap
+setlocal wrapmargin=0
+let s:l = 1 - ((0 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+tabedit db/schema.rb
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+nmap <buffer> gf <Plug>RailsTabFind
+nmap <buffer> f <Plug>RailsSplitFind
+nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe        "stjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> ] :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe  v:count1."tag =RubyCursorIdentifier()"
+nmap <buffer> gf <Plug>RailsFind
+nnoremap <buffer> <silent> g] :exe       "tselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe         "tjump =RubyCursorIdentifier()"
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal noautoindent
+setlocal balloonexpr=RubyBalloonexpr()
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=:#
+setlocal commentstring=#\ %s
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=syntaxcomplete#Complete
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=^\\s*def\\s\\+\\(self\\.\\)\\=\\|^\\s*create_table\\s\\+[:'\"]
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'ruby'
+setlocal filetype=ruby
+endif
+setlocal foldcolumn=0
+set nofoldenable
+setlocal nofoldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+set foldlevel=1
+setlocal foldlevel=1
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=indent
+setlocal foldminlines=1
+set foldnestmax=10
+setlocal foldnestmax=10
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
+setlocal includeexpr=RailsIncludeexpr()
+setlocal indentexpr=GetRubyIndent(v:lnum)
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,=end,=else,=elsif,=when,=ensure,=rescue,==begin,==end
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255,$
+setlocal keywordprg=ri\ -T\ -f\ bs
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal nomacmeta
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=rubycomplete#Complete
+setlocal path=lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,test,test/unit,test/functional,test/integration,test/controllers,test/helpers,test/mailers,test/models,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/toy-twitter-app,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.2.0,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.2.0,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/x86_64-darwin12.2.0
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!Pl#Statusline(0,0)
+setlocal suffixesadd=.rb
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'ruby'
+setlocal syntax=ruby
+endif
+setlocal tabstop=2
+setlocal tags=~/Projects/toy-twitter-app/tags,~/Projects/toy-twitter-app/tmp/tags,~/Projects/toy-twitter-app/.git/ruby.tags,~/Projects/toy-twitter-app/.git/tags,./tags,tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.2.0/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.2.0/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/vendor_ruby/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/x86_64-darwin12.2.0/tags
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+set nowrap
+setlocal nowrap
+setlocal wrapmargin=0
+let s:l = 55 - ((48 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+55
+normal! 02l
+tabedit config/database.yml
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+nmap <buffer> gf <Plug>RailsTabFind
+nmap <buffer> f <Plug>RailsSplitFind
+nmap <buffer> gf <Plug>RailsFind
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal noautoindent
+setlocal balloonexpr=
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=:#
+setlocal commentstring=#\ %s
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=^\\%(\\h\\k*:\\)\\@=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'yaml'
+setlocal filetype=yaml
+endif
+setlocal foldcolumn=0
+set nofoldenable
+setlocal nofoldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+set foldlevel=1
+setlocal foldlevel=1
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=indent
+setlocal foldminlines=1
+set foldnestmax=10
+setlocal foldnestmax=10
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=
+setlocal includeexpr=RailsIncludeexpr()
+setlocal indentexpr=GetYAMLIndent(v:lnum)
+setlocal indentkeys=!^F,o,O,0#,0},0],<:>,-
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255,$
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal nomacmeta
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=csscomplete#CompleteCSS
+setlocal path=.,lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,test,test/unit,test/functional,test/integration,test/controllers,test/helpers,test/mailers,test/models,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Projects/toy-twitter-app,/usr/include,
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!Pl#Statusline(0,1)
+setlocal suffixesadd=.rb
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'yaml'
+setlocal syntax=yaml
+endif
+setlocal tabstop=2
+setlocal tags=~/Projects/toy-twitter-app/tags,~/Projects/toy-twitter-app/tmp/tags,~/Projects/toy-twitter-app/.git/yaml.tags,~/Projects/toy-twitter-app/.git/tags,./tags,tags
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+set nowrap
+setlocal nowrap
+setlocal wrapmargin=0
+let s:l = 1 - ((0 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+tabnext 4
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
 endif
