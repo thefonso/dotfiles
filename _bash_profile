@@ -8,10 +8,6 @@
 #                         |_|
 # When Bash starts, it executes the commands in this script
 # http://en.wikipedia.org/wiki/Bash_(Unix_shell)
-# ====================
-# morning pages alias
-# ====================
-alias 750words='mp'
 
 # ====================
 # File Navigation
@@ -76,12 +72,6 @@ export HISTIGNORE="h:ls:ls *:ll:ll *:"
 # Or my vim with special sauce
 export EDITOR="vim"
 export SHELL="bash"
-
-# ==================
-# Vim
-# ==================
-# open macvim anywhere
-alias mvim='open -a macvim'
 
 # ==================
 # Webstorm
@@ -266,9 +256,9 @@ fi
 #----------------------
 # Print Stats on terminal load
 #----------------------
-# GA General Assembly Webdevelopment Immersive
-genstats(){
-  echo ${BG_RED}${WHITE}GA${RESET}${WHITE}${BG_BLACK} General Assembly ${RESET}${BG_YELLOW}${BLACK} Web Development Immersive ${RESET}
+# Fonso Webdevelopment Immersive
+fonsostats(){
+  echo ${BG_RED}${WHITE}${RESET}${WHITE}${BG_BLACK} Fonso ${RESET}${BG_YELLOW}${BLACK} Web Development Immersive ${RESET}
   echo "------------------------------------------"
   echo $(ruby -v)
   echo $(rails -v)
@@ -278,7 +268,7 @@ genstats(){
   echo $(brew -v)
   echo "------------------------------------------"
 }
-alias genstats=genstats
+alias fonsostats=fonsostats
 
 #----------------------
 # style the prompt
@@ -332,8 +322,8 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
-export GOPATH="/Users/aleph/go_projects"
 
+### NVM for node versions
 export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"
 
