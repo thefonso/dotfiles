@@ -41,11 +41,6 @@ export LC_ALL="en_US.UTF-8"
 # use UTF-8
 export LANG="en_US"
 
-# =================
-# Shortcuts
-# =================
-# Students can add a shortcut to quickly access their GA folder
-# example: alias wdi="cd ~/Documents/GA/WDI4"
 
 # =================
 # History
@@ -322,8 +317,11 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+export GOPATH="/Users/aleph/go_projects"
 
-### NVM for node versions
+# ======================
+# Node Version Manager
+# ======================
 export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"
 
