@@ -82,32 +82,33 @@ nmap ; <Plug>(EmmetExpandWord)
 vmap , <Plug>(EmmetExpandAbbr)
 nmap , <Plug>(EmmetExpandAbbr)
 nnoremap <silent>  :ZoomWin
-vmap 9 <Plug>TComment_9
+nmap  <Plug>TComment_
+nmap 1 <Plug>TComment_1
+nmap 2 <Plug>TComment_2
+nmap 3 <Plug>TComment_3
+nmap 4 <Plug>TComment_4
+nmap 5 <Plug>TComment_5
+nmap 6 <Plug>TComment_6
+nmap 7 <Plug>TComment_7
+nmap 8 <Plug>TComment_8
 nmap 9 <Plug>TComment_9
+vmap 9 <Plug>TComment_9
 omap 9 <Plug>TComment_9
 vmap 8 <Plug>TComment_8
-nmap 8 <Plug>TComment_8
 omap 8 <Plug>TComment_8
 vmap 7 <Plug>TComment_7
-nmap 7 <Plug>TComment_7
 omap 7 <Plug>TComment_7
 vmap 6 <Plug>TComment_6
-nmap 6 <Plug>TComment_6
 omap 6 <Plug>TComment_6
 vmap 5 <Plug>TComment_5
-nmap 5 <Plug>TComment_5
 omap 5 <Plug>TComment_5
 vmap 4 <Plug>TComment_4
-nmap 4 <Plug>TComment_4
 omap 4 <Plug>TComment_4
 vmap 3 <Plug>TComment_3
-nmap 3 <Plug>TComment_3
 omap 3 <Plug>TComment_3
 vmap 2 <Plug>TComment_2
-nmap 2 <Plug>TComment_2
 omap 2 <Plug>TComment_2
 vmap 1 <Plug>TComment_1
-nmap 1 <Plug>TComment_1
 omap 1 <Plug>TComment_1
 map ca <Plug>TComment_ca
 map cc <Plug>TComment_cc
@@ -120,7 +121,6 @@ map r <Plug>TComment_r
 map   <Plug>TComment_ 
 map p <Plug>TComment_p
 vmap  <Plug>TComment_
-nmap  <Plug>TComment_
 omap  <Plug>TComment_
 snoremap % b<BS>%
 snoremap ' b<BS>'
@@ -130,6 +130,8 @@ vnoremap . :norm.                               " in visual mode, "." will for
 xmap S <Plug>VSurround
 snoremap U b<BS>U
 map Y y$
+smap \__ <Plug>TComment_\__
+nmap \__ <Plug>TComment_\__
 map \fs :set invfu " \fs for full screen
 snoremap \ b<BS>\
 map \_s <Plug>TComment_\_s
@@ -141,8 +143,6 @@ xmap \_i <Plug>TComment_\_i
 map \_  <Plug>TComment_\_ 
 map \_p <Plug>TComment_\_p
 xmap \__ <Plug>TComment_\__
-nmap \__ <Plug>TComment_\__
-smap \__ <Plug>TComment_\__
 omap \__ <Plug>TComment_\__
 nmap \ca <Plug>NERDCommenterAltDelims
 vmap \cA <Plug>NERDCommenterAppend
@@ -240,6 +240,18 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
+nnoremap <Plug>TComment_ :TComment
+snoremap <Plug>TComment_\__ :TComment
+nnoremap <Plug>TComment_\__ :TComment
+nnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
+nnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
+nnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
+nnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
+nnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
+nnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
+nnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
+nnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
+nnoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
 noremap <M-Down> }
 noremap <D-Down> <C-End>
 noremap <M-Up> {
@@ -292,31 +304,22 @@ nnoremap <silent> <Plug>TComment_gc3c :call tcomment#ResetOption() | if v:cou
 nnoremap <silent> <Plug>TComment_gc2c :call tcomment#ResetOption() | if v:count > 0 | call tcomment#SetOption("count", v:count) | endif | let w:tcommentPos = getpos(".") |set opfunc=TCommentOpFunc_gc2cg@
 nnoremap <silent> <Plug>TComment_gc1c :call tcomment#ResetOption() | if v:count > 0 | call tcomment#SetOption("count", v:count) | endif | let w:tcommentPos = getpos(".") |set opfunc=TCommentOpFunc_gc1cg@
 vnoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
-nnoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
 onoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
 vnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
-nnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
 onoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
 vnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
-nnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
 onoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
 vnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
-nnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
 onoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
 vnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
-nnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
 onoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
 vnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
-nnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
 onoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
 vnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
-nnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
 onoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
 vnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
-nnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
 onoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
 vnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
-nnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
 onoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
 nnoremap <silent> <Plug>TComment_gc :call tcomment#ResetOption() | if v:count > 0 | call tcomment#SetOption("count", v:count) | endif | let w:tcommentPos = getpos(".") |set opfunc=TCommentOpFunc_gcg@
 xnoremap <Plug>TComment_gc :TCommentMaybeInline
@@ -340,8 +343,6 @@ xnoremap <Plug>TComment_\_i :TCommentInline
 noremap <Plug>TComment_\_  :TComment 
 noremap <Plug>TComment_\_p vip:TComment
 xnoremap <Plug>TComment_\__ :TCommentMaybeInline
-nnoremap <Plug>TComment_\__ :TComment
-snoremap <Plug>TComment_\__ :TComment
 onoremap <Plug>TComment_\__ :TComment
 noremap <Plug>TComment_ca :call tcomment#SetOption("as", input("Comment as: ", &filetype, "customlist,tcomment#Complete"))
 noremap <Plug>TComment_cc :call tcomment#SetOption("count", v:count1)
@@ -354,7 +355,6 @@ noremap <Plug>TComment_r :TCommentRight
 noremap <Plug>TComment_  :TComment 
 noremap <Plug>TComment_p m`vip:TComment``
 vnoremap <Plug>TComment_ :TCommentMaybeInline
-nnoremap <Plug>TComment_ :TComment
 onoremap <Plug>TComment_ :TComment
 nnoremap <silent> <Plug>ZoomWin :set lz|sil call ZoomWin#ZoomWin()|set nolz
 vnoremap <silent> <Plug>(seeing_is_believing-run) :call xmpfilter#run('v', '')
@@ -514,16 +514,186 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 00-prework/ruby_basics/03_methods/00_methods_classes/02-methods.rb
+badd +1 00-prework/ruby_basics/03_methods/00_methods_classes/02-methods.rb
+badd +0 ~/projects/WDI/UNCLEFONSO_student
 argglobal
 silent! argdel *
-$argadd .
+$argadd ~/projects/WDI/UNCLEFONSO_student
 edit 00-prework/ruby_basics/03_methods/00_methods_classes/02-methods.rb
 set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
 set winminheight=1 winheight=1 winminwidth=1 winwidth=1
+exe 'vert 1resize ' . ((&columns * 25 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 156 + 91) / 182)
+argglobal
+enew
+file NERD_tree_2
+let s:cpo_save=&cpo
+set cpo&vim
+nnoremap <buffer> <silent> <NL> :call nerdtree#ui_glue#invokeKeyMap("<C-j>")
+nnoremap <buffer> <silent>  :call nerdtree#ui_glue#invokeKeyMap("<C-k>")
+nnoremap <buffer> <silent>  :call nerdtree#ui_glue#invokeKeyMap(g:NERDTreeMapActivateNode)
+nnoremap <buffer> <silent> ? :call nerdtree#ui_glue#invokeKeyMap("?")
+nnoremap <buffer> <silent> A :call nerdtree#ui_glue#invokeKeyMap("A")
+nnoremap <buffer> <silent> B :call nerdtree#ui_glue#invokeKeyMap("B")
+nnoremap <buffer> <silent> CD :call nerdtree#ui_glue#invokeKeyMap("CD")
+nnoremap <buffer> <silent> C :call nerdtree#ui_glue#invokeKeyMap("C")
+nnoremap <buffer> <silent> D :call nerdtree#ui_glue#invokeKeyMap("D")
+nnoremap <buffer> <silent> F :call nerdtree#ui_glue#invokeKeyMap("F")
+nnoremap <buffer> <silent> I :call nerdtree#ui_glue#invokeKeyMap("I")
+nnoremap <buffer> <silent> J :call nerdtree#ui_glue#invokeKeyMap("J")
+nnoremap <buffer> <silent> K :call nerdtree#ui_glue#invokeKeyMap("K")
+nnoremap <buffer> <silent> O :call nerdtree#ui_glue#invokeKeyMap("O")
+nnoremap <buffer> <silent> P :call nerdtree#ui_glue#invokeKeyMap("P")
+nnoremap <buffer> <silent> R :call nerdtree#ui_glue#invokeKeyMap("R")
+nnoremap <buffer> <silent> T :call nerdtree#ui_glue#invokeKeyMap("T")
+nnoremap <buffer> <silent> U :call nerdtree#ui_glue#invokeKeyMap("U")
+nnoremap <buffer> <silent> X :call nerdtree#ui_glue#invokeKeyMap("X")
+nnoremap <buffer> <silent> cd :call nerdtree#ui_glue#invokeKeyMap("cd")
+nnoremap <buffer> <silent> e :call nerdtree#ui_glue#invokeKeyMap("e")
+nnoremap <buffer> <silent> f :call nerdtree#ui_glue#invokeKeyMap("f")
+nnoremap <buffer> <silent> gi :call nerdtree#ui_glue#invokeKeyMap("gi")
+nnoremap <buffer> <silent> gs :call nerdtree#ui_glue#invokeKeyMap("gs")
+nnoremap <buffer> <silent> go :call nerdtree#ui_glue#invokeKeyMap("go")
+nnoremap <buffer> <silent> i :call nerdtree#ui_glue#invokeKeyMap("i")
+nnoremap <buffer> <silent> m :call nerdtree#ui_glue#invokeKeyMap("m")
+nnoremap <buffer> <silent> o :call nerdtree#ui_glue#invokeKeyMap("o")
+nnoremap <buffer> <silent> p :call nerdtree#ui_glue#invokeKeyMap("p")
+nnoremap <buffer> <silent> q :call nerdtree#ui_glue#invokeKeyMap("q")
+nnoremap <buffer> <silent> r :call nerdtree#ui_glue#invokeKeyMap("r")
+nnoremap <buffer> <silent> s :call nerdtree#ui_glue#invokeKeyMap("s")
+nnoremap <buffer> <silent> t :call nerdtree#ui_glue#invokeKeyMap("t")
+nnoremap <buffer> <silent> u :call nerdtree#ui_glue#invokeKeyMap("u")
+nnoremap <buffer> <silent> x :call nerdtree#ui_glue#invokeKeyMap("x")
+nnoremap <buffer> <silent> <2-LeftMouse> :call nerdtree#ui_glue#invokeKeyMap("<2-LeftMouse>")
+nnoremap <buffer> <silent> <LeftRelease> <LeftRelease>:call nerdtree#ui_glue#invokeKeyMap("<LeftRelease>")
+nnoremap <buffer> <silent> <MiddleRelease> :call nerdtree#ui_glue#invokeKeyMap("<MiddleRelease>")
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal noautoindent
+setlocal backupcopy=
+setlocal balloonexpr=
+setlocal nobinary
+setlocal nobreakindent
+setlocal breakindentopt=
+setlocal bufhidden=hide
+setlocal nobuflisted
+setlocal buftype=nofile
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'nerdtree'
+setlocal filetype=nerdtree
+endif
+setlocal fixendofline
+setlocal foldcolumn=0
+set nofoldenable
+setlocal nofoldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+set foldlevel=1
+setlocal foldlevel=1
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=manual
+setlocal foldminlines=1
+set foldnestmax=10
+setlocal foldnestmax=10
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal lispwords=
+setlocal nolist
+setlocal nomacmeta
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal nomodifiable
+setlocal nrformats=bin,octal,hex
+set number
+setlocal nonumber
+setlocal numberwidth=4
+setlocal omnifunc=csscomplete#CompleteCSS
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal signcolumn=auto
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!Pl#Statusline(11,1)
+setlocal suffixesadd=
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'nerdtree'
+setlocal syntax=nerdtree
+endif
+setlocal tabstop=2
+setlocal tagcase=
+setlocal tags=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal undolevels=-123456
+setlocal nowinfixheight
+setlocal winfixwidth
+set nowrap
+setlocal nowrap
+setlocal wrapmargin=0
+wincmd w
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
@@ -635,7 +805,7 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal statusline=%!Pl#Statusline(0,1)
+setlocal statusline=%!Pl#Statusline(0,0)
 setlocal suffixesadd=.rb
 setlocal noswapfile
 setlocal synmaxcol=3000
@@ -654,12 +824,15 @@ setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 24 - ((23 * winheight(0) + 25) / 51)
+let s:l = 1 - ((0 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-24
+1
 normal! 0
+wincmd w
+exe 'vert 1resize ' . ((&columns * 25 + 91) / 182)
+exe 'vert 2resize ' . ((&columns * 156 + 91) / 182)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

@@ -8,10 +8,6 @@
 #                         |_|
 # When Bash starts, it executes the commands in this script
 # http://en.wikipedia.org/wiki/Bash_(Unix_shell)
-# ====================
-# morning pages alias
-# ====================
-alias 750words='mp'
 
 # ====================
 # File Navigation
@@ -76,12 +72,6 @@ export HISTIGNORE="h:ls:ls *:ll:ll *:"
 # Or my vim with special sauce
 export EDITOR="vim"
 export SHELL="bash"
-
-# ==================
-# Vim
-# ==================
-# open macvim anywhere
-alias mvim='open -a macvim'
 
 # ==================
 # Webstorm

@@ -82,32 +82,33 @@ nmap ; <Plug>(EmmetExpandWord)
 vmap , <Plug>(EmmetExpandAbbr)
 nmap , <Plug>(EmmetExpandAbbr)
 nnoremap <silent>  :ZoomWin
-vmap 9 <Plug>TComment_9
+nmap  <Plug>TComment_
+nmap 1 <Plug>TComment_1
+nmap 2 <Plug>TComment_2
+nmap 3 <Plug>TComment_3
+nmap 4 <Plug>TComment_4
+nmap 5 <Plug>TComment_5
+nmap 6 <Plug>TComment_6
+nmap 7 <Plug>TComment_7
+nmap 8 <Plug>TComment_8
 nmap 9 <Plug>TComment_9
+vmap 9 <Plug>TComment_9
 omap 9 <Plug>TComment_9
 vmap 8 <Plug>TComment_8
-nmap 8 <Plug>TComment_8
 omap 8 <Plug>TComment_8
 vmap 7 <Plug>TComment_7
-nmap 7 <Plug>TComment_7
 omap 7 <Plug>TComment_7
 vmap 6 <Plug>TComment_6
-nmap 6 <Plug>TComment_6
 omap 6 <Plug>TComment_6
 vmap 5 <Plug>TComment_5
-nmap 5 <Plug>TComment_5
 omap 5 <Plug>TComment_5
 vmap 4 <Plug>TComment_4
-nmap 4 <Plug>TComment_4
 omap 4 <Plug>TComment_4
 vmap 3 <Plug>TComment_3
-nmap 3 <Plug>TComment_3
 omap 3 <Plug>TComment_3
 vmap 2 <Plug>TComment_2
-nmap 2 <Plug>TComment_2
 omap 2 <Plug>TComment_2
 vmap 1 <Plug>TComment_1
-nmap 1 <Plug>TComment_1
 omap 1 <Plug>TComment_1
 map ca <Plug>TComment_ca
 map cc <Plug>TComment_cc
@@ -120,7 +121,6 @@ map r <Plug>TComment_r
 map   <Plug>TComment_ 
 map p <Plug>TComment_p
 vmap  <Plug>TComment_
-nmap  <Plug>TComment_
 omap  <Plug>TComment_
 snoremap % b<BS>%
 snoremap ' b<BS>'
@@ -130,6 +130,8 @@ vnoremap . :norm.                               " in visual mode, "." will for
 xmap S <Plug>VSurround
 snoremap U b<BS>U
 map Y y$
+smap \__ <Plug>TComment_\__
+nmap \__ <Plug>TComment_\__
 map \fs :set invfu " \fs for full screen
 snoremap \ b<BS>\
 map \_s <Plug>TComment_\_s
@@ -141,8 +143,6 @@ xmap \_i <Plug>TComment_\_i
 map \_  <Plug>TComment_\_ 
 map \_p <Plug>TComment_\_p
 xmap \__ <Plug>TComment_\__
-nmap \__ <Plug>TComment_\__
-smap \__ <Plug>TComment_\__
 omap \__ <Plug>TComment_\__
 nmap \ca <Plug>NERDCommenterAltDelims
 vmap \cA <Plug>NERDCommenterAppend
@@ -174,6 +174,10 @@ map \do :python debugger_command('step_over')
 map \di :python debugger_command('step_into')
 map \dr :python debugger_resize()
 nmap \j <Plug>(CommandTJump)
+vmap \m :norm A # => 
+nmap \m A # => 
+nmap \c :%.!seeing_is_believing --clean;
+nmap \n :%.!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk --xmpfilter-style;
 nmap \b <Plug>(CommandTBuffer)
 nmap \A :tab split:Ack 
 nmap \a :tab split:Ack ""<Left>
@@ -236,6 +240,18 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
+nnoremap <Plug>TComment_ :TComment
+snoremap <Plug>TComment_\__ :TComment
+nnoremap <Plug>TComment_\__ :TComment
+nnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
+nnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
+nnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
+nnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
+nnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
+nnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
+nnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
+nnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
+nnoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
 noremap <M-Down> }
 noremap <D-Down> <C-End>
 noremap <M-Up> {
@@ -288,31 +304,22 @@ nnoremap <silent> <Plug>TComment_gc3c :call tcomment#ResetOption() | if v:cou
 nnoremap <silent> <Plug>TComment_gc2c :call tcomment#ResetOption() | if v:count > 0 | call tcomment#SetOption("count", v:count) | endif | let w:tcommentPos = getpos(".") |set opfunc=TCommentOpFunc_gc2cg@
 nnoremap <silent> <Plug>TComment_gc1c :call tcomment#ResetOption() | if v:count > 0 | call tcomment#SetOption("count", v:count) | endif | let w:tcommentPos = getpos(".") |set opfunc=TCommentOpFunc_gc1cg@
 vnoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
-nnoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
 onoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
 vnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
-nnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
 onoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
 vnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
-nnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
 onoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
 vnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
-nnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
 onoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
 vnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
-nnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
 onoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
 vnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
-nnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
 onoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
 vnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
-nnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
 onoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
 vnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
-nnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
 onoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
 vnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
-nnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
 onoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
 nnoremap <silent> <Plug>TComment_gc :call tcomment#ResetOption() | if v:count > 0 | call tcomment#SetOption("count", v:count) | endif | let w:tcommentPos = getpos(".") |set opfunc=TCommentOpFunc_gcg@
 xnoremap <Plug>TComment_gc :TCommentMaybeInline
@@ -336,8 +343,6 @@ xnoremap <Plug>TComment_\_i :TCommentInline
 noremap <Plug>TComment_\_  :TComment 
 noremap <Plug>TComment_\_p vip:TComment
 xnoremap <Plug>TComment_\__ :TCommentMaybeInline
-nnoremap <Plug>TComment_\__ :TComment
-snoremap <Plug>TComment_\__ :TComment
 onoremap <Plug>TComment_\__ :TComment
 noremap <Plug>TComment_ca :call tcomment#SetOption("as", input("Comment as: ", &filetype, "customlist,tcomment#Complete"))
 noremap <Plug>TComment_cc :call tcomment#SetOption("count", v:count1)
@@ -350,7 +355,6 @@ noremap <Plug>TComment_r :TCommentRight
 noremap <Plug>TComment_  :TComment 
 noremap <Plug>TComment_p m`vip:TComment``
 vnoremap <Plug>TComment_ :TCommentMaybeInline
-nnoremap <Plug>TComment_ :TComment
 onoremap <Plug>TComment_ :TComment
 nnoremap <silent> <Plug>ZoomWin :set lz|sil call ZoomWin#ZoomWin()|set nolz
 vnoremap <silent> <Plug>(seeing_is_believing-run) :call xmpfilter#run('v', '')
@@ -510,11 +514,12 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 ruby_arrays.rb
+badd +1 array_examples.rb
+badd +1 ruby_arrays.rb
 argglobal
 silent! argdel *
 $argadd ruby_arrays.rb
-edit ruby_arrays.rb
+edit array_examples.rb
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -603,6 +608,7 @@ setlocal nolisp
 setlocal lispwords=
 setlocal nolist
 setlocal nomacmeta
+setlocal makeencoding=
 setlocal makeprg=ruby\ -w\ $*
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
@@ -611,8 +617,8 @@ setlocal nrformats=bin,octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=rubycomplete#Complete
-setlocal path=/usr/local/lib/ruby/site_ruby/2.3.0,/usr/local/lib/ruby/site_ruby/2.3.0/x86_64-darwin14,/usr/local/lib/ruby/site_ruby,/usr/local/lib/ruby/vendor_ruby/2.3.0,/usr/local/lib/ruby/vendor_ruby/2.3.0/x86_64-darwin14,/usr/local/lib/ruby/vendor_ruby,/usr/local/Cellar/ruby/2.3.1/lib/ruby/2.3.0,/usr/local/Cellar/ruby/2.3.1/lib/ruby/2.3.0/x86_64-darwin14
+setlocal omnifunc=csscomplete#CompleteCSS
+setlocal path=~/.rbenv/versions/2.1.2/lib/ruby/site_ruby/2.1.0,~/.rbenv/versions/2.1.2/lib/ruby/site_ruby/2.1.0/x86_64-darwin13.0,~/.rbenv/versions/2.1.2/lib/ruby/site_ruby,~/.rbenv/versions/2.1.2/lib/ruby/vendor_ruby/2.1.0,~/.rbenv/versions/2.1.2/lib/ruby/vendor_ruby/2.1.0/x86_64-darwin13.0,~/.rbenv/versions/2.1.2/lib/ruby/vendor_ruby,~/.rbenv/versions/2.1.2/lib/ruby/2.1.0,~/.rbenv/versions/2.1.2/lib/ruby/2.1.0/x86_64-darwin13.0
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -639,7 +645,7 @@ setlocal syntax=ruby
 endif
 setlocal tabstop=2
 setlocal tagcase=
-setlocal tags=./tags,tags,/usr/local/lib/ruby/site_ruby/2.3.0/tags,/usr/local/lib/ruby/site_ruby/2.3.0/x86_64-darwin14/tags,/usr/local/lib/ruby/site_ruby/tags,/usr/local/lib/ruby/vendor_ruby/2.3.0/tags,/usr/local/lib/ruby/vendor_ruby/2.3.0/x86_64-darwin14/tags,/usr/local/lib/ruby/vendor_ruby/tags,/usr/local/Cellar/ruby/2.3.1/lib/ruby/2.3.0/tags,/usr/local/Cellar/ruby/2.3.1/lib/ruby/2.3.0/x86_64-darwin14/tags
+setlocal tags=./tags,tags,~/.rbenv/versions/2.1.2/lib/ruby/site_ruby/2.1.0/tags,~/.rbenv/versions/2.1.2/lib/ruby/site_ruby/2.1.0/x86_64-darwin13.0/tags,~/.rbenv/versions/2.1.2/lib/ruby/site_ruby/tags,~/.rbenv/versions/2.1.2/lib/ruby/vendor_ruby/2.1.0/tags,~/.rbenv/versions/2.1.2/lib/ruby/vendor_ruby/2.1.0/x86_64-darwin13.0/tags,~/.rbenv/versions/2.1.2/lib/ruby/vendor_ruby/tags,~/.rbenv/versions/2.1.2/lib/ruby/2.1.0/tags,~/.rbenv/versions/2.1.2/lib/ruby/2.1.0/x86_64-darwin13.0/tags
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
@@ -654,7 +660,7 @@ if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
-normal! 0
+normal! 0127|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

@@ -2,10 +2,10 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <silent> <SNR>41_AutoPairsReturn =AutoPairsReturn()
-inoremap <silent> <SNR>39_AutoPairsReturn =AutoPairsReturn()
-inoremap <silent> <SNR>37_AutoPairsReturn =AutoPairsReturn()
 inoremap <silent> <SNR>40_AutoPairsReturn =AutoPairsReturn()
+inoremap <silent> <SNR>37_AutoPairsReturn =AutoPairsReturn()
+inoremap <silent> <SNR>39_AutoPairsReturn =AutoPairsReturn()
+inoremap <silent> <SNR>41_AutoPairsReturn =AutoPairsReturn()
 imap <D-BS> 
 imap <M-BS> 
 imap <M-Down> }
@@ -87,16 +87,16 @@ nmap ; <Plug>(EmmetExpandWord)
 vmap , <Plug>(EmmetExpandAbbr)
 nmap , <Plug>(EmmetExpandAbbr)
 nnoremap <silent>  :ZoomWin
-onoremap <silent> 9 :TComment count=9
-onoremap <silent> 8 :TComment count=8
-onoremap <silent> 7 :TComment count=7
-onoremap <silent> 6 :TComment count=6
-onoremap <silent> 5 :TComment count=5
-onoremap <silent> 4 :TComment count=4
-onoremap <silent> 3 :TComment count=3
-onoremap <silent> 2 :TComment count=2
-onoremap <silent> 1 :TComment count=1
 onoremap <silent>  :TComment
+onoremap <silent> 1 :TComment count=1
+onoremap <silent> 2 :TComment count=2
+onoremap <silent> 3 :TComment count=3
+onoremap <silent> 4 :TComment count=4
+onoremap <silent> 5 :TComment count=5
+onoremap <silent> 6 :TComment count=6
+onoremap <silent> 7 :TComment count=7
+onoremap <silent> 8 :TComment count=8
+onoremap <silent> 9 :TComment count=9
 vnoremap <silent> 9 :TCommentMaybeInline count=9
 nnoremap <silent> 9 :TComment count=9
 vnoremap <silent> 8 :TCommentMaybeInline count=8
@@ -135,8 +135,8 @@ vnoremap . :norm.                               " in visual mode, "." will for
 xmap S <Plug>VSurround
 snoremap U b<BS>U
 map Y y$
-nnoremap <silent> \__ :TComment
 onoremap <silent> \__ :TComment
+nnoremap <silent> \__ :TComment
 map \fs :set invfu
 snoremap \ b<BS>\
 noremap \_s :TCommentAs =&ft_
@@ -179,6 +179,10 @@ map \do :python debugger_command('step_over')
 map \di :python debugger_command('step_into')
 map \dr :python debugger_resize()
 nmap \j <Plug>(CommandTJump)
+vmap \m :norm A # => 
+nmap \m A # => 
+nmap \c :%.!seeing_is_believing --clean;
+nmap \n :%.!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk --xmpfilter-style;
 nmap \b <Plug>(CommandTBuffer)
 nmap \A :tab split:Ack 
 nmap \a :tab split:Ack ""<Left>
@@ -195,9 +199,9 @@ snoremap ^ b<BS>^
 snoremap ` b<BS>`
 nmap cs <Plug>Csurround
 nmap ds <Plug>Dsurround
-xnoremap <silent> gC :TCommentMaybeInline!
-nnoremap <silent> gCc :let w:tcommentPos = getpos(".") | set opfunc=tcomment#OperatorLineAnywayg@$
 nnoremap <silent> gC :let w:tcommentPos = getpos(".") | set opfunc=tcomment#OperatorAnywayg@
+nnoremap <silent> gCc :let w:tcommentPos = getpos(".") | set opfunc=tcomment#OperatorLineAnywayg@$
+xnoremap <silent> gC :TCommentMaybeInline!
 vmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
 xmap g> <Plug>TComment_Comment
@@ -244,18 +248,18 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
-nnoremap <Plug>TComment_ :TComment
-snoremap <Plug>TComment_\__ :TComment
-nnoremap <Plug>TComment_\__ :TComment
-nnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
-nnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
-nnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
-nnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
-nnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
-nnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
-nnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
-nnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
 nnoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
+nnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
+nnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
+nnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
+nnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
+nnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
+nnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
+nnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
+nnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
+nnoremap <Plug>TComment_\__ :TComment
+snoremap <Plug>TComment_\__ :TComment
+nnoremap <Plug>TComment_ :TComment
 map <M-Down> }
 noremap <D-Down> <C-End>
 map <M-Up> {
@@ -497,9 +501,6 @@ set laststatus=2
 set mouse=a
 set omnifunc=csscomplete#CompleteCSS
 set printexpr=system('open\ -a\ Preview\ '.v:fname_in)\ +\ v:shell_error
-set pythondll=/usr/local/Frameworks/Python.framework/Versions/2.7/Python
-set pythonhome=/usr/local/Frameworks/Python.framework/Versions/2.7
-set pyxversion=2
 set ruler
 set runtimepath=~/.vim,~/.vim/bundle/Command-T,~/.vim/bundle/bufexplorer-7.3.3,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/emmet-vim,~/.vim/bundle/html5.vim,~/.vim/bundle/jshint.vim,~/.vim/bundle/nerdtree,~/.vim/bundle/snipmate.vim,~/.vim/bundle/syntastic,~/.vim/bundle/tComment,~/.vim/bundle/vim-bundler,~/.vim/bundle/vim-coffee-script,~/.vim/bundle/vim-colors-solarized,~/.vim/bundle/vim-fugitive,~/.vim/bundle/vim-golang,~/.vim/bundle/vim-haml,~/.vim/bundle/vim-javascript,~/.vim/bundle/vim-powerline,~/.vim/bundle/vim-rails,~/.vim/bundle/vim-ruby,~/.vim/bundle/VimClojure,/usr/local/Cellar/macvim/7.3-66/MacVim.app/Contents/Resources/vim/vimfiles,/usr/local/Cellar/macvim/7.3-66/MacVim.app/Contents/Resources/vim/runtime,/usr/local/Cellar/macvim/7.3-66/MacVim.app/Contents/Resources/vim/vimfiles/after,~/.vim/bundle/snipmate.vim/after,~/.vim/bundle/vim-coffee-script/after,~/.vim/after
 set scrolloff=5
@@ -659,7 +660,7 @@ setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 235 - ((45 * winheight(0) + 25) / 51)
+let s:l = 235 - ((44 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
