@@ -19,6 +19,18 @@ autocmd BufLeave,FocusLost * silent! wall
 :""quick save
 noremap <Leader>s :update<CR>
 
+"" Allow usage of mouse in iTerm
+set ttyfast
+set mouse=a
+set ttymouse=xterm2
+
+""Copy and paste working between the system clipboard and Vim/Tmux(1 and 2)
+"" 1. F2 before pasting to preserve indentation
+set pastetoggle=<F2>
+
+"" 2. Ctrl+c in visual mode sends selection to clipboard
+vnoremap <C-c> "*y
+
 "" Whitespace
 set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
@@ -38,6 +50,12 @@ set omnifunc=csscomplete#CompleteCSS
 "" and to get this to work for sass
 autocmd BufNewFile,BufRead *.scss             set ft=scss.css
 
+"" Omnicomplete Ruby
+if has("autocmd")
+   autocmd FileType ruby set omnifunc=rubycomplete#Complete
+   autocmd FileType ruby let g:rubycomplete_buffer_loading=1
+   autocmd FileType ruby let g:rubycomplete_classes_in_global=1
+endif
 
 set number
 set showmatch

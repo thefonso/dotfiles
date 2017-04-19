@@ -2,10 +2,10 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <silent> <SNR>40_AutoPairsReturn =AutoPairsReturn()
-inoremap <silent> <SNR>37_AutoPairsReturn =AutoPairsReturn()
-inoremap <silent> <SNR>39_AutoPairsReturn =AutoPairsReturn()
 inoremap <silent> <SNR>41_AutoPairsReturn =AutoPairsReturn()
+inoremap <silent> <SNR>39_AutoPairsReturn =AutoPairsReturn()
+inoremap <silent> <SNR>37_AutoPairsReturn =AutoPairsReturn()
+inoremap <silent> <SNR>40_AutoPairsReturn =AutoPairsReturn()
 imap <D-BS> 
 imap <M-BS> 
 imap <M-Down> }
@@ -87,16 +87,16 @@ nmap ; <Plug>(EmmetExpandWord)
 vmap , <Plug>(EmmetExpandAbbr)
 nmap , <Plug>(EmmetExpandAbbr)
 nnoremap <silent>  :ZoomWin
-onoremap <silent>  :TComment
-onoremap <silent> 1 :TComment count=1
-onoremap <silent> 2 :TComment count=2
-onoremap <silent> 3 :TComment count=3
-onoremap <silent> 4 :TComment count=4
-onoremap <silent> 5 :TComment count=5
-onoremap <silent> 6 :TComment count=6
-onoremap <silent> 7 :TComment count=7
-onoremap <silent> 8 :TComment count=8
 onoremap <silent> 9 :TComment count=9
+onoremap <silent> 8 :TComment count=8
+onoremap <silent> 7 :TComment count=7
+onoremap <silent> 6 :TComment count=6
+onoremap <silent> 5 :TComment count=5
+onoremap <silent> 4 :TComment count=4
+onoremap <silent> 3 :TComment count=3
+onoremap <silent> 2 :TComment count=2
+onoremap <silent> 1 :TComment count=1
+onoremap <silent>  :TComment
 vnoremap <silent> 9 :TCommentMaybeInline count=9
 nnoremap <silent> 9 :TComment count=9
 vnoremap <silent> 8 :TCommentMaybeInline count=8
@@ -135,8 +135,8 @@ vnoremap . :norm.                               " in visual mode, "." will for
 xmap S <Plug>VSurround
 snoremap U b<BS>U
 map Y y$
-onoremap <silent> \__ :TComment
 nnoremap <silent> \__ :TComment
+onoremap <silent> \__ :TComment
 map \fs :set invfu
 snoremap \ b<BS>\
 noremap \_s :TCommentAs =&ft_
@@ -199,9 +199,9 @@ snoremap ^ b<BS>^
 snoremap ` b<BS>`
 nmap cs <Plug>Csurround
 nmap ds <Plug>Dsurround
-nnoremap <silent> gC :let w:tcommentPos = getpos(".") | set opfunc=tcomment#OperatorAnywayg@
-nnoremap <silent> gCc :let w:tcommentPos = getpos(".") | set opfunc=tcomment#OperatorLineAnywayg@$
 xnoremap <silent> gC :TCommentMaybeInline!
+nnoremap <silent> gCc :let w:tcommentPos = getpos(".") | set opfunc=tcomment#OperatorLineAnywayg@$
+nnoremap <silent> gC :let w:tcommentPos = getpos(".") | set opfunc=tcomment#OperatorAnywayg@
 vmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
 xmap g> <Plug>TComment_Comment
@@ -248,18 +248,18 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
-nnoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
-nnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
-nnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
-nnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
-nnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
-nnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
-nnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
-nnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
-nnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
-nnoremap <Plug>TComment_\__ :TComment
-snoremap <Plug>TComment_\__ :TComment
 nnoremap <Plug>TComment_ :TComment
+snoremap <Plug>TComment_\__ :TComment
+nnoremap <Plug>TComment_\__ :TComment
+nnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
+nnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
+nnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
+nnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
+nnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
+nnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
+nnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
+nnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
+nnoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
 map <M-Down> }
 noremap <D-Down> <C-End>
 map <M-Up> {
@@ -527,6 +527,7 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
+badd +1 .vimrc
 badd +1 .bashrc
 badd +39 .zshrc
 badd +88 .bash_profile
@@ -660,12 +661,12 @@ setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 235 - ((44 * winheight(0) + 25) / 51)
+let s:l = 174 - ((18 * winheight(0) + 46) / 93)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-235
-normal! 0
+174
+normal! 019|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

@@ -1,7 +1,7 @@
 if has("mac")
   set guifont=Monaco\ for\ Powerline
 "  set fuopt=maxhorz,maxvert
-  set fu "start full screen
+"  set fu "start full screen
   set vb "shuts up the bell sounds from macVim
   map <Leader>fs :set invfu<CR> " \fs for full screen
 end
