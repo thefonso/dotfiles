@@ -4,11 +4,8 @@
 require 'fileutils'
 
 puts "BEFORE YOU DO THIS~"
-puts "you should have run the following command!"
 puts
-puts "rvm use system"
-puts
-puts "if you have run this command and are using system ruby, type yes to continue"
+p "make sure you are using SYSTEM ruby, type 'yes' to continue"
 
 if gets.chomp != "yes"
   exit 0
@@ -16,7 +13,8 @@ end
 
 git_bundles = [
   # plugins
-
+  "git://github.com/t9md/vim-ruby-xmpfilter.git",
+  "git://github.com/tpope/vim-rbenv.git",
   "git://github.com/vim-scripts/pathogen.vim.git",
   "git://github.com/vim-scripts/surround.vim.git",
   "git://github.com/scrooloose/nerdtree.git",

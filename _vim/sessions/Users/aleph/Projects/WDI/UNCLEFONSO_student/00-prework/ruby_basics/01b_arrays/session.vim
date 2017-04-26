@@ -2,15 +2,11 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <silent> <SNR>40_AutoPairsReturn =AutoPairsReturn()
-inoremap <silent> <SNR>37_AutoPairsReturn =AutoPairsReturn()
-inoremap <silent> <SNR>39_AutoPairsReturn =AutoPairsReturn()
-inoremap <silent> <SNR>41_AutoPairsReturn =AutoPairsReturn()
-imap <D-BS> 
-imap <M-BS> 
-imap <M-Down> }
+inoremap <D-BS> 
+inoremap <M-BS> 
+inoremap <M-Down> }
 inoremap <D-Down> <C-End>
-imap <M-Up> {
+inoremap <M-Up> {
 inoremap <D-Up> <C-Home>
 noremap! <M-Right> <C-Right>
 noremap! <D-Right> <End>
@@ -66,7 +62,6 @@ snoremap <silent> 	 i<Right>=TriggerSnippet()
 nnoremap <NL> j
 nnoremap  k
 nnoremap  l
-nnoremap <silent>  :CtrlP
 nmap o <Plug>ZoomWin
 snoremap  b<BS>
 vmap c <Plug>(EmmetCodePretty)
@@ -87,46 +82,46 @@ nmap ; <Plug>(EmmetExpandWord)
 vmap , <Plug>(EmmetExpandAbbr)
 nmap , <Plug>(EmmetExpandAbbr)
 nnoremap <silent>  :ZoomWin
-onoremap <silent>  :TComment
-onoremap <silent> 1 :TComment count=1
-onoremap <silent> 2 :TComment count=2
-onoremap <silent> 3 :TComment count=3
-onoremap <silent> 4 :TComment count=4
-onoremap <silent> 5 :TComment count=5
-onoremap <silent> 6 :TComment count=6
-onoremap <silent> 7 :TComment count=7
-onoremap <silent> 8 :TComment count=8
-onoremap <silent> 9 :TComment count=9
-vnoremap <silent> 9 :TCommentMaybeInline count=9
-nnoremap <silent> 9 :TComment count=9
-vnoremap <silent> 8 :TCommentMaybeInline count=8
-nnoremap <silent> 8 :TComment count=8
-vnoremap <silent> 7 :TCommentMaybeInline count=7
-nnoremap <silent> 7 :TComment count=7
-vnoremap <silent> 6 :TCommentMaybeInline count=6
-nnoremap <silent> 6 :TComment count=6
-vnoremap <silent> 5 :TCommentMaybeInline count=5
-nnoremap <silent> 5 :TComment count=5
-vnoremap <silent> 4 :TCommentMaybeInline count=4
-nnoremap <silent> 4 :TComment count=4
-vnoremap <silent> 3 :TCommentMaybeInline count=3
-nnoremap <silent> 3 :TComment count=3
-vnoremap <silent> 2 :TCommentMaybeInline count=2
-nnoremap <silent> 2 :TComment count=2
-vnoremap <silent> 1 :TCommentMaybeInline count=1
-nnoremap <silent> 1 :TComment count=1
-noremap ca :call tcomment#SetOption("as", input("Comment as: ", &filetype, "customlist,tcomment#Complete"))
-noremap <silent> cc :call tcomment#SetOption("count", v:count1)
-noremap s :TCommentAs =&ft_
-noremap n :TCommentAs =&ft 
-noremap a :TCommentAs 
-noremap b :TCommentBlock
-noremap <silent> i v:TCommentInline mode=I#
-noremap <silent> r :TCommentRight
-noremap   :TComment 
-noremap <silent> p m`vip:TComment``
-vnoremap <silent>  :TCommentMaybeInline
-nnoremap <silent>  :TComment
+vmap 9 <Plug>TComment_9
+nmap 9 <Plug>TComment_9
+omap 9 <Plug>TComment_9
+vmap 8 <Plug>TComment_8
+nmap 8 <Plug>TComment_8
+omap 8 <Plug>TComment_8
+vmap 7 <Plug>TComment_7
+nmap 7 <Plug>TComment_7
+omap 7 <Plug>TComment_7
+vmap 6 <Plug>TComment_6
+nmap 6 <Plug>TComment_6
+omap 6 <Plug>TComment_6
+vmap 5 <Plug>TComment_5
+nmap 5 <Plug>TComment_5
+omap 5 <Plug>TComment_5
+vmap 4 <Plug>TComment_4
+nmap 4 <Plug>TComment_4
+omap 4 <Plug>TComment_4
+vmap 3 <Plug>TComment_3
+nmap 3 <Plug>TComment_3
+omap 3 <Plug>TComment_3
+vmap 2 <Plug>TComment_2
+nmap 2 <Plug>TComment_2
+omap 2 <Plug>TComment_2
+vmap 1 <Plug>TComment_1
+nmap 1 <Plug>TComment_1
+omap 1 <Plug>TComment_1
+map ca <Plug>TComment_ca
+map cc <Plug>TComment_cc
+map s <Plug>TComment_s
+map n <Plug>TComment_n
+map a <Plug>TComment_a
+map b <Plug>TComment_b
+map i <Plug>TComment_i
+map r <Plug>TComment_r
+map   <Plug>TComment_ 
+map p <Plug>TComment_p
+vmap  <Plug>TComment_
+nmap  <Plug>TComment_
+omap  <Plug>TComment_
 snoremap % b<BS>%
 snoremap ' b<BS>'
 nnoremap ,e :python debugger_watch_input("eval")A
@@ -135,20 +130,20 @@ vnoremap . :norm.                               " in visual mode, "." will for
 xmap S <Plug>VSurround
 snoremap U b<BS>U
 map Y y$
-onoremap <silent> \__ :TComment
-nnoremap <silent> \__ :TComment
-map \fs :set invfu
+map \fs :set invfu " \fs for full screen
 snoremap \ b<BS>\
-noremap \_s :TCommentAs =&ft_
-noremap \_n :TCommentAs =&ft 
-noremap \_a :TCommentAs 
-noremap \_b :TCommentBlock
-noremap <silent> \_r :TCommentRight
-xnoremap <silent> \_i :TCommentInline
-noremap \_  :TComment 
-noremap <silent> \_p vip:TComment
-xnoremap <silent> \__ :TCommentMaybeInline
-snoremap <silent> \__ :TComment
+map \_s <Plug>TComment_\_s
+map \_n <Plug>TComment_\_n
+map \_a <Plug>TComment_\_a
+map \_b <Plug>TComment_\_b
+map \_r <Plug>TComment_\_r
+xmap \_i <Plug>TComment_\_i
+map \_  <Plug>TComment_\_ 
+map \_p <Plug>TComment_\_p
+xmap \__ <Plug>TComment_\__
+nmap \__ <Plug>TComment_\__
+smap \__ <Plug>TComment_\__
+omap \__ <Plug>TComment_\__
 nmap \ca <Plug>NERDCommenterAltDelims
 vmap \cA <Plug>NERDCommenterAppend
 nmap \cA <Plug>NERDCommenterAppend
@@ -183,7 +178,7 @@ vmap \m :norm A # => 
 nmap \m A # => 
 nmap \c :%.!seeing_is_believing --clean;
 nmap \n :%.!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk --xmpfilter-style;
-nmap \b <Plug>(CommandTBuffer)
+nmap \b :%!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk;
 nmap \A :tab split:Ack 
 nmap \a :tab split:Ack ""<Left>
 nnoremap <silent> \cw :Trim
@@ -199,9 +194,6 @@ snoremap ^ b<BS>^
 snoremap ` b<BS>`
 nmap cs <Plug>Csurround
 nmap ds <Plug>Dsurround
-nnoremap <silent> gC :let w:tcommentPos = getpos(".") | set opfunc=tcomment#OperatorAnywayg@
-nnoremap <silent> gCc :let w:tcommentPos = getpos(".") | set opfunc=tcomment#OperatorLineAnywayg@$
-xnoremap <silent> gC :TCommentMaybeInline!
 vmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
 xmap g> <Plug>TComment_Comment
@@ -212,28 +204,28 @@ xmap g< <Plug>TComment_Uncomment
 nmap <silent> g<b <Plug>TComment_Uncommentb
 nmap <silent> g<c <Plug>TComment_Uncommentc
 nmap <silent> g< <Plug>TComment_Uncomment
-xnoremap <silent> gc :TCommentMaybeInline
+xmap gc <Plug>TComment_gc
 nmap <silent> gcb <Plug>TComment_gcb
-nnoremap <silent> gcc :let w:tcommentPos = getpos(".") | set opfunc=tcomment#OperatorLineg@$
-nnoremap <silent> gc9c :let w:tcommentPos = getpos(".") | call tcomment#SetOption("count", 9) | set opfunc=tcomment#Operatorg@
+nmap <silent> gcc <Plug>TComment_gcc
+nmap <silent> gc9c <Plug>TComment_gc9c
 nmap <silent> gc9 <Plug>TComment_gc9
-nnoremap <silent> gc8c :let w:tcommentPos = getpos(".") | call tcomment#SetOption("count", 8) | set opfunc=tcomment#Operatorg@
+nmap <silent> gc8c <Plug>TComment_gc8c
 nmap <silent> gc8 <Plug>TComment_gc8
-nnoremap <silent> gc7c :let w:tcommentPos = getpos(".") | call tcomment#SetOption("count", 7) | set opfunc=tcomment#Operatorg@
+nmap <silent> gc7c <Plug>TComment_gc7c
 nmap <silent> gc7 <Plug>TComment_gc7
-nnoremap <silent> gc6c :let w:tcommentPos = getpos(".") | call tcomment#SetOption("count", 6) | set opfunc=tcomment#Operatorg@
+nmap <silent> gc6c <Plug>TComment_gc6c
 nmap <silent> gc6 <Plug>TComment_gc6
-nnoremap <silent> gc5c :let w:tcommentPos = getpos(".") | call tcomment#SetOption("count", 5) | set opfunc=tcomment#Operatorg@
+nmap <silent> gc5c <Plug>TComment_gc5c
 nmap <silent> gc5 <Plug>TComment_gc5
-nnoremap <silent> gc4c :let w:tcommentPos = getpos(".") | call tcomment#SetOption("count", 4) | set opfunc=tcomment#Operatorg@
+nmap <silent> gc4c <Plug>TComment_gc4c
 nmap <silent> gc4 <Plug>TComment_gc4
-nnoremap <silent> gc3c :let w:tcommentPos = getpos(".") | call tcomment#SetOption("count", 3) | set opfunc=tcomment#Operatorg@
+nmap <silent> gc3c <Plug>TComment_gc3c
 nmap <silent> gc3 <Plug>TComment_gc3
-nnoremap <silent> gc2c :let w:tcommentPos = getpos(".") | call tcomment#SetOption("count", 2) | set opfunc=tcomment#Operatorg@
+nmap <silent> gc2c <Plug>TComment_gc2c
 nmap <silent> gc2 <Plug>TComment_gc2
-nnoremap <silent> gc1c :let w:tcommentPos = getpos(".") | call tcomment#SetOption("count", 1) | set opfunc=tcomment#Operatorg@
+nmap <silent> gc1c <Plug>TComment_gc1c
 nmap <silent> gc1 <Plug>TComment_gc1
-nnoremap <silent> gc :if v:count > 0 | call tcomment#SetOption("count", v:count) | endif | let w:tcommentPos = getpos(".") | set opfunc=tcomment#Operatorg@
+nmap <silent> gc <Plug>TComment_gc
 xmap gS <Plug>VgSurround
 nmap gl :cwindow>
 nmap gq :ccl
@@ -248,22 +240,9 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
-nnoremap <SNR>56_: :=v:count ? v:count : ''
-nnoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
-nnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
-nnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
-nnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
-nnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
-nnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
-nnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
-nnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
-nnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
-nnoremap <Plug>TComment_\__ :TComment
-snoremap <Plug>TComment_\__ :TComment
-nnoremap <Plug>TComment_ :TComment
-map <M-Down> }
+noremap <M-Down> }
 noremap <D-Down> <C-End>
-map <M-Up> {
+noremap <M-Up> {
 noremap <D-Up> <C-Home>
 noremap <M-Right> <C-Right>
 noremap <D-Right> <End>
@@ -274,7 +253,7 @@ snoremap <Right> a
 snoremap <BS> b<BS>
 snoremap <silent> <S-Tab> i<Right>=BackwardsSnippet()
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
-nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetrwBrowseX(expand("<cWORD>"),0)
+nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())
 nnoremap <Plug>ClojureCloseResultBuffer. :call vimclojure#ResultWindow.CloseWindow()
 nnoremap <Plug>ClojureReplHatHook. :call b:vimclojure_repl.hatHook()
 nnoremap <Plug>ClojureStartLocalRepl. :call vimclojure#ProtectedPlug( function("vimclojure#CommandPlug"), [ function("vimclojure#StartRepl"), [ b:vimclojure_namespace ]])
@@ -313,22 +292,31 @@ nnoremap <silent> <Plug>TComment_gc3c :call tcomment#ResetOption() | if v:cou
 nnoremap <silent> <Plug>TComment_gc2c :call tcomment#ResetOption() | if v:count > 0 | call tcomment#SetOption("count", v:count) | endif | let w:tcommentPos = getpos(".") |set opfunc=TCommentOpFunc_gc2cg@
 nnoremap <silent> <Plug>TComment_gc1c :call tcomment#ResetOption() | if v:count > 0 | call tcomment#SetOption("count", v:count) | endif | let w:tcommentPos = getpos(".") |set opfunc=TCommentOpFunc_gc1cg@
 vnoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
+nnoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
 onoremap <Plug>TComment_9 :call tcomment#SetOption("count", 9)
 vnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
+nnoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
 onoremap <Plug>TComment_8 :call tcomment#SetOption("count", 8)
 vnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
+nnoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
 onoremap <Plug>TComment_7 :call tcomment#SetOption("count", 7)
 vnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
+nnoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
 onoremap <Plug>TComment_6 :call tcomment#SetOption("count", 6)
 vnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
+nnoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
 onoremap <Plug>TComment_5 :call tcomment#SetOption("count", 5)
 vnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
+nnoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
 onoremap <Plug>TComment_4 :call tcomment#SetOption("count", 4)
 vnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
+nnoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
 onoremap <Plug>TComment_3 :call tcomment#SetOption("count", 3)
 vnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
+nnoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
 onoremap <Plug>TComment_2 :call tcomment#SetOption("count", 2)
 vnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
+nnoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
 onoremap <Plug>TComment_1 :call tcomment#SetOption("count", 1)
 nnoremap <silent> <Plug>TComment_gc :call tcomment#ResetOption() | if v:count > 0 | call tcomment#SetOption("count", v:count) | endif | let w:tcommentPos = getpos(".") |set opfunc=TCommentOpFunc_gcg@
 xnoremap <Plug>TComment_gc :TCommentMaybeInline
@@ -352,6 +340,8 @@ xnoremap <Plug>TComment_\_i :TCommentInline
 noremap <Plug>TComment_\_  :TComment 
 noremap <Plug>TComment_\_p vip:TComment
 xnoremap <Plug>TComment_\__ :TCommentMaybeInline
+nnoremap <Plug>TComment_\__ :TComment
+snoremap <Plug>TComment_\__ :TComment
 onoremap <Plug>TComment_\__ :TComment
 noremap <Plug>TComment_ca :call tcomment#SetOption("as", input("Comment as: ", &filetype, "customlist,tcomment#Complete"))
 noremap <Plug>TComment_cc :call tcomment#SetOption("count", v:count1)
@@ -364,6 +354,7 @@ noremap <Plug>TComment_r :TCommentRight
 noremap <Plug>TComment_  :TComment 
 noremap <Plug>TComment_p m`vip:TComment``
 vnoremap <Plug>TComment_ :TCommentMaybeInline
+nnoremap <Plug>TComment_ :TComment
 onoremap <Plug>TComment_ :TComment
 nnoremap <silent> <Plug>ZoomWin :set lz|sil call ZoomWin#ZoomWin()|set nolz
 vnoremap <silent> <Plug>(seeing_is_believing-run) :call xmpfilter#run('v', '')
@@ -464,31 +455,30 @@ imap ; <Plug>(EmmetExpandWord)
 imap , <Plug>(EmmetExpandAbbr)
 cnoremap f <S-Right>
 cnoremap b <S-Left>
-inoremap <silent> 9 :TComment count=9
-inoremap <silent> 8 :TComment count=8
-inoremap <silent> 7 :TComment count=7
-inoremap <silent> 6 :TComment count=6
-inoremap <silent> 5 :TComment count=5
-inoremap <silent> 4 :TComment count=4
-inoremap <silent> 3 :TComment count=3
-inoremap <silent> 2 :TComment count=2
-inoremap <silent> 1 :TComment count=1
-inoremap s :TCommentAs =&ft_
-inoremap n :TCommentAs =&ft 
-inoremap a :TCommentAs 
-inoremap b :TCommentBlock
-inoremap <silent> i v:TCommentInline mode=#
-inoremap <silent> r :TCommentRight
-inoremap   :TComment 
-inoremap <silent> p :norm! m`vip:TComment``
-inoremap <silent>  :TComment
+imap 9 <Plug>TComment_9
+imap 8 <Plug>TComment_8
+imap 7 <Plug>TComment_7
+imap 6 <Plug>TComment_6
+imap 5 <Plug>TComment_5
+imap 4 <Plug>TComment_4
+imap 3 <Plug>TComment_3
+imap 2 <Plug>TComment_2
+imap 1 <Plug>TComment_1
+imap s <Plug>TComment_s
+imap n <Plug>TComment_n
+imap a <Plug>TComment_a
+imap b <Plug>TComment_b
+imap i <Plug>TComment_i
+imap r <Plug>TComment_r
+imap   <Plug>TComment_ 
+imap p <Plug>TComment_p
+imap  <Plug>TComment_
 let &cpo=s:cpo_save
 unlet s:cpo_save
 set background=dark
 set backspace=indent,eol,start
 set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
-set fuoptions=maxhorz,maxvert
 set guifont=Monaco\ for\ Powerline
 set guioptions=eg
 set guitablabel=%M%t
@@ -501,19 +491,12 @@ set langmenu=none
 set laststatus=2
 set mouse=a
 set omnifunc=csscomplete#CompleteCSS
-set pastetoggle=<F2>
 set printexpr=system('open\ -a\ Preview\ '.v:fname_in)\ +\ v:shell_error
-set pythondll=/usr/local/Frameworks/Python.framework/Versions/2.7/Python
-set pythonhome=/usr/local/Frameworks/Python.framework/Versions/2.7
-set pyxversion=2
 set ruler
-set runtimepath=~/.vim,~/.vim/bundle/Command-T,~/.vim/bundle/bufexplorer-7.3.3,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/emmet-vim,~/.vim/bundle/html5.vim,~/.vim/bundle/jshint.vim,~/.vim/bundle/nerdtree,~/.vim/bundle/snipmate.vim,~/.vim/bundle/syntastic,~/.vim/bundle/tComment,~/.vim/bundle/vim-bundler,~/.vim/bundle/vim-coffee-script,~/.vim/bundle/vim-colors-solarized,~/.vim/bundle/vim-fugitive,~/.vim/bundle/vim-golang,~/.vim/bundle/vim-haml,~/.vim/bundle/vim-javascript,~/.vim/bundle/vim-powerline,~/.vim/bundle/vim-rails,~/.vim/bundle/vim-ruby,~/.vim/bundle/VimClojure,/usr/local/Cellar/macvim/7.3-66/MacVim.app/Contents/Resources/vim/vimfiles,/usr/local/Cellar/macvim/7.3-66/MacVim.app/Contents/Resources/vim/runtime,/usr/local/Cellar/macvim/7.3-66/MacVim.app/Contents/Resources/vim/vimfiles/after,~/.vim/bundle/snipmate.vim/after,~/.vim/bundle/vim-coffee-script/after,~/.vim/after
+set runtimepath=~/.vim,~/.vim/bundle/Command-T,~/.vim/bundle/html5.vim,~/.vim/bundle/nerdtree,~/.vim/bundle/pathogen.vim,~/.vim/bundle/surround.vim,~/.vim/bundle/tComment,~/.vim/bundle/vim-coffee-script,~/.vim/bundle/vim-colors-solarized,~/.vim/bundle/vim-fugitive,~/.vim/bundle/vim-golang,~/.vim/bundle/vim-javascript,~/.vim/bundle/vim-powerline,~/.vim/bundle/vim-rbenv,~/.vim/bundle/vim-ruby,~/.vim/bundle/VimClojure,/usr/local/Cellar/macvim/8.0-129/MacVim.app/Contents/Resources/vim/vimfiles,/usr/local/Cellar/macvim/8.0-129/MacVim.app/Contents/Resources/vim/runtime,/usr/local/Cellar/macvim/8.0-129/MacVim.app/Contents/Resources/vim/vimfiles/after,~/.vim/bundle/vim-javascript/after,~/.vim/bundle/vim-coffee-script/after,~/.vim/bundle/html5.vim/after,~/.vim/after
 set scrolloff=5
-set shell=bash\ -l
 set shiftwidth=2
-set shortmess=aoO
 set showmatch
-set noshowmode
 set smartcase
 set softtabstop=2
 set noswapfile
@@ -521,40 +504,44 @@ set tabstop=2
 set termencoding=utf-8
 set timeoutlen=100
 set visualbell
-set winminwidth=15
-set winwidth=95
+set window=52
 set nowritebackup
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/
+cd ~/projects/WDI/UNCLEFONSO_student/00-prework/ruby_basics/01b_arrays
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 disable.sh
-badd +1 .vimrc
-badd +174 .bashrc
-badd +39 .zshrc
-badd +88 .bash_profile
-badd +46 .zshenv
-badd +2 .profile
-badd +19 .bash_history
+badd +0 02-arrays.rb
 argglobal
 silent! argdel *
-$argadd .profile
-edit disable.sh
+$argadd 02-arrays.rb
+edit 02-arrays.rb
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winminheight=1 winheight=1 winminwidth=1 winwidth=1
 argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+imap <buffer> <D-r> <Plug>(xmpfilter-run)
+imap <buffer> <D-m> <Plug>(xmpfilter-mark)
+xmap <buffer> <D-r> <Plug>(xmpfilter-run)
+nmap <buffer> <D-r> <Plug>(xmpfilter-run)
+xmap <buffer> <D-m> <Plug>(xmpfilter-mark)
+nmap <buffer> <D-m> <Plug>(xmpfilter-mark)
+cmap <buffer>  <Plug><cfile>
+cmap <buffer>  <Plug><cword>
+let &cpo=s:cpo_save
+unlet s:cpo_save
 setlocal keymap=
 setlocal noarabic
 setlocal noautoindent
 setlocal backupcopy=
-setlocal balloonexpr=
+setlocal balloonexpr=RubyBalloonexpr()
 setlocal nobinary
 setlocal nobreakindent
 setlocal breakindentopt=
@@ -566,8 +553,8 @@ setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=#%s
+setlocal comments=:#
+setlocal commentstring=#\ %s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -583,8 +570,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=%+E%f:%l:\ parse\ error,%W%f:%l:\ warning:\ %m,%E%f:%l:in\ %*[^:]:\ %m,%E%f:%l:\ %m,%-C%tfrom\ %f:%l:in\ %.%#,%-Z%tfrom\ %f:%l,%-Z%p^,%-G%.%#
 setlocal expandtab
-if &filetype != 'sh'
-setlocal filetype=sh
+if &filetype != 'ruby'
+setlocal filetype=ruby
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -602,19 +589,19 @@ set foldnestmax=10
 setlocal foldnestmax=10
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcq
+setlocal formatoptions=croql
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=2
 setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=GetShIndent()
-setlocal indentkeys=0{,0},!^F,o,O,e,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,0=end,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
+setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
+setlocal includeexpr=substitute(substitute(v:fname,'::','/','g'),'%(.rb)=$','.rb','')
+setlocal indentexpr=GetRubyIndent(v:lnum)
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,:,.,=end,=else,=elsif,=when,=ensure,=rescue,==begin,==end,=private,=protected,=public
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
+setlocal keywordprg=ri\ -T\ -f\ bs
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -629,8 +616,8 @@ setlocal nrformats=bin,octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=csscomplete#CompleteCSS
-setlocal path=
+setlocal omnifunc=rubycomplete#Complete
+setlocal path=~/.rbenv/versions/2.1.2/lib/ruby/site_ruby/2.1.0,~/.rbenv/versions/2.1.2/lib/ruby/site_ruby/2.1.0/x86_64-darwin13.0,~/.rbenv/versions/2.1.2/lib/ruby/site_ruby,~/.rbenv/versions/2.1.2/lib/ruby/vendor_ruby/2.1.0,~/.rbenv/versions/2.1.2/lib/ruby/vendor_ruby/2.1.0/x86_64-darwin13.0,~/.rbenv/versions/2.1.2/lib/ruby/vendor_ruby,~/.rbenv/versions/2.1.2/lib/ruby/2.1.0,~/.rbenv/versions/2.1.2/lib/ruby/2.1.0/x86_64-darwin13.0
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -649,15 +636,15 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=%!Pl#Statusline(0,1)
-setlocal suffixesadd=
+setlocal suffixesadd=.rb
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'sh'
-setlocal syntax=sh
+if &syntax != 'ruby'
+setlocal syntax=ruby
 endif
 setlocal tabstop=2
 setlocal tagcase=
-setlocal tags=
+setlocal tags=./tags,tags,~/.rbenv/versions/2.1.2/lib/ruby/site_ruby/2.1.0/tags,~/.rbenv/versions/2.1.2/lib/ruby/site_ruby/2.1.0/x86_64-darwin13.0/tags,~/.rbenv/versions/2.1.2/lib/ruby/site_ruby/tags,~/.rbenv/versions/2.1.2/lib/ruby/vendor_ruby/2.1.0/tags,~/.rbenv/versions/2.1.2/lib/ruby/vendor_ruby/2.1.0/x86_64-darwin13.0/tags,~/.rbenv/versions/2.1.2/lib/ruby/vendor_ruby/tags,~/.rbenv/versions/2.1.2/lib/ruby/2.1.0/tags,~/.rbenv/versions/2.1.2/lib/ruby/2.1.0/x86_64-darwin13.0/tags
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
@@ -665,21 +652,21 @@ setlocal undolevels=-123456
 setlocal nowinfixheight
 setlocal nowinfixwidth
 set nowrap
-setlocal wrap
+setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 23 - ((20 * winheight(0) + 21) / 42)
+let s:l = 32 - ((31 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-23
-normal! 039|
+32
+normal! 021|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=95 shortmess=aoO
-set winminheight=1 winminwidth=15
+set winheight=1 winwidth=20 shortmess=filnxtToO
+set winminheight=1 winminwidth=1
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if file_readable(s:sx)
   exe "source " . fnameescape(s:sx)
