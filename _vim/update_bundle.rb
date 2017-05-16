@@ -26,6 +26,7 @@ git_bundles = [
   "git://github.com/tomtom/tlib_vim.git",
   "git://github.com/MarcWeber/vim-addon-mw-utils.git",
   "git://github.com/garbas/vim-snipmate.git",
+  "git://github.com/honza/vim-snippets.git",
 
   # syntax / language
   "git://github.com/kchmck/vim-coffee-script.git",

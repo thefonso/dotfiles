@@ -2,14 +2,14 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
-""supertab settings
-""g:SuperTabDefaultCompletionType (default value: "<c-p>")
+" force YouCompleteMe to NOT use tab. NOTE: cycle through completion with <C-N> and <C-P> keys
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
 
-""autocmd FileType *
-  ""if &omnifunc != '' |
-    ""call SuperTabChain(&omnifunc, "<c-p>") |
-    ""call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-  ""endif
+" Trigger configuration.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 compiler ruby
 
