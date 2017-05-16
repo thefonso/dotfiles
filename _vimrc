@@ -151,7 +151,7 @@ let NERDTreeShowLineNumbers     = 0
 let NERDTreeMouseMode           = 2
 let NERDTreeAutoCenter          = 1
 let NERDTreeAutoCenterThreshold = 10
-let NERDTreeIgnore              = ['\.git', '\.pyc', '\.jhw-cache','\.DS_Store']
+let NERDTreeIgnore              = ['\.git', '\.idea', '\.pyc', '\.jhw-cache','\.DS_Store']
 let g:no_html_toolbar           = 'yes'
 let g:Powerline_symbols         = 'fancy'
 let g:CommandTMaxHeight         = 10
@@ -217,21 +217,29 @@ nmap <Leader>A :tab split<CR>:Ack <C-R><C-w><CR>
 autocmd FileType markdown nnoremap <buffer> <A-m>:!open -a "Google Chrome"<cr>
 autocmd FileType md nnoremap <buffer> <A-m>:!open -a "Google Chrome"<cr>
 
-
-" ===== Seeing Is Believing =====
 " Assumes you have a Ruby with SiB available in the PATH
 " If it doesn't work, you may need to `gem install seeing_is_believing`
 
 " Annotate every line
   nmap <leader>b :%!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk<CR>;
-  
+
 " Annotate marked lines
-  nmap <leader>n :%.!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk --xmpfilter-style<CR>;
-  
+  nmap <leader>r :%.!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk --xmpfilter-style<CR>;
+
 " Remove annotations
   nmap <leader>c :%.!seeing_is_believing --clean<CR>;
-  
+
 " Mark the current line for annotation
   nmap <leader>m A # => <Esc>
 " Mark the highlighted lines for annotation
   vmap <leader>m :norm A # => <Esc>
+
+"" XMPFilter options (see ruby results inside vim with #=>)
+"" us VISUAL mode, select item, use -u- to undo result
+autocmd FileType ruby nmap <buffer> <D-m> <Plug>(xmpfilter-mark)
+autocmd FileType ruby xmap <buffer> <D-m> <Plug>(xmpfilter-mark)
+autocmd FileType ruby imap <buffer> <D-m> <Plug>(xmpfilter-mark)
+
+autocmd FileType ruby nmap <buffer> <D-r> <Plug>(xmpfilter-run)
+autocmd FileType ruby xmap <buffer> <D-r> <Plug>(xmpfilter-run)
+autocmd FileType ruby imap <buffer> <D-r> <Plug>(xmpfilter-run)

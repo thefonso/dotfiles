@@ -16,13 +16,16 @@ git_bundles = [
   "git://github.com/t9md/vim-ruby-xmpfilter.git",
   "git://github.com/tpope/vim-rbenv.git",
   "git://github.com/vim-scripts/pathogen.vim.git",
-  "git://github.com/vim-scripts/surround.vim.git",
+  "git://github.com/tpope/vim-surround.git",
   "git://github.com/scrooloose/nerdtree.git",
   "git://github.com/Lokaltog/vim-powerline.git",
   "git://github.com/tpope/vim-fugitive.git",
   "git://github.com/altercation/vim-colors-solarized.git",
   "git://github.com/wincent/Command-T.git",
   "git://github.com/vim-scripts/tComment.git",
+  "git://github.com/tomtom/tlib_vim.git",
+  "git://github.com/MarcWeber/vim-addon-mw-utils.git",
+  "git://github.com/garbas/vim-snipmate.git",
 
   # syntax / language
   "git://github.com/kchmck/vim-coffee-script.git",
