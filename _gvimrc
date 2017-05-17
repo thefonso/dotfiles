@@ -12,9 +12,9 @@ set guioptions-=r
 set guioptions-=L
 
 
-"colorscheme candycode
+colorscheme candycode
 "colorscheme candy
-colorscheme tomorrow-night
+"colorscheme tomorrow-night
 "colorscheme twilight
 
 "set transparency=0
