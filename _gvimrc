@@ -12,8 +12,8 @@ set guioptions-=r
 set guioptions-=L
 
 
-colorscheme candycode
-"colorscheme candy
+"colorscheme candycode
+colorscheme candy
 "colorscheme tomorrow-night
 "colorscheme twilight
 
@@ -50,5 +50,5 @@ function! LoadSession()
     echo "No session loaded."
   endif
 endfunction
-""au VimEnter * nested :call LoadSession()
-""au VimLeave * :call MakeSession()
+au VimEnter * nested :call LoadSession()
+au VimLeave * :call MakeSession()

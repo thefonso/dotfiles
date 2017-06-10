@@ -1,3 +1,12 @@
+" To disable a plugin, add it's bundle name to the following list
+let g:pathogen_disabled = []
+
+" for some reason the vim-sass-colors plugin conflicts with things in macvim
+" but not in terminal Vim, so disable it if GUI is running
+if has('gui_running')
+    call add(g:pathogen_disabled, 'vim-css-color')
+endif
+
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
